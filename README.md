@@ -1,2 +1,2 @@
-# NLW 2 Profy
-App desenvolvido com o layout produzido pelo programa da RocketSeat Next Level Week#2  utilizando Material UI e React.
+# Armazenagem 3L
+App desenvolvido com objetivo de integração com a API Armazenagem 3L
