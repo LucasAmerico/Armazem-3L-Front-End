@@ -1,10 +1,8 @@
 /* eslint-disable linebreak-style */
 import React from 'react';
-import { Grid, Button } from '@material-ui/core';
-import classNames from 'classnames';
-import { FaGraduationCap, FaChalkboardTeacher } from 'react-icons/fa';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
+import Lista from '../../components/Lista/lista'
 
 const HomePage = () => {
   const classes = useStyles();
@@ -14,6 +12,7 @@ const HomePage = () => {
     <div className={classes.root}>
       width: {width} ~ height: {height}
       <h2>Welcome to Armazenagem</h2>
+      <Lista />
     </div>
   );
 };
