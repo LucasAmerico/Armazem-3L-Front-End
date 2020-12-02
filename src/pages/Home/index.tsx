@@ -18,8 +18,6 @@ const HomePage = () => {
         [classes.contentShift]: open,
       })}
     >
-      width: {width} ~ height: {height}
-      <h2>Welcome to Armazenagem</h2>
       <Lista />
     </div>
   );

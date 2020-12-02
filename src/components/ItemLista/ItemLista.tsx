@@ -19,7 +19,7 @@ const ItemLista = ({ titulo }: Props) => {
       <ListItemSecondaryAction>
         <Tooltip title={<Typography variant="subtitle1"> Delete </Typography>}>
           <IconButton edge="end" aria-label="delete">
-            <DeleteForeverIcon fontSize="large" color="secondary" />
+            <DeleteForeverIcon fontSize="large" color="primary" />
           </IconButton>
         </Tooltip>
       </ListItemSecondaryAction>

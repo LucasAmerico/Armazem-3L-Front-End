@@ -13,10 +13,7 @@ import ItemLista from '../ItemLista/ItemLista';
 const Lista = () => {
   const classes = useStyles();
   return (
-    <Container
-      maxWidth="lg"
-      style={{ backgroundColor: '#DAD8D8', height: '100vh' }}
-    >
+    <Container maxWidth="lg" className={classes.container}>
       <Grid container spacing={5}>
         <Grid container item xs={12} spacing={3}>
           <Grid item xs={8}>

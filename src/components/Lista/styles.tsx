@@ -1,20 +1,26 @@
 import { makeStyles, Theme } from '@material-ui/core';
+import COLORS from '../../constantes/COLORS';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: COLORS.white,
+  },
+  container: {
+    backgroundColor: COLORS.gray,
+    height: '100vh',
+    paddingTop: '5vh',
   },
   button: {
-    backgroundColor: theme.palette.success.main,
+    backgroundColor: COLORS.green,
     '&:hover': {
-      backgroundColor: theme.palette.success.light,
+      backgroundColor: COLORS.lightGreen,
     },
   },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: theme.palette.common.white,
+    backgroundColor: COLORS.white,
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
