@@ -1,10 +1,13 @@
 import { makeStyles, Theme } from '@material-ui/core';
+import COLORS from '../../constants/COLORS';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: COLORS.white,
+  },
+  deleteButton: {
+    color: COLORS.red,
   },
 }));
 
