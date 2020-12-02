@@ -8,7 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import useStyles from './styles';
-import ItemLista from '../ItemLista/ItemLista';
+import ItemLista from '../listItem/listItem';
 
 const Lista = () => {
   const classes = useStyles();

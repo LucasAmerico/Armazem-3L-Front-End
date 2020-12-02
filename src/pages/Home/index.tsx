@@ -5,7 +5,6 @@ import clsx from 'clsx';
 import sideBarState from '../../recoil/atom';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
-import Lista from '../../components/Lista/lista';
 
 const HomePage = () => {
   const classes = useStyles();
@@ -17,9 +16,7 @@ const HomePage = () => {
       className={clsx(classes.content, {
         [classes.contentShift]: open,
       })}
-    >
-      <Lista />
-    </div>
+    />
   );
 };
 

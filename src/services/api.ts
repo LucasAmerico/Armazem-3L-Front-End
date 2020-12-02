@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://empresas.ioasys.com.br/api/v1/',
+  baseURL: 'http://localhost:50212/api',
 });
 
 export default api;
