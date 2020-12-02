@@ -1,16 +1,12 @@
+import { Card, CardContent, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import { Typography } from '@material-ui/core';
 import useStyles from './styles';
 
 interface Props {
   titulo: string;
-  quantidade: string;
   color: string;
 }
-
-const CardComponent = ({ titulo, quantidade, color }: Props) => {
+const CardGrafico = ({ titulo, color }: Props) => {
   const [styleProps, setStyleProps] = useState({
     color: '#DAD8D8',
   });
@@ -24,12 +20,9 @@ const CardComponent = ({ titulo, quantidade, color }: Props) => {
         <Typography variant="h5" component="h2">
           {titulo}
         </Typography>
-        <Typography variant="h4" component="h2">
-          {quantidade}
-        </Typography>
       </CardContent>
     </Card>
   );
 };
 
-export default CardComponent;
+export default CardGrafico;

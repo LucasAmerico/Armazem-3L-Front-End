@@ -1,10 +1,11 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
-  root: {
+  root: (props: any) => ({
     width: '20rem',
     height: '10rem',
-  },
+    backgroundColor: props.color,
+  }),
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
@@ -15,6 +16,9 @@ const useStyles = makeStyles({
   },
   pos: {
     marginBottom: 12,
+  },
+  cardMargin: {
+    padding: '25px',
   },
 });
 export default useStyles;
