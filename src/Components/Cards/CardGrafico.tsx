@@ -1,5 +1,6 @@
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Card, CardContent, Grid, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
+import Chart from '../Chart/Chart';
 import useStyles from './styles';
 
 interface Props {
@@ -16,10 +17,10 @@ const CardGrafico = ({ titulo, color }: Props) => {
   const classes = useStyles(styleProps);
   return (
     <Card className={classes.root}>
-      <CardContent className={classes.cardMargin}>
-        <Typography variant="h5" component="h2">
-          {titulo}
-        </Typography>
+      <CardContent>
+        <Grid alignItems="center" spacing={3}>
+          <Chart />
+        </Grid>
       </CardContent>
     </Card>
   );
