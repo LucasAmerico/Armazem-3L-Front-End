@@ -6,7 +6,7 @@ import useStyles from './styles';
 
 interface Props {
   titulo: string;
-  quantidade: string;
+  quantidade: any;
   color: string;
 }
 

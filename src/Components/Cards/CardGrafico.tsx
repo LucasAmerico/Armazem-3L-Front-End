@@ -5,8 +5,10 @@ import useStyles from './styles';
 
 interface Props {
   color: string;
+  qtdPendente: any;
+  qtdAceitas: any;
 }
-const CardGrafico = ({ color }: Props) => {
+const CardGrafico = ({ color, qtdPendente, qtdAceitas }: Props) => {
   const [styleProps, setStyleProps] = useState({
     color: '#DAD8D8',
   });
@@ -17,7 +19,10 @@ const CardGrafico = ({ color }: Props) => {
   return (
     <Card className={classes.root}>
       <CardContent className={classes.cardChartMargin}>
-        <Chart />
+        <Chart
+          quantidadePendente={qtdPendente}
+          quantidadeAceitas={qtdAceitas}
+        />
       </CardContent>
     </Card>
   );

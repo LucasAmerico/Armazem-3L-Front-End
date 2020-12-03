@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { Pie } from 'react-chartjs-2';
 
-// const CardComponent = ({ titulo, quantidade, color }: Props) => {
-const Chart = () => {
+interface Props {
+  quantidadePendente: any;
+  quantidadeAceitas: any;
+}
+const Chart = ({ quantidadePendente, quantidadeAceitas }: Props) => {
+  console.log(quantidadePendente);
+  console.log(quantidadeAceitas);
   const [chartState, setChartState] = useState({
     labels: ['Pendentes', 'Aceitas'],
     datasets: [
@@ -10,7 +15,7 @@ const Chart = () => {
         label: 'Rainfall',
         backgroundColor: ['#C9DE00', '#2FDE00'],
         hoverBackgroundColor: ['#4B5000', '#175000'],
-        data: [65, 59],
+        data: [quantidadePendente, quantidadeAceitas],
       },
     ],
   });
