@@ -20,5 +20,8 @@ const useStyles = makeStyles({
   cardMargin: {
     padding: '25px',
   },
+  cardChartMargin: {
+    marginTop: '-10px',
+  },
 });
 export default useStyles;

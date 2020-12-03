@@ -7,7 +7,6 @@ import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
 import CardGrafico from '../../Components/Cards/CardGrafico';
 import CardComponent from '../../Components/Cards/CardComponent';
-import Chart from '../../Components/Chart/Chart';
 
 const HomePage = () => {
   const classes = useStyles();
@@ -17,25 +16,25 @@ const HomePage = () => {
     <div className={classes.root}>
       width: {width} ~height: {height}
       <h2>Welcome to Armazenagem</h2>
-      <Grid container spacing={6}>
-        <Grid container item xs={12} spacing={3}>
-          <CardGrafico titulo="Info" color="#DAD8D8" />
+      <Grid container spacing={4}>
+        <Grid container item xs={12} spacing={0}>
+          <CardGrafico color="#DAD8D8" />
         </Grid>
-        <Grid container item xs={12} spacing={3}>
+        <Grid container item xs={12} spacing={0}>
           <CardComponent
             titulo="Cargas Pendentes"
             quantidade="100"
             color="#E0DC74"
           />
         </Grid>
-        <Grid container item xs={12} spacing={3}>
+        <Grid container item xs={12} spacing={0}>
           <CardComponent
             titulo="Cargas Aceitas"
             quantidade="100"
             color="#96BB88"
           />
         </Grid>
-        <Grid container item xs={12} spacing={3}>
+        <Grid container item xs={12} spacing={0}>
           <CardComponent
             titulo="Total de Cargas"
             quantidade="100"
