@@ -16,10 +16,7 @@ const HomePage = () => {
       className={clsx(classes.content, {
         [classes.contentShift]: open,
       })}
-    >
-      width: {width} ~ height: {height}
-      <h2>Welcome to Armazenagem</h2>
-    </div>
+    />
   );
 };
 
