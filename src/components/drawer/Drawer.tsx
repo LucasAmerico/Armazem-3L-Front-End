@@ -15,13 +15,14 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { useTheme } from '@material-ui/core/styles';
 import { useRecoilState } from 'recoil';
+import { Link } from 'react-router-dom';
+import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
-import sideBarState from '../../recoil/atom';
 
 const SideBar = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = useRecoilState(sideBarState);
+  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -52,8 +53,13 @@ const SideBar = () => {
       </div>
       <Divider />
       <List>
-        {['Carga', 'Produtos'].map((text, index) => (
-          <ListItem button key={text}>
+        {['Cargas', 'Produtos'].map((text, index) => (
+          <ListItem
+            button
+            key={text}
+            component={Link}
+            to={`/${text.toLocaleLowerCase()}`}
+          >
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>

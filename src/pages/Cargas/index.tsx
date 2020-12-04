@@ -13,8 +13,10 @@ import CargaService from '../../services/CargaService';
 import Lista from '../../components/List/list';
 import useWindowDimensions from '../../utils/windowsDimension';
 import useStyles from './styles';
-import sideBarState from '../../recoil/atom';
 import DialogConfirmAction from '../../components/Dialog/DialogConfirmAction';
+import GlobalStates from '../../recoil/atom';
+import CadastroCarga from '../../components/modal-cadastro-carga/CadastroCarga';
+import CardDashboard from '../../components/cards-dashboard';
 
 const CargasPage = () => {
   const [pageState, setPageState] = useState({
@@ -22,13 +24,13 @@ const CargasPage = () => {
     openConfirmActionModal: false,
     selectedDeleteId: undefined,
   });
-
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(sideBarState);
+  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
+  const [saveCarga, setSaveCarga] = useRecoilState(GlobalStates.saveCarga);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleConfirmActionModalOpen = (id: any) => {
-    console.log(`handleConfirmActionModalOpen ${id}`);
     setPageState({
       ...pageState,
       openConfirmActionModal: true,
@@ -69,15 +71,42 @@ const CargasPage = () => {
         });
     }
   }
+  useEffect(() => {
+    console.log(saveCarga);
+
+    if (saveCarga === true) {
+      CargaService.getCarga()
+        .then((data) => {
+          setPageState({
+            ...pageState,
+            cargasList: data,
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      setOpenModal(false);
+      setSaveCarga(false);
+    }
+  }, [saveCarga]);
 
   useEffect(() => {
     findCargaList();
   }, []);
 
+  const handleOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
   return (
     <div
       className={clsx(classes.content, {
         [classes.contentShift]: open,
+        [classes.contentDisplay]: true,
       })}
     >
       <DialogConfirmAction
@@ -89,51 +118,75 @@ const CargasPage = () => {
         closeFunction={() => handleConfirmActionModalClose()}
         actionFunction={() => deleteCarga()}
       />
-      <Container maxWidth="md" className={classes.container}>
-        <Grid container spacing={5}>
-          <Grid container item xs={12} spacing={3}>
-            <Grid item xs={8}>
-              <Typography variant="h4"> Listagem de cargas </Typography>
-            </Grid>
-            <Grid container item xs={4} className={classes.actionContainer}>
-              <Button
-                variant="contained"
-                size="small"
-                className={classes.button}
+      <CadastroCarga modal={openModal} onClose={handleClose} />
+      <Grid
+        container
+        xs={12}
+        sm={12}
+        md={12}
+        lg={12}
+        xl={12}
+        className={classes.containerPadding}
+      >
+        <Grid item xs={8} sm={8} md={8} lg={8} xl={8}>
+          <Container maxWidth="md" className={classes.container}>
+            <Grid container spacing={5}>
+              <Grid
+                container
+                item
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
+                xl={12}
+                spacing={3}
               >
-                <AddIcon fontSize="large" />
-              </Button>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder="Buscar…"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ 'aria-label': 'search' }}
-                />
-              </div>
+                <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+                  <Typography variant="h4"> Listagem de cargas </Typography>
+                </Grid>
+                <Grid
+                  container
+                  item
+                  xs={6}
+                  sm={6}
+                  md={6}
+                  lg={6}
+                  xl={6}
+                  className={classes.actionContainer}
+                >
+                  <Button
+                    variant="contained"
+                    size="small"
+                    className={classes.button}
+                    onClick={handleOpen}
+                  >
+                    <AddIcon fontSize="large" />
+                  </Button>
+                  <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                      <SearchIcon />
+                    </div>
+                    <InputBase
+                      placeholder="Buscar…"
+                      classes={{
+                        root: classes.inputRoot,
+                        input: classes.inputInput,
+                      }}
+                      inputProps={{ 'aria-label': 'search' }}
+                    />
+                  </div>
+                </Grid>
+              </Grid>
+              <Grid container item xs={12} spacing={3}>
+                <Lista content={pageState.cargasList} onAction={() => {}} />
+              </Grid>
             </Grid>
-          </Grid>
-          {pageState.cargasList.length > 0 ? (
-            <Grid container item xs={12} spacing={3}>
-              <Lista
-                content={pageState.cargasList}
-                onAction={handleConfirmActionModalOpen}
-              />
-            </Grid>
-          ) : (
-            <Grid item xs={12}>
-              <Typography variant="h6" className={classes.align}>
-                Você não tem cargas cadastradas no momento.
-              </Typography>
-            </Grid>
-          )}
+          </Container>
         </Grid>
-      </Container>
+        <Grid item xs={4} sm={4} md={4} lg={4} xl={4} justify="flex-end">
+          <CardDashboard />
+        </Grid>
+      </Grid>
     </div>
   );
 };
