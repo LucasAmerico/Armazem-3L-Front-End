@@ -9,19 +9,26 @@ import Tooltip from '@material-ui/core/Tooltip';
 import useStyles from './styles';
 
 interface Props {
-  titulo: string;
+  title: string;
+  action: any;
 }
-const ItemLista = ({ titulo }: Props) => {
+const ItemLista = ({ title, action }: Props) => {
   const classes = useStyles();
 
   return (
     <ListItem button className={classes.root}>
       <ListItemText>
-        <Typography variant="h5"> {titulo} </Typography>
+        <Typography variant="h5"> {title} </Typography>
       </ListItemText>
       <ListItemSecondaryAction>
         <Tooltip title={<Typography variant="subtitle1"> Delete </Typography>}>
-          <IconButton edge="end" aria-label="delete">
+          <IconButton
+            edge="end"
+            aria-label="delete"
+            onClick={() => {
+              action();
+            }}
+          >
             <DeleteForeverIcon
               fontSize="large"
               className={classes.deleteButton}

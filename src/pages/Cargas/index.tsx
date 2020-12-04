@@ -14,13 +14,37 @@ import Lista from '../../components/List/list';
 import useWindowDimensions from '../../utils/windowsDimension';
 import useStyles from './styles';
 import sideBarState from '../../recoil/atom';
+import DialogConfirmAction from '../../components/Dialog/DialogConfirmAction';
 
 const CargasPage = () => {
   const [pageState, setPageState] = useState({
     cargasList: [],
+    openConfirmActionModal: false,
+    selectedDeleteId: undefined,
   });
 
-  useEffect(() => {
+  const classes = useStyles();
+  const { height, width } = useWindowDimensions();
+  const [open, setOpen] = useRecoilState(sideBarState);
+
+  const handleConfirmActionModalOpen = (id: any) => {
+    console.log(`handleConfirmActionModalOpen ${id}`);
+    setPageState({
+      ...pageState,
+      openConfirmActionModal: true,
+      selectedDeleteId: id,
+    });
+  };
+
+  const handleConfirmActionModalClose = () => {
+    setPageState({
+      ...pageState,
+      openConfirmActionModal: false,
+      selectedDeleteId: undefined,
+    });
+  };
+
+  function findCargaList() {
     CargaService.getCarga()
       .then((data) => {
         setPageState({
@@ -31,11 +55,24 @@ const CargasPage = () => {
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }
 
-  const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(sideBarState);
+  function deleteCarga() {
+    handleConfirmActionModalClose();
+    if (pageState.selectedDeleteId) {
+      CargaService.deleteCarga(pageState.selectedDeleteId)
+        .then(() => {
+          findCargaList();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }
+
+  useEffect(() => {
+    findCargaList();
+  }, []);
 
   return (
     <div
@@ -43,6 +80,15 @@ const CargasPage = () => {
         [classes.contentShift]: open,
       })}
     >
+      <DialogConfirmAction
+        open={pageState.openConfirmActionModal}
+        title="Deseja deletar carga?"
+        content="A carga selecionada sera deletada, deseja prosseguir com esta ação?"
+        leftBtnLabel="Cancelar"
+        rigthBtnLabel="Ok"
+        closeFunction={() => handleConfirmActionModalClose()}
+        actionFunction={() => deleteCarga()}
+      />
       <Container maxWidth="md" className={classes.container}>
         <Grid container spacing={5}>
           <Grid container item xs={12} spacing={3}>
@@ -72,12 +118,20 @@ const CargasPage = () => {
               </div>
             </Grid>
           </Grid>
-          <Grid container item xs={12} spacing={3}>
-            <Lista
-              titulo="Listagem de cargas"
-              conteudo={pageState.cargasList}
-            />
-          </Grid>
+          {pageState.cargasList.length > 0 ? (
+            <Grid container item xs={12} spacing={3}>
+              <Lista
+                content={pageState.cargasList}
+                onAction={() => handleConfirmActionModalOpen}
+              />
+            </Grid>
+          ) : (
+            <Grid item xs={12}>
+              <Typography variant="h6" className={classes.align}>
+                Você não tem cargas cadastradas no momento.
+              </Typography>
+            </Grid>
+          )}
         </Grid>
       </Container>
     </div>

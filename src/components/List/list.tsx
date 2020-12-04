@@ -4,15 +4,19 @@ import useStyles from './styles';
 import ItemLista from '../listItem/listItem';
 
 interface Props {
-  titulo: string;
-  conteudo: any;
+  content: any;
+  onAction: any;
 }
-const Lista = ({ titulo, conteudo }: Props) => {
+const Lista = ({ content, onAction }: Props) => {
   const classes = useStyles();
   return (
     <List component="nav" className={classes.root} aria-label="listagem">
-      {conteudo.map((item: { endereco: string; id: number }) => (
-        <ItemLista titulo={item.endereco} key={item.id} />
+      {content.map((item: { endereco: string; id: number }) => (
+        <ItemLista
+          title={item.endereco}
+          key={item.id}
+          action={() => onAction(item.id)}
+        />
       ))}
     </List>
   );
