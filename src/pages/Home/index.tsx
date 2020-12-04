@@ -3,13 +3,14 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import clsx from 'clsx';
 import { Backdrop, Button, Fade, Grid, Modal } from '@material-ui/core';
-import sideBarState from '../../recoil/atom';
+import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
-import DataCarga from '../../componentes/chose-products/DataCarga';
-import ListProducts from '../../componentes/list-products/ListProducts';
 import api from '../../services/api';
 import { Carga, Produto, ProdutoList } from '../../utils/interfaces';
+import ListProducts from '../../components/list-products/ListProducts';
+import DataCarga from '../../components/chose-products/DataCarga';
+import CargaService from '../../services/CargaService';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -29,143 +30,142 @@ function getModalStyle() {
 const HomePage = () => {
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(sideBarState);
-  const [carga, setCarga] = useState({ endereco: '', frete: '' });
-  const [modalStyle] = useState(getModalStyle);
-  const [openM, setOpenM] = useState(false);
-  const [produtos, setProdutos] = useState<Produto[]>([]);
-  const [filtro, setFiltro] = useState<string>('');
-  const [prodState, setProdState] = useState<boolean[]>([]);
-  const [produtosAux, setProdutosAux] = useState<Produto[]>([]);
-  const [selectAll, setSelectAll] = useState<boolean>(false);
+  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
+  // const [carga, setCarga] = useState({ endereco: '', frete: '' });
+  // const [modalStyle] = useState(getModalStyle);
+  // const [openM, setOpenM] = useState(false);
+  // const [produtos, setProdutos] = useState<Produto[]>([]);
+  // const [filtro, setFiltro] = useState<string>('');
+  // const [prodState, setProdState] = useState<boolean[]>([]);
+  // const [produtosAux, setProdutosAux] = useState<Produto[]>([]);
+  // const [selectAll, setSelectAll] = useState<boolean>(false);
 
-  useEffect(() => {
-    api.get('produto/listagem').then((res) => {
-      const { data } = res;
+  // useEffect(() => {
+  //   api.get('produto/listagem').then((res) => {
+  //     const { data } = res;
 
-      setProdState(Array.from({ length: data.length }, (_, i) => false));
-      setProdutos(data);
-      setProdutosAux(data);
-    });
-  }, []);
+  //     setProdState(Array.from({ length: data.length }, (_, i) => false));
+  //     setProdutos(data);
+  //     setProdutosAux(data);
+  //   });
+  // }, []);
 
-  const handleOpen = () => {
-    setOpenM(true);
-  };
+  // const handleOpen = () => {
+  //   setOpenM(true);
+  // };
 
-  const handleClose = () => {
-    setOpenM(false);
-  };
+  // const handleClose = () => {
+  //   setOpenM(false);
+  // };
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setCarga({ ...carga, [name]: value });
-  };
+  // const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = event.target;
+  //   setCarga({ ...carga, [name]: value });
+  // };
 
-  useEffect(() => {
-    const filtrados = produtosAux.filter((item) =>
-      item.nome.toLowerCase().includes(filtro),
-    );
+  // useEffect(() => {
+  //   const filtrados = produtosAux.filter((item) =>
+  //     item.nome.toLowerCase().includes(filtro),
+  //   );
 
-    // eslint-disable-next-line no-unused-expressions
-    filtro.length === 0 ? setProdutos(produtosAux) : setProdutos(filtrados);
-  }, [filtro]);
+  //   // eslint-disable-next-line no-unused-expressions
+  //   filtro.length === 0 ? setProdutos(produtosAux) : setProdutos(filtrados);
+  // }, [filtro]);
 
-  const qtdsReset = (idx?: number) => {
-    const prods = [...produtos];
-    if (idx === undefined) {
-      prods.forEach((item: Produto) => {
-        item.qtdCarga = 0;
-      });
-    } else {
-      prods[idx].qtdCarga = 0;
-    }
-    setProdutos(() => prods);
-  };
+  // const qtdsReset = (idx?: number) => {
+  //   const prods = [...produtos];
+  //   if (idx === undefined) {
+  //     prods.forEach((item: Produto) => {
+  //       item.qtdCarga = 0;
+  //     });
+  //   } else {
+  //     prods[idx].qtdCarga = 0;
+  //   }
+  //   setProdutos(() => prods);
+  // };
 
-  const handleUnselectAllItens = () => {
-    let array = [...prodState];
-    array = array.map((item, idx) => {
-      return false;
-    });
-    setProdState(array);
-    qtdsReset();
-  };
+  // const handleUnselectAllItens = () => {
+  //   let array = [...prodState];
+  //   array = array.map((item, idx) => {
+  //     return false;
+  //   });
+  //   setProdState(array);
+  //   qtdsReset();
+  // };
 
-  const handleSelectAllItens = () => {
-    if (selectAll === false) {
-      let array = [...prodState];
-      array = array.map((item, idx) => {
-        return true;
-      });
+  // const handleSelectAllItens = () => {
+  //   if (selectAll === false) {
+  //     let array = [...prodState];
+  //     array = array.map((item, idx) => {
+  //       return true;
+  //     });
 
-      setProdState(array);
-      setSelectAll(() => !selectAll);
-    } else {
-      setSelectAll(() => !selectAll);
-    }
-  };
+  //     setProdState(array);
+  //     setSelectAll(() => !selectAll);
+  //   } else {
+  //     setSelectAll(() => !selectAll);
+  //   }
+  // };
 
-  const handleChangeQtd = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    const prods = [...produtos];
-    prods[Number(name)].qtdCarga = Number(value);
+  // const handleChangeQtd = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = event.target;
+  //   const prods = [...produtos];
+  //   prods[Number(name)].qtdCarga = Number(value);
 
-    setProdutos(() => prods);
-  };
+  //   setProdutos(() => prods);
+  // };
 
-  const handleIfSelectAllTrue = () => {
-    if (selectAll === true) {
-      setSelectAll(() => false);
-    }
-  };
+  // const handleIfSelectAllTrue = () => {
+  //   if (selectAll === true) {
+  //     setSelectAll(() => false);
+  //   }
+  // };
 
-  const handleSelectItem = (event: ChangeEvent<HTMLInputElement>) => {
-    const array = [...prodState];
-    if (array[Number([event.target.name])] === true) {
-      qtdsReset(Number(event.target.name));
-    }
-    array[Number([event.target.name])] = !array[Number([event.target.name])];
-    setProdState(array);
-    if (selectAll === true) {
-      handleIfSelectAllTrue();
-    }
-  };
+  // const handleSelectItem = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const array = [...prodState];
+  //   if (array[Number([event.target.name])] === true) {
+  //     qtdsReset(Number(event.target.name));
+  //   }
+  //   array[Number([event.target.name])] = !array[Number([event.target.name])];
+  //   setProdState(array);
+  //   if (selectAll === true) {
+  //     handleIfSelectAllTrue();
+  //   }
+  // };
 
-  const handleFilter = (event: ChangeEvent<HTMLInputElement>) => {
-    setFiltro(event.target.value.toLocaleLowerCase());
-  };
+  // const handleFilter = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setFiltro(event.target.value.toLocaleLowerCase());
+  // };
 
-  const handlePosSave = () => {
-    setCarga({ ...carga, endereco: '', frete: '' });
-    handleUnselectAllItens();
-  };
+  // const handlePosSave = () => {
+  //   setCarga({ ...carga, endereco: '', frete: '' });
+  //   handleUnselectAllItens();
+  // };
 
-  const handleSave = () => {
-    const { endereco, frete } = carga;
-    const produtosCarga: ProdutoList[] = produtos
-      .filter((item: Produto, idx: number) => prodState[idx] === true)
-      .map(({ id, qtdCarga }) => ({ produtoId: id, qtd: qtdCarga }));
+  // const handleSave = () => {
+  //   const { endereco, frete } = carga;
+  //   const produtosCarga: ProdutoList[] = produtos
+  //     .filter((item: Produto, idx: number) => prodState[idx] === true)
+  //     .map(({ id, qtdCarga }) => ({ produtoId: id, qtd: qtdCarga }));
 
-    const newCarga: Carga = {
-      endereco,
-      frete: Number(frete),
-      produtos: produtosCarga,
-    };
+  //   const newCarga: Carga = {
+  //     endereco,
+  //     frete: Number(frete),
+  //     produtos: produtosCarga,
+  //   };
 
-    api
-      .post('carga', newCarga)
-      .then((res) => {
-        alert('Sucesso');
-        setOpenM(false);
-        handlePosSave();
-      })
-      .catch((error) => {
-        alert('Erro ao Salvar');
-        setOpenM(false);
-        handlePosSave();
-      });
-  };
+  //   CargaService.postCarga(newCarga)
+  //     .then((res) => {
+  //       alert('Sucesso');
+  //       setOpenM(false);
+  //       handlePosSave();
+  //     })
+  //     .catch((error) => {
+  //       alert('Erro ao Salvar');
+  //       setOpenM(false);
+  //       handlePosSave();
+  //     });
+  // };
 
   return (
     <div
@@ -175,7 +175,7 @@ const HomePage = () => {
     >
       width: {width} ~ height: {height}
       <h2>Welcome to Armazenagem</h2>
-      <button type="button" onClick={handleOpen}>
+      {/* <button type="button" onClick={handleOpen}>
         Open Modal
       </button>
       <Modal
@@ -248,7 +248,7 @@ const HomePage = () => {
             </Grid>
           </div>
         </Fade>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

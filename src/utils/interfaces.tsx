@@ -13,6 +13,11 @@ export interface IPropsDataCarga {
   onChangeValue?: any;
 }
 
+export interface IPropsCadastroCarga {
+  modal: boolean;
+  onClose: any;
+}
+
 export interface HandleBooleans {
   prodState: boolean[];
   selectAll: boolean;
