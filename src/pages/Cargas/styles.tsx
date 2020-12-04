@@ -16,7 +16,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginLeft: drawerWidth,
+  },
+  containerPadding: {
+    paddingLeft: '6rem',
+  },
+  contentDisplay: {
+    display: 'flex',
+    justifyContent: 'center',
   },
   container: {
     flexGrow: 1,
