@@ -59,7 +59,7 @@ const HomePage = () => {
   }, []);
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(sideBarState);
+  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
 
   return (
     <div
