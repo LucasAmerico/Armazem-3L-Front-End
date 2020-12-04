@@ -13,12 +13,18 @@ import CargaService from '../../services/CargaService';
 import Lista from '../../components/List/list';
 import useWindowDimensions from '../../utils/windowsDimension';
 import useStyles from './styles';
-import sideBarState from '../../recoil/atom';
+import GlobalStates from '../../recoil/atom';
+import CadastroCarga from '../../components/modal-cadastro-carga/CadastroCarga';
 
 const CargasPage = () => {
   const [pageState, setPageState] = useState({
     cargasList: [],
   });
+  const classes = useStyles();
+  const { height, width } = useWindowDimensions();
+  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
+  const [saveCarga, setSaveCarga] = useRecoilState(GlobalStates.saveCarga);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     CargaService.getCarga()
@@ -33,9 +39,32 @@ const CargasPage = () => {
       });
   }, []);
 
-  const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(sideBarState);
+  useEffect(() => {
+    console.log(saveCarga);
+
+    if (saveCarga === true) {
+      CargaService.getCarga()
+        .then((data) => {
+          setPageState({
+            ...pageState,
+            cargasList: data,
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      setOpenModal(false);
+      setSaveCarga(false);
+    }
+  }, [saveCarga]);
+
+  const handleOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
 
   return (
     <div
@@ -43,6 +72,7 @@ const CargasPage = () => {
         [classes.contentShift]: open,
       })}
     >
+      <CadastroCarga modal={openModal} onClose={handleClose} />
       <Container maxWidth="md" className={classes.container}>
         <Grid container spacing={5}>
           <Grid container item xs={12} spacing={3}>
@@ -54,6 +84,7 @@ const CargasPage = () => {
                 variant="contained"
                 size="small"
                 className={classes.button}
+                onClick={handleOpen}
               >
                 <AddIcon fontSize="large" />
               </Button>

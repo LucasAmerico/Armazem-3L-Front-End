@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 import React from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 
 import HomePage from './pages/Home';
 import Header from './components/header/Header';
@@ -12,8 +12,15 @@ const Routes = () => (
     <Header />
     <SideBar />
     <Switch>
-      <Route component={HomePage} path="/" exact />
+      <Route
+        exact
+        path="/"
+        render={() => {
+          return <Redirect to="/cargas" />;
+        }}
+      />
       <Route component={CargasPage} path="/cargas" exact />
+      <Route component={HomePage} path="/produtos" exact />
     </Switch>
   </BrowserRouter>
 );

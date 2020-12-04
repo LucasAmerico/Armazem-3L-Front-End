@@ -6,13 +6,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import { useRecoilState } from 'recoil';
 import useStyles from './styles';
-import sideBarState from '../../recoil/atom';
+import GlobalStates from '../../recoil/atom';
 
 const Header = (props: any) => {
   console.log(props);
   const classes = useStyles();
   // const [sideBarStateValue, ] = useRecoilValue(sideBarState);
-  const [open, setOpen] = useRecoilState(sideBarState);
+  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
 
   const handleDrawerOpen = () => {
     setOpen(true);
