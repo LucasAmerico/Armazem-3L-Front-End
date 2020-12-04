@@ -5,8 +5,8 @@ import { IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import { useRecoilState } from 'recoil';
-import useStyles from './styles';
 import GlobalStates from '../../recoil/atom';
+import useStyles from './styles';
 
 const Header = (props: any) => {
   console.log(props);

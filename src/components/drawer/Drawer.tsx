@@ -15,9 +15,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { useTheme } from '@material-ui/core/styles';
 import { useRecoilState } from 'recoil';
-import useStyles from './styles';
-import GlobalStates from '../../recoil/atom';
 import { Link } from 'react-router-dom';
+import GlobalStates from '../../recoil/atom';
+import useStyles from './styles';
 
 const SideBar = () => {
   const classes = useStyles();
