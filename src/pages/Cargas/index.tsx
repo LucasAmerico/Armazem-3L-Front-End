@@ -122,7 +122,7 @@ const CargasPage = () => {
             <Grid container item xs={12} spacing={3}>
               <Lista
                 content={pageState.cargasList}
-                onAction={() => handleConfirmActionModalOpen}
+                onAction={handleConfirmActionModalOpen}
               />
             </Grid>
           ) : (
