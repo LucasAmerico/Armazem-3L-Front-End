@@ -65,11 +65,10 @@ const CardDashboard = () => {
     <div>
       <Grid
         container
-        spacing={6}
         direction="column"
         alignItems="center"
         justify="center"
-        style={{ minHeight: '100vh' }}
+        className={classes.container}
       >
         <Grid item xs={12} spacing={0}>
           <CardGrafico
