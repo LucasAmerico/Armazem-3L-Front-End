@@ -23,6 +23,7 @@ const CargasPage = () => {
     cargasList: [],
     openConfirmActionModal: false,
     selectedDeleteId: undefined,
+    confirmDelete: false,
   });
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
@@ -42,7 +43,6 @@ const CargasPage = () => {
     setPageState({
       ...pageState,
       openConfirmActionModal: false,
-      selectedDeleteId: undefined,
     });
   };
 
@@ -60,17 +60,32 @@ const CargasPage = () => {
   }
 
   function deleteCarga() {
-    handleConfirmActionModalClose();
-    if (pageState.selectedDeleteId) {
-      CargaService.deleteCarga(pageState.selectedDeleteId)
-        .then(() => {
-          findCargaList();
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }
+    setPageState({
+      ...pageState,
+      confirmDelete: true,
+    });
   }
+
+  useEffect(() => {
+    if (pageState.confirmDelete === true) {
+      if (pageState.selectedDeleteId) {
+        CargaService.deleteCarga(pageState.selectedDeleteId)
+          .then(() => {
+            findCargaList();
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+        setPageState({
+          ...pageState,
+          selectedDeleteId: undefined,
+          openConfirmActionModal: false,
+          confirmDelete: false,
+        });
+      }
+    }
+  }, [pageState.confirmDelete]);
+
   useEffect(() => {
     console.log(saveCarga);
 
@@ -178,7 +193,10 @@ const CargasPage = () => {
                 </Grid>
               </Grid>
               <Grid container item xs={12} spacing={3}>
-                <Lista content={pageState.cargasList} onAction={() => {}} />
+                <Lista
+                  content={pageState.cargasList}
+                  onAction={handleConfirmActionModalOpen}
+                />
               </Grid>
             </Grid>
           </Container>

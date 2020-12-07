@@ -5,23 +5,25 @@ const getCargaRoute = '/carga/listagem';
 const postCargaRoute = '/carga';
 
 async function getCarga(id?: any, motorista?: any) {
-  let url = `${getCargaRoute}/listagem`;
+  let url = getCargaRoute;
 
   if (id) {
     url = `${url}?id=${id}`;
   }
 
   if (motorista) {
-    url = `${url}?id=${id}`;
+    if (url.includes('?id=')) {
+      url = `${url}&motorista=${motorista}`;
+    } else {
+      url = `${url}?motorista=${motorista}`;
+    }
   }
-  console.log(url);
   const response = await api.get(url);
   return response.data;
 }
 
 async function deleteCarga(id: any) {
-  console.log(getCargaRoute);
-  let url = getCargaRoute;
+  let url = postCargaRoute;
   url = `${url}/${id}`;
 
   const response = await api.delete(url);
