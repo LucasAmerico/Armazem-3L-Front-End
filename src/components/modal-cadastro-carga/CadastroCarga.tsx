@@ -147,6 +147,7 @@ const CadastroCarga = ({ modal, onClose }: IPropsCadastroCarga) => {
 
     const newCarga: Carga = {
       endereco,
+      motoristaId: 0,
       frete: Number(frete),
       produtos: produtosCarga,
     };
