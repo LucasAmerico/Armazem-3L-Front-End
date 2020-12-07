@@ -44,5 +44,6 @@ export interface ProdutoList {
 export interface Carga {
   endereco: string;
   frete: number;
+  motoristaId: number;
   produtos: ProdutoList[];
 }

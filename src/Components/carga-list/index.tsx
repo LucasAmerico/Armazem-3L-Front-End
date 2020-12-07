@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import {
   Button,
@@ -16,16 +16,19 @@ import GlobalStates from '../../recoil/atom';
 import CargaService from '../../services/CargaService';
 import CadastroCarga from '../modal-cadastro-carga/CadastroCarga';
 import Lista from '../List/list';
+import { Carga } from '../../utils/interfaces';
 
 const CargaLista = () => {
   const [pageState, setPageState] = useState({
-    cargasList: [],
+    cargasList: [] as Carga[],
+    cargasListAux: [] as Carga[],
   });
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
   const [saveCarga, setSaveCarga] = useRecoilState(GlobalStates.saveCarga);
   const [openModal, setOpenModal] = useState(false);
+  const [filtro, setFiltro] = useState<string>('');
 
   useEffect(() => {
     CargaService.getCarga()
@@ -33,6 +36,7 @@ const CargaLista = () => {
         setPageState({
           ...pageState,
           cargasList: data,
+          cargasListAux: data,
         });
       })
       .catch((e) => {
@@ -46,6 +50,8 @@ const CargaLista = () => {
     if (saveCarga === true) {
       CargaService.getCarga()
         .then((data) => {
+          console.log(data);
+
           setPageState({
             ...pageState,
             cargasList: data,
@@ -59,12 +65,35 @@ const CargaLista = () => {
     }
   }, [saveCarga]);
 
+  useEffect(() => {
+    console.log(filtro);
+
+    const filtrados = pageState.cargasListAux.filter((item) =>
+      item.endereco.toLowerCase().includes(filtro),
+    );
+
+    // eslint-disable-next-line no-unused-expressions
+    filtro.length === 0
+      ? setPageState({
+          ...pageState,
+          cargasList: pageState.cargasListAux,
+        })
+      : setPageState({
+          ...pageState,
+          cargasList: filtrados,
+        });
+  }, [filtro]);
+
   const handleOpen = () => {
     setOpenModal(true);
   };
 
   const handleClose = () => {
     setOpenModal(false);
+  };
+
+  const handleFilter = (event: ChangeEvent<HTMLInputElement>) => {
+    setFiltro(event.target.value.toLocaleLowerCase());
   };
 
   return (
@@ -109,6 +138,7 @@ const CargaLista = () => {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={handleFilter}
             />
           </div>
         </Grid>
