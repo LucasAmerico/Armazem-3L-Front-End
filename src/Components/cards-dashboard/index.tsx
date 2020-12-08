@@ -3,19 +3,23 @@ import { useRecoilState } from 'recoil';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
-import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
 import CargaService from '../../services/CargaService';
 import CardGrafico from '../Cards/CardGrafico';
+import useStyles from '../Cards/styles';
 import CardComponent from '../Cards/CardComponent';
 
 const CardDashboard = () => {
   const [pageState, setPageState] = useState({
     cargasList: [],
-    pententePorcentagem: 50,
-    aceitasPorcentagem: 50,
+    pendentePorcentagem: 0,
+    aceitasPorcentagem: 0,
     key: 0,
   });
+
+  const classes = useStyles();
+  const { height, width } = useWindowDimensions();
+  const [saveCarga, setSaveCarga] = useRecoilState(GlobalStates.saveCarga);
   const calculaCargasPendentes = () => {
     const filtrados = pageState.cargasList.filter(
       (item: any) => item.motoristaId === 0,
@@ -28,8 +32,7 @@ const CardDashboard = () => {
     );
     return filtrados.length;
   };
-
-  useEffect(() => {
+  const buscaCargas = () => {
     CargaService.getCarga()
       .then((data) => {
         console.log(data);
@@ -49,17 +52,23 @@ const CardDashboard = () => {
           ...pageState,
           cargasList: data,
           aceitasPorcentagem: aceitosPerct,
-          pententePorcentagem: pendentesPerct,
+          pendentePorcentagem: pendentesPerct,
           key: pageState.key + 1,
         });
       })
       .catch((e) => {
         console.log(e);
       });
+  };
+  useEffect(() => {
+    buscaCargas();
   }, []);
-  const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
+
+  useEffect(() => {
+    if (saveCarga === true) {
+      buscaCargas();
+    }
+  }, [saveCarga]);
 
   return (
     <div>
@@ -75,7 +84,7 @@ const CardDashboard = () => {
             key={pageState.key}
             color="#DAD8D8"
             qtdAceitas={pageState.aceitasPorcentagem}
-            qtdPendente={pageState.pententePorcentagem}
+            qtdPendente={pageState.pendentePorcentagem}
           />
         </Grid>
         <Grid item xs={12} spacing={0}>
