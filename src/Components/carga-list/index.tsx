@@ -5,11 +5,18 @@ import {
   Container,
   Grid,
   InputBase,
+  Tooltip,
   Typography,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import clsx from 'clsx';
+import List from '@material-ui/core/List/List';
+import ListItem from '@material-ui/core/ListItem/ListItem';
+import ListItemText from '@material-ui/core/ListItemText/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction/ListItemSecondaryAction';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import IconButton from '@material-ui/core/IconButton/IconButton';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
 import GlobalStates from '../../recoil/atom';
@@ -17,20 +24,39 @@ import CargaService from '../../services/CargaService';
 import CadastroCarga from '../modal-cadastro-carga/CadastroCarga';
 import Lista from '../List/list';
 import { Carga } from '../../utils/interfaces';
+import DialogConfirmAction from '../Dialog/DialogConfirmAction';
 
 const CargaLista = () => {
   const [pageState, setPageState] = useState({
     cargasList: [] as Carga[],
     cargasListAux: [] as Carga[],
+    selectedDeleteId: 0,
   });
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
-  const [saveCarga, setSaveCarga] = useRecoilState(GlobalStates.saveCarga);
+  const [changeCarga, setChangeCarga] = useRecoilState(
+    GlobalStates.changeCarga,
+  );
   const [openModal, setOpenModal] = useState(false);
+  const [openConfirmActionModal, setOpenConfirmActionModal] = useState(false);
   const [filtro, setFiltro] = useState<string>('');
 
-  useEffect(() => {
+  const handleConfirmActionModalOpen = (id: any) => {
+    console.log(`handleConfirmActionModalOpen ${id}`);
+    setPageState({
+      ...pageState,
+      selectedDeleteId: id,
+    });
+    setOpenConfirmActionModal(true);
+  };
+
+  const handleConfirmActionModalClose = () => {
+    console.log('handleConfirmActionModalClose');
+    setOpenConfirmActionModal(false);
+  };
+
+  const buscarLista = () => {
     CargaService.getCarga()
       .then((data) => {
         setPageState({
@@ -42,28 +68,21 @@ const CargaLista = () => {
       .catch((e) => {
         console.log(e);
       });
+  };
+
+  useEffect(() => {
+    buscarLista();
   }, []);
 
   useEffect(() => {
-    console.log(saveCarga);
+    console.log(changeCarga);
 
-    if (saveCarga === true) {
-      CargaService.getCarga()
-        .then((data) => {
-          console.log(data);
-
-          setPageState({
-            ...pageState,
-            cargasList: data,
-          });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+    if (changeCarga === true) {
+      buscarLista();
       setOpenModal(false);
-      setSaveCarga(false);
+      setChangeCarga(false);
     }
-  }, [saveCarga]);
+  }, [changeCarga]);
 
   useEffect(() => {
     console.log(filtro);
@@ -96,8 +115,36 @@ const CargaLista = () => {
     setFiltro(event.target.value.toLocaleLowerCase());
   };
 
+  function deleteCarga() {
+    console.log('deleteCarga');
+    if (pageState.selectedDeleteId > 0) {
+      CargaService.deleteCarga(pageState.selectedDeleteId)
+        .then(() => {
+          setChangeCarga(true);
+          handleConfirmActionModalClose();
+          setPageState({
+            ...pageState,
+            selectedDeleteId: 0,
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }
+
   return (
     <div>
+      <DialogConfirmAction
+        open={openConfirmActionModal}
+        title="Deseja deletar carga?"
+        content="A carga selecionada sera deletada,
+        deseja prosseguir com esta ação?"
+        leftBtnLabel="Cancelar"
+        rigthBtnLabel="Ok"
+        closeFunction={() => handleConfirmActionModalClose()}
+        actionFunction={() => deleteCarga()}
+      />
       <CadastroCarga modal={openModal} onClose={handleClose} />
       <Container
         maxWidth="md"
@@ -143,7 +190,10 @@ const CargaLista = () => {
           </div>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
-          <Lista titulo="Listagem de cargas" conteudo={pageState.cargasList} />
+          <Lista
+            content={pageState.cargasList}
+            onAction={handleConfirmActionModalOpen}
+          />
         </Grid>
       </Container>
     </div>

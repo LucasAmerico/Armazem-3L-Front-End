@@ -5,9 +5,9 @@ const sideBarState = atom({
   default: false,
 });
 
-const saveCarga = atom({
-  key: 'saveCarga',
+const changeCarga = atom({
+  key: 'changeCarga',
   default: false,
 });
 
-export default { sideBarState, saveCarga };
+export default { sideBarState, changeCarga };

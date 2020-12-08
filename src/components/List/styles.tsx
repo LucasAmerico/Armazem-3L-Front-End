@@ -6,6 +6,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     backgroundColor: COLORS.white,
   },
+  deleteButton: {
+    color: COLORS.red,
+  },
 }));
 
 export default useStyles;
