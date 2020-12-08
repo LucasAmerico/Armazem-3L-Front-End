@@ -5,18 +5,11 @@ import {
   Container,
   Grid,
   InputBase,
-  Tooltip,
   Typography,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import clsx from 'clsx';
-import List from '@material-ui/core/List/List';
-import ListItem from '@material-ui/core/ListItem/ListItem';
-import ListItemText from '@material-ui/core/ListItemText/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction/ListItemSecondaryAction';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import IconButton from '@material-ui/core/IconButton/IconButton';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
 import GlobalStates from '../../recoil/atom';
@@ -190,10 +183,7 @@ const CargaLista = () => {
           </div>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
-          <Lista
-            content={pageState.cargasList}
-            onAction={handleConfirmActionModalOpen}
-          />
+          <Lista content={pageState.cargasList} parent="carga" />
         </Grid>
       </Container>
     </div>
