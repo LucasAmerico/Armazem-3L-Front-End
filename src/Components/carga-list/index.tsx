@@ -18,6 +18,7 @@ import CadastroCarga from '../modal-cadastro-carga/CadastroCarga';
 import Lista from '../List/list';
 import { Carga } from '../../utils/interfaces';
 import DialogConfirmAction from '../Dialog/DialogConfirmAction';
+import DetalhesCarga from '../modal-detalhes-carga';
 
 const CargaLista = () => {
   const [pageState, setPageState] = useState({
@@ -31,6 +32,9 @@ const CargaLista = () => {
   const [openDialog, setOpenDialog] = useRecoilState(GlobalStates.openDialog);
   const [changeCarga, setChangeCarga] = useRecoilState(
     GlobalStates.changeCarga,
+  );
+  const [openDetalhe, setOpenDetalhe] = useRecoilState(
+    GlobalStates.openProdutoDetalhe,
   );
   const [openModal, setOpenModal] = useState(false);
   const [filtro, setFiltro] = useState<string>('');
@@ -90,6 +94,10 @@ const CargaLista = () => {
     setOpenModal(false);
   };
 
+  const handleCloseDetalhe = () => {
+    setOpenDetalhe({ ...openDetalhe, open: false });
+  };
+
   const handleFilter = (event: ChangeEvent<HTMLInputElement>) => {
     setFiltro(event.target.value.toLocaleLowerCase());
   };
@@ -128,6 +136,13 @@ const CargaLista = () => {
         actionFunction={handleDelete}
       />
       <CadastroCarga modal={openModal} onClose={handleClose} />
+      <DetalhesCarga
+        modal={openDetalhe.open}
+        onClose={handleCloseDetalhe}
+        carga={pageState.cargasList
+          .filter((item: Carga) => item.id === openDialog.id)
+          .pop()}
+      />
       <Container
         maxWidth="md"
         className={clsx(classes.container, {

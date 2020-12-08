@@ -41,6 +41,12 @@ export interface IPropsDetalhesProduto {
   onClose: any;
 }
 
+export interface IPropsDetalhesCarga {
+  carga: Carga | undefined;
+  modal: boolean;
+  onClose: any;
+}
+
 export interface IPropsFormProduct {
   name?: string;
   weight?: string;
