@@ -28,26 +28,12 @@ const CargaLista = () => {
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
+  const [openDialog, setOpenDialog] = useRecoilState(GlobalStates.openDialog);
   const [changeCarga, setChangeCarga] = useRecoilState(
     GlobalStates.changeCarga,
   );
   const [openModal, setOpenModal] = useState(false);
-  const [openConfirmActionModal, setOpenConfirmActionModal] = useState(false);
   const [filtro, setFiltro] = useState<string>('');
-
-  const handleConfirmActionModalOpen = (id: any) => {
-    console.log(`handleConfirmActionModalOpen ${id}`);
-    setPageState({
-      ...pageState,
-      selectedDeleteId: id,
-    });
-    setOpenConfirmActionModal(true);
-  };
-
-  const handleConfirmActionModalClose = () => {
-    console.log('handleConfirmActionModalClose');
-    setOpenConfirmActionModal(false);
-  };
 
   const buscarLista = () => {
     CargaService.getCarga()
@@ -108,35 +94,38 @@ const CargaLista = () => {
     setFiltro(event.target.value.toLocaleLowerCase());
   };
 
-  function deleteCarga() {
-    console.log('deleteCarga');
-    if (pageState.selectedDeleteId > 0) {
-      CargaService.deleteCarga(pageState.selectedDeleteId)
-        .then(() => {
-          setChangeCarga(true);
-          handleConfirmActionModalClose();
-          setPageState({
-            ...pageState,
-            selectedDeleteId: 0,
-          });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }
-  }
+  const handleCloseDialog = () => {
+    setOpenDialog({ ...openDialog, open: false });
+  };
+
+  const handlePosDelete = () => {
+    setOpenDialog({ ...openDialog, open: false, id: 0 });
+    setChangeCarga(true);
+  };
+
+  const handleDelete = () => {
+    CargaService.deleteCarga(openDialog.id)
+      .then((res) => {
+        alert('Sucesso');
+        handlePosDelete();
+      })
+      .catch((error) => {
+        alert('Erro ao Salvar');
+        handlePosDelete();
+      });
+  };
 
   return (
     <div>
       <DialogConfirmAction
-        open={openConfirmActionModal}
+        open={openDialog.open}
         title="Deseja deletar carga?"
         content="A carga selecionada sera deletada,
         deseja prosseguir com esta ação?"
         leftBtnLabel="Cancelar"
         rigthBtnLabel="Ok"
-        closeFunction={() => handleConfirmActionModalClose()}
-        actionFunction={() => deleteCarga()}
+        closeFunction={handleCloseDialog}
+        actionFunction={handleDelete}
       />
       <CadastroCarga modal={openModal} onClose={handleClose} />
       <Container
