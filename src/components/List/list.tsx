@@ -6,13 +6,20 @@ import ItemLista from '../listItem/listItem';
 interface Props {
   titulo: string;
   conteudo: any;
+  parent: string;
 }
-const Lista = ({ titulo, conteudo }: Props) => {
+const Lista = ({ titulo, conteudo, parent }: Props) => {
   const classes = useStyles();
-  return (
+  return parent === 'produto' ? (
+    <List component="nav" className={classes.root} aria-label="listagem">
+      {conteudo.map((item: { nome: string; id: number }) => (
+        <ItemLista titulo={item.nome} id={item.id} key={item.id} />
+      ))}
+    </List>
+  ) : (
     <List component="nav" className={classes.root} aria-label="listagem">
       {conteudo.map((item: { endereco: string; id: number }) => (
-        <ItemLista titulo={item.endereco} key={item.id} />
+        <ItemLista titulo={item.endereco} id={item.id} key={item.id} />
       ))}
     </List>
   );

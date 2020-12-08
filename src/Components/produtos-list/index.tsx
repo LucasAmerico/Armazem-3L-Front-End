@@ -13,30 +13,41 @@ import clsx from 'clsx';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
 import GlobalStates from '../../recoil/atom';
-import CargaService from '../../services/CargaService';
+import ProdutosService from '../../services/ProdutoService';
 import CadastroCarga from '../modal-cadastro-carga/CadastroCarga';
 import Lista from '../List/list';
-import { Carga } from '../../utils/interfaces';
+import { Carga, Produto } from '../../utils/interfaces';
+import CadastroProduto from '../modal-cadastro-produto';
+import DialogRmProduto from '../dialog-deletar-produto';
+import DetalhesProduto from '../modal-detalhe-produto';
 
-const CargaLista = () => {
+const ProdutosLista = () => {
   const [pageState, setPageState] = useState({
-    cargasList: [] as Carga[],
-    cargasListAux: [] as Carga[],
+    produtosList: [] as Produto[],
+    produtosListAux: [] as Produto[],
   });
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
-  const [saveCarga, setSaveCarga] = useRecoilState(GlobalStates.saveCarga);
+  const [openDialog, setOpenDialog] = useRecoilState(GlobalStates.openDialog);
+  const [saveProduto, setSaveProduto] = useRecoilState(
+    GlobalStates.saveProduto,
+  );
+  const [openDetalhe, setOpenDetalhe] = useRecoilState(
+    GlobalStates.openProdutoDetalhe,
+  );
   const [openModal, setOpenModal] = useState(false);
   const [filtro, setFiltro] = useState<string>('');
 
   useEffect(() => {
-    CargaService.getCarga()
+    ProdutosService.getProdutos()
       .then((data) => {
+        console.log(data);
+
         setPageState({
           ...pageState,
-          cargasList: data,
-          cargasListAux: data,
+          produtosList: data,
+          produtosListAux: data,
         });
       })
       .catch((e) => {
@@ -44,43 +55,59 @@ const CargaLista = () => {
       });
   }, []);
 
-  useEffect(() => {
-    console.log(saveCarga);
+  const attData = () => {
+    ProdutosService.getProdutos()
+      .then((data) => {
+        console.log(data);
 
-    if (saveCarga === true) {
-      CargaService.getCarga()
+        setPageState({
+          ...pageState,
+          produtosList: data,
+          produtosListAux: data,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    console.log(saveProduto);
+
+    if (saveProduto === true) {
+      ProdutosService.getProdutos()
         .then((data) => {
           console.log(data);
 
           setPageState({
             ...pageState,
-            cargasList: data,
+            produtosList: data,
           });
         })
         .catch((e) => {
           console.log(e);
         });
       setOpenModal(false);
-      setSaveCarga(false);
+      setSaveProduto(false);
     }
-  }, [saveCarga]);
+  }, [saveProduto]);
 
   useEffect(() => {
     console.log(filtro);
 
-    const filtrados = pageState.cargasListAux.filter((item) =>
-      item.endereco.toLowerCase().includes(filtro),
+    const filtrados = pageState.produtosListAux.filter((item) =>
+      item.nome.toLowerCase().includes(filtro),
     );
 
     // eslint-disable-next-line no-unused-expressions
     filtro.length === 0
       ? setPageState({
           ...pageState,
-          cargasList: pageState.cargasListAux,
+          produtosList: pageState.produtosListAux,
         })
       : setPageState({
           ...pageState,
-          cargasList: filtrados,
+          produtosList: filtrados,
         });
   }, [filtro]);
 
@@ -92,22 +119,47 @@ const CargaLista = () => {
     setOpenModal(false);
   };
 
+  const handleCloseDetalhe = () => {
+    setOpenDetalhe({ ...openDetalhe, open: false });
+  };
+
   const handleFilter = (event: ChangeEvent<HTMLInputElement>) => {
     setFiltro(event.target.value.toLocaleLowerCase());
   };
 
+  const handleCloseDialog = () => {
+    setOpenDialog({ ...openDialog, open: false });
+  };
+
+  const handlePosDelete = () => {
+    setOpenDialog({ ...openDialog, open: false, id: 0 });
+    attData();
+  };
+
+  const handleDeleteProduto = () => {
+    ProdutosService.deleteProduto(openDialog.id)
+      .then((res) => {
+        alert('Sucesso');
+        handlePosDelete();
+      })
+      .catch((error) => {
+        alert('Erro ao Salvar');
+        handlePosDelete();
+      });
+  };
+
   return (
     <div>
-      <CadastroCarga modal={openModal} onClose={handleClose} />
+      <CadastroProduto modal={openModal} onClose={handleClose} />
       <Container
-        maxWidth="md"
+        maxWidth="lg"
         className={clsx(classes.container, {
-          [classes.container__iniWidth]: pageState.cargasList.length === 0,
+          [classes.container__iniWidth]: pageState.produtosList.length === 0,
         })}
       >
         <Grid container xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
           <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-            <Typography variant="h4"> Listagem de cargas </Typography>
+            <Typography variant="h4"> Produtos </Typography>
           </Grid>
         </Grid>
         <Grid
@@ -145,13 +197,31 @@ const CargaLista = () => {
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
           <Lista
             titulo="Listagem de cargas"
-            conteudo={pageState.cargasList}
-            parent="carga"
+            conteudo={pageState.produtosList}
+            parent="produto"
           />
         </Grid>
       </Container>
+      <DialogRmProduto
+        id={openDialog.id}
+        open={openDialog.open}
+        onClose={handleCloseDialog}
+        onDelete={handleDeleteProduto}
+        nome={
+          pageState.produtosList
+            .filter((item: Produto) => item.id === openDialog.id)
+            .pop()?.nome
+        }
+      />
+      <DetalhesProduto
+        openM={openDetalhe.open}
+        onClose={handleCloseDetalhe}
+        produto={pageState.produtosList
+          .filter((item: Produto) => item.id === openDialog.id)
+          .pop()}
+      />
     </div>
   );
 };
 
-export default CargaLista;
+export default ProdutosLista;

@@ -1,10 +1,10 @@
 export interface Produto {
-  id: number;
+  id?: number;
   nome: string;
   peso: number;
   preco: number;
   qtd: number;
-  qtdCarga: number;
+  qtdCarga?: number;
 }
 
 export interface IPropsDataCarga {
@@ -13,7 +13,49 @@ export interface IPropsDataCarga {
   onChangeValue?: any;
 }
 
+export interface IPropsItemLista {
+  titulo: string;
+  id: number;
+}
+
+export interface IRmProduct {
+  open: boolean;
+  id: number;
+}
+
+export interface IDtProduct {
+  open: boolean;
+  id: number;
+}
+export interface IPropsRmProduto {
+  id: number;
+  nome: string | undefined;
+  open: boolean;
+  onClose: any;
+  onDelete: any;
+}
+
+export interface IPropsDetalhesProduto {
+  produto: Produto | undefined;
+  openM: boolean;
+  onClose: any;
+}
+
+export interface IPropsFormProduct {
+  name?: string;
+  weight?: string;
+  price?: string;
+  qtd?: string;
+  disabled: boolean;
+  onChangeValue?: any;
+}
+
 export interface IPropsCadastroCarga {
+  modal: boolean;
+  onClose: any;
+}
+
+export interface IPropsCadastroProduto {
   modal: boolean;
   onClose: any;
 }
