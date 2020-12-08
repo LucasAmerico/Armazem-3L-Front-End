@@ -6,7 +6,7 @@ import GlobalStates from '../../recoil/atom';
 import useWindowDimensions from '../../utils/windowsDimension';
 import CargaService from '../../services/CargaService';
 import CardGrafico from '../Cards/CardGrafico';
-import useStyles from '../Cards/styles';
+import useStyles from './styles';
 import CardComponent from '../Cards/CardComponent';
 
 const CardDashboard = () => {
