@@ -56,8 +56,8 @@ const DetalhesListProducts = ({
         <Divider variant="middle" className={classes.paper__divider} />
         <div className={classes.paper__listProducts}>
           {produtos?.length > 0
-            ? produtos.map((i) => (
-                <Grid key={i.id} container xs={12} xl={12}>
+            ? produtos.map((item) => (
+                <Grid key={item.produto.id} container xs={12} xl={12}>
                   <Grid
                     item
                     xs={12}
@@ -67,15 +67,15 @@ const DetalhesListProducts = ({
                     xl={12}
                     className={classes.paper__listInputs}
                   >
-                    <Typography variant="h6">{i.nome}</Typography>
+                    {console.log(item)}
+                    <Typography variant="h6">{item.produto.nome}</Typography>
                     <TextField
                       label="Qtd"
                       type="number"
                       id="standard-size-small"
                       InputProps={{ inputProps: { min: 1, max: 999 } }}
                       defaultValue="Small"
-                      value={i.qtd}
-                      name={`${i.id! - 1}`}
+                      value={item.quantidade}
                       size="small"
                       disabled
                       className={classes.paper__inputNumber}

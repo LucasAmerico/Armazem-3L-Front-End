@@ -39,7 +39,7 @@ const CadastroCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
   useEffect(() => {
     if (carga?.listaProdutos?.length > 0) {
       const filtrados = carga?.listaProdutos.filter((item) =>
-        item.nome.toLowerCase().includes(filtro),
+        item.produto.nome.toLowerCase().includes(filtro),
       );
 
       // eslint-disable-next-line no-unused-expressions

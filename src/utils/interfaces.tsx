@@ -1,4 +1,6 @@
 export interface Produto {
+  quantidade: any;
+  produto: any;
   id?: number;
   nome: string;
   peso: number;
