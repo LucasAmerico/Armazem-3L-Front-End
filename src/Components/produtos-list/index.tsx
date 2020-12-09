@@ -10,6 +10,7 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import clsx from 'clsx';
+import { toast } from 'react-toastify';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
 import GlobalStates from '../../recoil/atom';
@@ -20,6 +21,7 @@ import { Carga, Produto } from '../../utils/interfaces';
 import CadastroProduto from '../modal-cadastro-produto';
 import DialogRmProduto from '../dialog-deletar-produto';
 import DetalhesProduto from '../modal-detalhe-produto';
+import MESSAGES from '../../constants/MESSAGES';
 
 const ProdutosLista = () => {
   const [pageState, setPageState] = useState({
@@ -139,12 +141,12 @@ const ProdutosLista = () => {
   const handleDeleteProduto = () => {
     ProdutosService.deleteProduto(openDialog.id)
       .then((res) => {
-        alert('Sucesso');
         handlePosDelete();
+        toast.success(MESSAGES.deletar_Produto_Sucesso);
       })
       .catch((error) => {
-        alert('Erro ao Salvar');
         handlePosDelete();
+        toast.error(error);
       });
   };
 

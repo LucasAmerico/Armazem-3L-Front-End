@@ -3,6 +3,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import clsx from 'clsx';
 import { Backdrop, Button, Fade, Grid, Modal } from '@material-ui/core';
+import { toast } from 'react-toastify';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
@@ -18,6 +19,7 @@ import ProdutoService from '../../services/ProdutoService';
 import DataCarga from '../chose-products/DataCarga';
 import ListProducts from '../list-products/ListProducts';
 import FormProduct from '../form-product';
+import MESSAGES from '../../constants/MESSAGES';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -70,13 +72,13 @@ const CadastroProduto = ({ modal, onClose }: IPropsCadastroProduto) => {
 
     ProdutoService.postProduto(newProduto)
       .then((res) => {
-        alert('Sucesso');
         handlePosSave();
         setSaveProduto(true);
+        toast.success(MESSAGES.cadastrar_Produto_Sucesso);
       })
       .catch((error) => {
-        alert('Erro ao Salvar');
         handlePosSave();
+        toast.error(error);
       });
   };
 
