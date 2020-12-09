@@ -26,10 +26,16 @@ const openProdutoDetalhe = atom({
   default: { open: false, id: 0 } as IDtProduct,
 });
 
+const currentUser = atom({
+  key: 'currentUser',
+  default: false,
+});
+
 export default {
   sideBarState,
   saveCarga,
   saveProduto,
   openDialog,
   openProdutoDetalhe,
+  currentUser,
 };

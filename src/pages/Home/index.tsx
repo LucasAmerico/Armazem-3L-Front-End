@@ -8,6 +8,8 @@ import useWindowDimensions from '../../utils/windowsDimension';
 import CardGrafico from '../../components/Cards/CardGrafico';
 import CardComponent from '../../components/Cards/CardComponent';
 import CargaService from '../../services/CargaService';
+import CardUsers from '../../components/Cards/CardUsers';
+import usuarioEnum from '../../utils/enum/usuarioEnum';
 
 const HomePage = () => {
   const classes = useStyles();
@@ -20,7 +22,26 @@ const HomePage = () => {
         [classes.contentShift]: open,
       })}
     >
-      <h2>Produtos</h2>
+      <h2>Usuários</h2>
+
+      <Grid container direction="row" justify="center" alignItems="center">
+        <Grid>
+          <CardUsers
+            titulo="Usuário Administrativo"
+            tipoUsuario={usuarioEnum.ADMINISTRATIVO}
+            rota={null}
+            alt="Usuário Adm"
+          />
+        </Grid>
+        <Grid>
+          <CardUsers
+            titulo="Motorista"
+            tipoUsuario={usuarioEnum.MOTORISTA}
+            rota={null}
+            alt="Motorista"
+          />
+        </Grid>
+      </Grid>
     </div>
   );
 };
