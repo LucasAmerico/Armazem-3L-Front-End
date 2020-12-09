@@ -36,7 +36,9 @@ const CadastroCarga = ({ modal, onClose }: IPropsCadastroCarga) => {
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
-  const [saveCarga, setSaveCarga] = useRecoilState(GlobalStates.saveCarga);
+  const [changeCarga, setchangeCarga] = useRecoilState(
+    GlobalStates.changeCarga,
+  );
   const [carga, setCarga] = useState({ endereco: '', frete: '' });
   const [modalStyle] = useState(getModalStyle);
   const [produtos, setProdutos] = useState<Produto[]>([]);
@@ -156,7 +158,7 @@ const CadastroCarga = ({ modal, onClose }: IPropsCadastroCarga) => {
       .then((res) => {
         alert('Sucesso');
         handlePosSave();
-        setSaveCarga(true);
+        setchangeCarga(true);
       })
       .catch((error) => {
         alert('Erro ao Salvar');
@@ -198,6 +200,7 @@ const CadastroCarga = ({ modal, onClose }: IPropsCadastroCarga) => {
               address={carga.endereco}
               freight={carga.frete}
               onChangeValue={handleInputChange}
+              disabled={false}
             />
             <ListProducts
               produtos={produtos}

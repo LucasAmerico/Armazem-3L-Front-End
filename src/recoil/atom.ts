@@ -6,8 +6,8 @@ const sideBarState = atom({
   default: false,
 });
 
-const saveCarga = atom({
-  key: 'saveCarga',
+const changeCarga = atom({
+  key: 'changeCarga',
   default: false,
 });
 
@@ -28,7 +28,7 @@ const openProdutoDetalhe = atom({
 
 export default {
   sideBarState,
-  saveCarga,
+  changeCarga,
   saveProduto,
   openDialog,
   openProdutoDetalhe,

@@ -19,7 +19,9 @@ const CardDashboard = () => {
 
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
-  const [saveCarga, setSaveCarga] = useRecoilState(GlobalStates.saveCarga);
+  const [changeCarga, setchangeCarga] = useRecoilState(
+    GlobalStates.changeCarga,
+  );
   const calculaCargasPendentes = () => {
     const filtrados = pageState.cargasList.filter(
       (item: any) => item.motoristaId === 0,
@@ -65,10 +67,10 @@ const CardDashboard = () => {
   }, []);
 
   useEffect(() => {
-    if (saveCarga === true) {
+    if (changeCarga === true) {
       buscaCargas();
     }
-  }, [saveCarga]);
+  }, [changeCarga]);
 
   return (
     <div>

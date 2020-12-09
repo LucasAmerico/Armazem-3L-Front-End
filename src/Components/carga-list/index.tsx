@@ -17,20 +17,29 @@ import CargaService from '../../services/CargaService';
 import CadastroCarga from '../modal-cadastro-carga/CadastroCarga';
 import Lista from '../List/list';
 import { Carga } from '../../utils/interfaces';
+import DialogConfirmAction from '../Dialog/DialogConfirmAction';
+import DetalhesCarga from '../modal-detalhes-carga';
 
 const CargaLista = () => {
   const [pageState, setPageState] = useState({
     cargasList: [] as Carga[],
     cargasListAux: [] as Carga[],
+    selectedDeleteId: 0,
   });
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
-  const [saveCarga, setSaveCarga] = useRecoilState(GlobalStates.saveCarga);
+  const [openDialog, setOpenDialog] = useRecoilState(GlobalStates.openDialog);
+  const [changeCarga, setChangeCarga] = useRecoilState(
+    GlobalStates.changeCarga,
+  );
+  const [openDetalhe, setOpenDetalhe] = useRecoilState(
+    GlobalStates.openProdutoDetalhe,
+  );
   const [openModal, setOpenModal] = useState(false);
   const [filtro, setFiltro] = useState<string>('');
 
-  useEffect(() => {
+  const buscarLista = () => {
     CargaService.getCarga()
       .then((data) => {
         setPageState({
@@ -42,28 +51,21 @@ const CargaLista = () => {
       .catch((e) => {
         console.log(e);
       });
+  };
+
+  useEffect(() => {
+    buscarLista();
   }, []);
 
   useEffect(() => {
-    console.log(saveCarga);
+    console.log(changeCarga);
 
-    if (saveCarga === true) {
-      CargaService.getCarga()
-        .then((data) => {
-          console.log(data);
-
-          setPageState({
-            ...pageState,
-            cargasList: data,
-          });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+    if (changeCarga === true) {
+      buscarLista();
       setOpenModal(false);
-      setSaveCarga(false);
+      setChangeCarga(false);
     }
-  }, [saveCarga]);
+  }, [changeCarga]);
 
   useEffect(() => {
     console.log(filtro);
@@ -92,13 +94,57 @@ const CargaLista = () => {
     setOpenModal(false);
   };
 
+  const handleCloseDetalhe = () => {
+    setOpenDetalhe({ ...openDetalhe, open: false });
+  };
+
   const handleFilter = (event: ChangeEvent<HTMLInputElement>) => {
     setFiltro(event.target.value.toLocaleLowerCase());
   };
 
+  const handleCloseDialog = () => {
+    setOpenDialog({ ...openDialog, open: false });
+  };
+
+  const handlePosDelete = () => {
+    setOpenDialog({ ...openDialog, open: false, id: 0 });
+    setChangeCarga(true);
+  };
+
+  const handleDelete = () => {
+    CargaService.deleteCarga(openDialog.id)
+      .then((res) => {
+        alert('Sucesso');
+        handlePosDelete();
+      })
+      .catch((error) => {
+        alert('Erro ao Salvar');
+        handlePosDelete();
+      });
+  };
+
   return (
     <div>
+      <DialogConfirmAction
+        open={openDialog.open}
+        title="Deseja deletar carga?"
+        content="A carga selecionada sera deletada,
+        deseja prosseguir com esta ação?"
+        leftBtnLabel="Cancelar"
+        rigthBtnLabel="Ok"
+        closeFunction={handleCloseDialog}
+        actionFunction={handleDelete}
+      />
       <CadastroCarga modal={openModal} onClose={handleClose} />
+      {console.log(pageState.cargasList)}
+      {console.log(openDetalhe)}
+      <DetalhesCarga
+        modal={openDetalhe.open}
+        onClose={handleCloseDetalhe}
+        carga={pageState.cargasList
+          .filter((item: Carga) => item.id === openDetalhe.id)
+          .pop()}
+      />
       <Container
         maxWidth="md"
         className={clsx(classes.container, {
@@ -143,11 +189,7 @@ const CargaLista = () => {
           </div>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
-          <Lista
-            titulo="Listagem de cargas"
-            conteudo={pageState.cargasList}
-            parent="carga"
-          />
+          <Lista content={pageState.cargasList} parent="carga" />
         </Grid>
       </Container>
     </div>

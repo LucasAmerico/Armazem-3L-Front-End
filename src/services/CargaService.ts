@@ -12,10 +12,21 @@ async function getCarga(id?: any, motorista?: any) {
   }
 
   if (motorista) {
-    url = `${url}?id=${id}`;
+    if (url.includes('?id=')) {
+      url = `${url}&motorista=${motorista}`;
+    } else {
+      url = `${url}?motorista=${motorista}`;
+    }
   }
-
   const response = await api.get(url);
+  return response.data;
+}
+
+async function deleteCarga(id: any) {
+  let url = postCargaRoute;
+  url = `${url}/${id}`;
+
+  const response = await api.delete(url);
   return response.data;
 }
 
@@ -28,5 +39,6 @@ async function postCarga(carga: Carga) {
 
 export default {
   getCarga,
+  deleteCarga,
   postCarga,
 };

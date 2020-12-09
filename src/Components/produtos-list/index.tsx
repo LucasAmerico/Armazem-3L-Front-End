@@ -195,11 +195,7 @@ const ProdutosLista = () => {
           </div>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
-          <Lista
-            titulo="Listagem de cargas"
-            conteudo={pageState.produtosList}
-            parent="produto"
-          />
+          <Lista content={pageState.produtosList} parent="produto" />
         </Grid>
       </Container>
       <DialogRmProduto
