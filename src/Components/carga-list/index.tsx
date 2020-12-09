@@ -136,11 +136,13 @@ const CargaLista = () => {
         actionFunction={handleDelete}
       />
       <CadastroCarga modal={openModal} onClose={handleClose} />
+      {console.log(pageState.cargasList)}
+      {console.log(openDetalhe)}
       <DetalhesCarga
         modal={openDetalhe.open}
         onClose={handleCloseDetalhe}
         carga={pageState.cargasList
-          .filter((item: Carga) => item.id === openDialog.id)
+          .filter((item: Carga) => item.id === openDetalhe.id)
           .pop()}
       />
       <Container

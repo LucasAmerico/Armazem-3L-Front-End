@@ -6,7 +6,9 @@ import { Backdrop, Button, Fade, Grid, Modal } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
-import { Carga, IPropsDetalhesCarga } from '../../utils/interfaces';
+import { Carga, Produto, IPropsDetalhesCarga } from '../../utils/interfaces';
+import DataCarga from '../chose-products/DataCarga';
+import DetalhesListProducts from '../detalhes-list-products/DetalhesListProducts';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -27,6 +29,29 @@ const CadastroCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
+  const [filtro, setFiltro] = useState<string>('');
+  const [produtos, setProdutos] = useState<Produto[]>([]);
+
+  useEffect(() => {
+    setProdutos(carga?.listaProdutos);
+  }, [carga]);
+
+  useEffect(() => {
+    if (carga?.listaProdutos?.length > 0) {
+      const filtrados = carga?.listaProdutos.filter((item) =>
+        item.nome.toLowerCase().includes(filtro),
+      );
+
+      // eslint-disable-next-line no-unused-expressions
+      filtro.length === 0
+        ? setProdutos(carga?.listaProdutos)
+        : setProdutos(filtrados);
+    }
+  }, [filtro]);
+
+  const handleFilter = (event: ChangeEvent<HTMLInputElement>) => {
+    setFiltro(event.target.value.toLocaleLowerCase());
+  };
 
   return (
     <div
@@ -58,6 +83,18 @@ const CadastroCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
                 </h2>
               </Grid>
             </Grid>
+            <DataCarga
+              address={carga?.endereco}
+              freight={carga?.frete}
+              disabled
+              onChangeValue={() => {}}
+            />
+            <DetalhesListProducts
+              produtos={produtos}
+              title="Lista de produtos"
+              filtro={filtro}
+              onChangeFilterValue={handleFilter}
+            />
             <Grid container xs={12} xl={12} className={classes.modal__buttons}>
               <Grid
                 item

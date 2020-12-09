@@ -9,8 +9,9 @@ export interface Produto {
 
 export interface IPropsDataCarga {
   address?: string;
-  freight?: string;
+  freight?: any;
   onChangeValue?: any;
+  disabled?: boolean;
 }
 
 export interface IPropsItemLista {
@@ -73,7 +74,7 @@ export interface HandleBooleans {
 
 export interface IPropsListProducts {
   produtos: Produto[];
-  prodState: boolean[];
+  prodState?: boolean[];
   filtro: string;
   selectAll?: boolean;
   onSelectAllItens?: any;
@@ -82,14 +83,17 @@ export interface IPropsListProducts {
   onChangeFilterValue: any;
   onSelectItem?: any;
   onChangeQtd?: any;
+  title?: string;
 }
 
 export interface ProdutoList {
+  nome?: any;
   produtoId: any;
   qtd: any;
 }
 
 export interface Carga {
+  id?: number;
   endereco: string;
   frete: number;
   motoristaId: number;

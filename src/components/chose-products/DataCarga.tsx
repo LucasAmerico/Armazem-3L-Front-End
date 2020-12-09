@@ -5,7 +5,12 @@ import useWindowDimensions from '../../utils/windowsDimension';
 import useStyles from './styles';
 import { IPropsDataCarga } from '../../utils/interfaces';
 
-const DataCarga = ({ address, freight, onChangeValue }: IPropsDataCarga) => {
+const DataCarga = ({
+  address,
+  freight,
+  onChangeValue,
+  disabled,
+}: IPropsDataCarga) => {
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
 
@@ -21,6 +26,7 @@ const DataCarga = ({ address, freight, onChangeValue }: IPropsDataCarga) => {
             variant="filled"
             value={address}
             onChange={onChangeValue}
+            disabled={disabled}
             className={clsx(classes.field__full, {
               [classes.field__margin]: true,
             })}
@@ -34,6 +40,7 @@ const DataCarga = ({ address, freight, onChangeValue }: IPropsDataCarga) => {
             name="frete"
             value={freight}
             onChange={onChangeValue}
+            disabled={disabled}
             variant="filled"
             className={classes.field__full}
           />
