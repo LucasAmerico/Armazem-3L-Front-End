@@ -10,6 +10,7 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import clsx from 'clsx';
+import { toast } from 'react-toastify';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
 import GlobalStates from '../../recoil/atom';
@@ -19,6 +20,7 @@ import Lista from '../List/list';
 import { Carga } from '../../utils/interfaces';
 import DialogConfirmAction from '../Dialog/DialogConfirmAction';
 import DetalhesCarga from '../modal-detalhes-carga';
+import MESSAGES from '../../constants/MESSAGES';
 
 const CargaLista = () => {
   const [pageState, setPageState] = useState({
@@ -38,6 +40,15 @@ const CargaLista = () => {
   );
   const [openModal, setOpenModal] = useState(false);
   const [filtro, setFiltro] = useState<string>('');
+  const toastConfig = {
+    position: 'top-right',
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
 
   const buscarLista = () => {
     CargaService.getCarga()
@@ -114,12 +125,12 @@ const CargaLista = () => {
   const handleDelete = () => {
     CargaService.deleteCarga(openDialog.id)
       .then((res) => {
-        alert('Sucesso');
         handlePosDelete();
+        toast.success(MESSAGES.deletar_Carga_Sucesso);
       })
       .catch((error) => {
-        alert('Erro ao Salvar');
         handlePosDelete();
+        toast.error(error);
       });
   };
 
@@ -136,8 +147,6 @@ const CargaLista = () => {
         actionFunction={handleDelete}
       />
       <CadastroCarga modal={openModal} onClose={handleClose} />
-      {console.log(pageState.cargasList)}
-      {console.log(openDetalhe)}
       <DetalhesCarga
         modal={openDetalhe.open}
         onClose={handleCloseDetalhe}
