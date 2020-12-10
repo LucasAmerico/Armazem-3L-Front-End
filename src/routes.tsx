@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import React from 'react';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 
@@ -17,7 +16,7 @@ const Routes = () => (
         exact
         path="/"
         render={() => {
-          return <Redirect to="/cargas" />;
+          return <Redirect to="/home" />;
         }}
       />
       <Route component={CargasPage} path="/cargas" exact />

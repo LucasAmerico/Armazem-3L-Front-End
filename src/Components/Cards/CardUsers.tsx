@@ -13,12 +13,11 @@ import imageEnum from '../../utils/enum/imageEnum';
 
 interface Props {
   titulo: string;
-  rota: any;
   tipoUsuario: string;
   alt: string;
 }
 
-const CardUsers = ({ titulo, rota, tipoUsuario, alt }: Props) => {
+const CardUsers = ({ titulo, tipoUsuario, alt }: Props) => {
   const classes = useStyles();
 
   return (
@@ -32,13 +31,10 @@ const CardUsers = ({ titulo, rota, tipoUsuario, alt }: Props) => {
           title={titulo}
         />
         <CardContent className={classes.cardMargin}>
-          <Typography variant="h5" component="h2">
-            {titulo}
-          </Typography>
           <CardActions>
-            <Button size="large" color="primary">
-              Learn More
-            </Button>
+            <Typography variant="h5" component="h2">
+              {titulo}
+            </Typography>
           </CardActions>
         </CardContent>
       </CardActionArea>
