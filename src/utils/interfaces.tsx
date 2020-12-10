@@ -1,4 +1,6 @@
 export interface Produto {
+  quantidade: any;
+  produto: any;
   id?: number;
   nome: string;
   peso: number;
@@ -68,7 +70,7 @@ export interface IPropsDetalhesProduto {
 
 export interface IPropsDetalhesCarga {
   carga: Carga | undefined;
-  openM: boolean;
+  modal: boolean;
   onClose: any;
 }
 
@@ -98,7 +100,7 @@ export interface HandleBooleans {
 
 export interface IPropsListProducts {
   produtos: Produto[];
-  prodState: boolean[];
+  prodState?: boolean[];
   filtro: string;
   selectAll?: boolean;
   onSelectAllItens?: any;
@@ -107,9 +109,11 @@ export interface IPropsListProducts {
   onChangeFilterValue: any;
   onSelectItem?: any;
   onChangeQtd?: any;
+  title?: string;
 }
 
 export interface ProdutoList {
+  nome?: any;
   produtoId: any;
   qtd: any;
 }

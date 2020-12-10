@@ -85,6 +85,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
+  deleteButton: {
+    color: COLORS.red,
+  },
 }));
 
 export default useStyles;

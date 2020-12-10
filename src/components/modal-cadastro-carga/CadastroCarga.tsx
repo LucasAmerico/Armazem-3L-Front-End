@@ -3,6 +3,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import clsx from 'clsx';
 import { Backdrop, Button, Fade, Grid, Modal } from '@material-ui/core';
+import { toast } from 'react-toastify';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
@@ -16,6 +17,7 @@ import {
 import CargaService from '../../services/CargaService';
 import DataCarga from '../chose-products/DataCarga';
 import ListProducts from '../list-products/ListProducts';
+import MESSAGES from '../../constants/MESSAGES';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -36,7 +38,9 @@ const CadastroCarga = ({ modal, onClose }: IPropsCadastroCarga) => {
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
-  const [saveCarga, setSaveCarga] = useRecoilState(GlobalStates.saveCarga);
+  const [changeCarga, setchangeCarga] = useRecoilState(
+    GlobalStates.changeCarga,
+  );
   const [carga, setCarga] = useState({ endereco: '', frete: '' });
   const [modalStyle] = useState(getModalStyle);
   const [produtos, setProdutos] = useState<Produto[]>([]);
@@ -154,13 +158,13 @@ const CadastroCarga = ({ modal, onClose }: IPropsCadastroCarga) => {
 
     CargaService.postCarga(newCarga)
       .then((res) => {
-        alert('Sucesso');
         handlePosSave();
-        setSaveCarga(true);
+        setchangeCarga(true);
+        toast.success(MESSAGES.cadastrar_Carga_Sucesso);
       })
       .catch((error) => {
-        alert('Erro ao Salvar');
         handlePosSave();
+        toast.error(error);
       });
   };
 

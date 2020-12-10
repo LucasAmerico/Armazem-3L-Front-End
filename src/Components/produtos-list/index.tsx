@@ -10,6 +10,7 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import clsx from 'clsx';
+import { toast } from 'react-toastify';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
 import GlobalStates from '../../recoil/atom';
@@ -20,6 +21,7 @@ import { Carga, Produto } from '../../utils/interfaces';
 import CadastroProduto from '../modal-cadastro-produto';
 import DialogRmProduto from '../dialog-deletar-produto';
 import DetalhesProduto from '../modal-detalhe-produto';
+import MESSAGES from '../../constants/MESSAGES';
 
 const ProdutosLista = () => {
   const [pageState, setPageState] = useState({
@@ -129,12 +131,12 @@ const ProdutosLista = () => {
   const handleDeleteProduto = () => {
     ProdutosService.deleteProduto(openDialog.id)
       .then((res) => {
-        alert('Sucesso');
         handlePosDelete();
+        toast.success(MESSAGES.deletar_Produto_Sucesso);
       })
       .catch((error) => {
-        alert('Erro ao Salvar');
         handlePosDelete();
+        toast.error(error);
       });
   };
 
@@ -185,11 +187,7 @@ const ProdutosLista = () => {
           </div>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
-          <Lista
-            titulo="Listagem de cargas"
-            conteudo={pageState.produtosList}
-            parent="produto"
-          />
+          <Lista content={pageState.produtosList} parent="produto" />
         </Grid>
       </Container>
       <DialogRmProduto
