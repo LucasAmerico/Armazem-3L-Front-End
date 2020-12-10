@@ -28,7 +28,7 @@ const openProdutoDetalhe = atom({
 
 const currentUser = atom({
   key: 'currentUser',
-  default: false,
+  default: '',
 });
 
 export default {

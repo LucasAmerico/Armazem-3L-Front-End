@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import clsx from 'clsx';
-import { Button, Grid } from '@material-ui/core';
-import { Router, Route, Switch, Link, useHistory } from 'react-router-dom';
+import { Button, Grid, Typography } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
@@ -14,14 +13,9 @@ import usuarioEnum from '../../utils/enum/usuarioEnum';
 import CargasPage from '../Cargas';
 
 const HomePage = () => {
-  const history = useHistory();
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
-
-  const handleOnClicUser = () => {
-    history.push('/Cargas');
-  };
 
   return (
     <div
@@ -29,26 +23,25 @@ const HomePage = () => {
         [classes.contentShift]: open,
       })}
     >
-      <h2>Usuários</h2>
       <div>
-        <Grid container direction="row" justify="center" alignItems="center">
-          <Grid>
-            <Button onClick={handleOnClicUser}>
+        <Grid container justify="center" spacing={0}>
+          <h1>Escolha o tipo de acesso</h1>
+
+          <Grid container direction="row" justify="center" alignItems="center">
+            <Grid item xs={3} spacing={0}>
               <CardUsers
                 titulo="Usuário Administrativo"
                 tipoUsuario={usuarioEnum.ADMINISTRATIVO}
-                alt="Usuário Adm"
+                route="/cargas"
               />
-            </Button>
-          </Grid>
-          <Grid>
-            <Button onClick={handleOnClicUser}>
+            </Grid>
+            <Grid item xs={2} spacing={0}>
               <CardUsers
                 titulo="Motorista"
                 tipoUsuario={usuarioEnum.MOTORISTA}
-                alt="Motorista"
+                route="/produtos"
               />
-            </Button>
+            </Grid>
           </Grid>
         </Grid>
       </div>

@@ -13,6 +13,9 @@ const Header = (props: any) => {
   const classes = useStyles();
   // const [sideBarStateValue, ] = useRecoilValue(sideBarState);
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
+  const [currentUser, setCurrentUser] = useRecoilState(
+    GlobalStates.currentUser,
+  );
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -43,7 +46,7 @@ const Header = (props: any) => {
           Armazenagem 3L
         </Typography>
         <Typography variant="h6" noWrap>
-          Bino
+          {currentUser.charAt(0).toUpperCase() + currentUser.slice(1)}
         </Typography>
       </Toolbar>
     </AppBar>
