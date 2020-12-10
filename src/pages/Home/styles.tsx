@@ -17,42 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     }),
     marginLeft: drawerWidth,
   },
-  paper: {
-    position: 'absolute',
-    width: 600,
-    backgroundColor: '#e5e5e5',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2),
-    outline: 0,
-  },
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  modal__AddButton: {
-    backgroundColor: '#03fc30',
-    borderRadius: 0,
-    '&:hover': {
-      backgroundColor: '#00c707',
-    },
-  },
-  modal__title: {
-    fontWeight: 800,
-    fontSize: '2.5rem',
-    paddingBottom: '2rem',
-  },
-  modal__buttons: {
-    paddingTop: '1.5rem',
-  },
-  modal__buttonsFlex: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  modal__buttonMargin: {
-    marginRight: '.5rem',
-  },
-  escolhaUsers: {
+  container: {
     minHeight: '70vh',
   },
 }));

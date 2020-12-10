@@ -29,15 +29,16 @@ const HomePage = () => {
           spacing={0}
           alignItems="center"
           justify="center"
-          className={classes.escolhaUsers}
+          className={classes.container}
         >
           <Grid justify="center">
             <h1>Escolha o tipo de acesso</h1>
           </Grid>
           <Grid
             container
+            spacing={10}
             direction="row"
-            justify="space-evenly"
+            justify="center"
             alignItems="center"
           >
             <Grid item>
