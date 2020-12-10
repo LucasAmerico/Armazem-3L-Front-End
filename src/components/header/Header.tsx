@@ -39,7 +39,12 @@ const Header = (props: any) => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" className={classes.grow} noWrap>
+        <Typography
+          data-testid="app-label"
+          variant="h6"
+          className={classes.grow}
+          noWrap
+        >
           Armazenagem 3L
         </Typography>
         <Typography variant="h6" noWrap>
