@@ -34,7 +34,7 @@ const ProdutosLista = () => {
     GlobalStates.saveProduto,
   );
   const [openDetalhe, setOpenDetalhe] = useRecoilState(
-    GlobalStates.openProdutoDetalhe,
+    GlobalStates.openDetalhe,
   );
   const [openModal, setOpenModal] = useState(false);
   const [filtro, setFiltro] = useState<string>('');
@@ -42,8 +42,6 @@ const ProdutosLista = () => {
   useEffect(() => {
     ProdutosService.getProdutos()
       .then((data) => {
-        console.log(data);
-
         setPageState({
           ...pageState,
           produtosList: data,
@@ -58,8 +56,6 @@ const ProdutosLista = () => {
   const attData = () => {
     ProdutosService.getProdutos()
       .then((data) => {
-        console.log(data);
-
         setPageState({
           ...pageState,
           produtosList: data,
@@ -72,13 +68,9 @@ const ProdutosLista = () => {
   };
 
   useEffect(() => {
-    console.log(saveProduto);
-
     if (saveProduto === true) {
       ProdutosService.getProdutos()
         .then((data) => {
-          console.log(data);
-
           setPageState({
             ...pageState,
             produtosList: data,
@@ -93,8 +85,6 @@ const ProdutosLista = () => {
   }, [saveProduto]);
 
   useEffect(() => {
-    console.log(filtro);
-
     const filtrados = pageState.produtosListAux.filter((item) =>
       item.nome.toLowerCase().includes(filtro),
     );
@@ -217,7 +207,7 @@ const ProdutosLista = () => {
         openM={openDetalhe.open}
         onClose={handleCloseDetalhe}
         produto={pageState.produtosList
-          .filter((item: Produto) => item.id === openDialog.id)
+          .filter((item: Produto) => item.id === openDetalhe.id)
           .pop()}
       />
     </div>

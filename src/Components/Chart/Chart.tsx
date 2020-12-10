@@ -6,8 +6,6 @@ interface Props {
   quantidadeAceitas: any;
 }
 const Chart = ({ quantidadePendente, quantidadeAceitas }: Props) => {
-  console.log(quantidadePendente);
-  console.log(quantidadeAceitas);
   const [chartState, setChartState] = useState({
     labels: ['Pendentes', 'Aceitas'],
     datasets: [

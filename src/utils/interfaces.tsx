@@ -8,9 +8,10 @@ export interface Produto {
 }
 
 export interface IPropsDataCarga {
-  address?: string;
-  freight?: string;
-  onChangeValue?: any;
+  address: string | undefined;
+  freight: string | undefined;
+  onChangeValue: any;
+  disabled: boolean;
 }
 
 export interface IPropsItemLista {
@@ -18,15 +19,39 @@ export interface IPropsItemLista {
   id: number;
 }
 
-export interface IRmProduct {
+export interface ITabItems {
+  value: number;
+}
+
+export interface IPropsDialog {
   open: boolean;
   id: number;
 }
 
-export interface IDtProduct {
+export interface IDetalhes {
   open: boolean;
   id: number;
 }
+
+export interface TabPanelProps {
+  children?: React.ReactNode;
+  index: any;
+  value: any;
+  style: any;
+}
+
+export interface IPropsAccCarga {
+  open: boolean;
+  onClose: any;
+  onDelete: any;
+}
+
+export interface IPropsRecCarga {
+  open: boolean;
+  onClose: any;
+  onDelete: any;
+}
+
 export interface IPropsRmProduto {
   id: number;
   nome: string | undefined;
@@ -37,6 +62,12 @@ export interface IPropsRmProduto {
 
 export interface IPropsDetalhesProduto {
   produto: Produto | undefined;
+  openM: boolean;
+  onClose: any;
+}
+
+export interface IPropsDetalhesCarga {
+  carga: Carga | undefined;
   openM: boolean;
   onClose: any;
 }
@@ -84,8 +115,14 @@ export interface ProdutoList {
 }
 
 export interface Carga {
+  id?: number;
   endereco: string;
   frete: number;
   motoristaId: number;
   produtos: ProdutoList[];
+}
+
+export interface CargaMotorista {
+  cargaId: number;
+  motoristaId: number;
 }

@@ -17,8 +17,9 @@ import GlobalStates from '../../recoil/atom';
 import CadastroCarga from '../../components/modal-cadastro-carga/CadastroCarga';
 import CardDashboard from '../../components/cards-dashboard';
 import CargaLista from '../../components/carga-list';
+import Fretamento from '../../components/carga-list-motorista';
 
-const CargasPage = () => {
+const MotoristasPage = () => {
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
@@ -32,7 +33,7 @@ const CargasPage = () => {
     >
       <Grid container xs={12} sm={12} md={12} lg={12} xl={12}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <CargaLista />
+          <Fretamento />
         </Grid>
       </Grid>
       <div className={classes.contentCards}>
@@ -42,4 +43,4 @@ const CargasPage = () => {
   );
 };
 
-export default CargasPage;
+export default MotoristasPage;

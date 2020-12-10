@@ -198,6 +198,7 @@ const CadastroCarga = ({ modal, onClose }: IPropsCadastroCarga) => {
               address={carga.endereco}
               freight={carga.frete}
               onChangeValue={handleInputChange}
+              disabled={false}
             />
             <ListProducts
               produtos={produtos}

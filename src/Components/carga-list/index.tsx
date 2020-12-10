@@ -45,13 +45,9 @@ const CargaLista = () => {
   }, []);
 
   useEffect(() => {
-    console.log(saveCarga);
-
     if (saveCarga === true) {
       CargaService.getCarga()
         .then((data) => {
-          console.log(data);
-
           setPageState({
             ...pageState,
             cargasList: data,
@@ -66,8 +62,6 @@ const CargaLista = () => {
   }, [saveCarga]);
 
   useEffect(() => {
-    console.log(filtro);
-
     const filtrados = pageState.cargasListAux.filter((item) =>
       item.endereco.toLowerCase().includes(filtro),
     );

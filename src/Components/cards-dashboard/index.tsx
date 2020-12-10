@@ -35,7 +35,6 @@ const CardDashboard = () => {
   const buscaCargas = () => {
     CargaService.getCarga()
       .then((data) => {
-        console.log(data);
         const filtradosAceitos = data.filter(
           (item: any) => item.motoristaId > 0,
         );

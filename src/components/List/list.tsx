@@ -2,6 +2,7 @@ import React from 'react';
 import List from '@material-ui/core/List';
 import useStyles from './styles';
 import ItemLista from '../listItem/listItem';
+import ItemListaMotorista from '../list-Item-motorista';
 
 interface Props {
   titulo: string;
@@ -10,17 +11,34 @@ interface Props {
 }
 const Lista = ({ titulo, conteudo, parent }: Props) => {
   const classes = useStyles();
+  // eslint-disable-next-line no-nested-ternary
   return parent === 'produto' ? (
     <List component="nav" className={classes.root} aria-label="listagem">
       {conteudo.map((item: { nome: string; id: number }) => (
         <ItemLista titulo={item.nome} id={item.id} key={item.id} />
       ))}
     </List>
-  ) : (
+  ) : parent === 'carga' ? (
     <List component="nav" className={classes.root} aria-label="listagem">
       {conteudo.map((item: { endereco: string; id: number }) => (
         <ItemLista titulo={item.endereco} id={item.id} key={item.id} />
       ))}
+    </List>
+  ) : (
+    <List component="nav" className={classes.root} aria-label="listagem">
+      {conteudo.length !== 0 ? (
+        conteudo.map((item: { endereco: string; id: number }) => (
+          <ItemListaMotorista
+            titulo={item.endereco}
+            id={item.id}
+            key={item.id}
+          />
+        ))
+      ) : (
+        <div className={classes.centrado}>
+          <h3> ...Sem cargas para visualizar </h3>
+        </div>
+      )}
     </List>
   );
 };
