@@ -52,6 +52,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   modal__buttonMargin: {
     marginRight: '.5rem',
   },
+  escolhaUsers: {
+    minHeight: '70vh',
+  },
 }));
 
 export default useStyles;

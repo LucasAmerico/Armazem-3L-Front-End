@@ -40,7 +40,7 @@ const CardUsers = ({ titulo, tipoUsuario, route }: Props) => {
           title={titulo}
           image={imageEnum(tipoUsuario)}
         />
-        <Typography variant="h5" component="h2" align="center">
+        <Typography gutterBottom variant="h5" component="h5" align="center">
           {titulo}
         </Typography>
       </CardActionArea>
