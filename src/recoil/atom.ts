@@ -45,6 +45,11 @@ const tabAtivo = atom({
   default: { value: 0 } as ITabItems,
 });
 
+const currentUser = atom({
+  key: 'currentUser',
+  default: '',
+});
+
 export default {
   sideBarState,
   changeCarga,
@@ -54,4 +59,5 @@ export default {
   tabAtivo,
   openDialogAccCarga,
   openDialogRecCarga,
+  currentUser,
 };
