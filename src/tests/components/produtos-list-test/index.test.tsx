@@ -5,27 +5,29 @@ import React from 'react';
 import { RecoilRoot } from 'recoil';
 import Fretamento from '../../../components/carga-list-motorista';
 import '@testing-library/jest-dom/extend-expect';
+import ProdutosLista from '../../../components/produtos-list';
 
-describe('Tests for Fretamento component', () => {
+describe('Tests for ProdutosLista component', () => {
   it('Renders Correctly', async () => {
     // renderizar o componente
     const { queryByTestId } = render(
       <RecoilRoot>
-        <Fretamento />
+        <ProdutosLista />
       </RecoilRoot>,
     );
 
-    expect(queryByTestId('data-testid')).toBeTruthy();
-    expect(queryByTestId('tabs')).toBeTruthy();
+    expect(queryByTestId('input-search')).toBeTruthy();
+    expect(queryByTestId('button-add')).toBeTruthy();
+    expect(queryByTestId('list')).toBeTruthy();
   });
-  it('Should screem have title Fretes', async () => {
+  it('Should screem have title Produtos', async () => {
     // renderizar o componente
     const { queryByTestId } = render(
       <RecoilRoot>
-        <Fretamento />
+        <ProdutosLista />
       </RecoilRoot>,
     );
 
-    expect(screen.getByTestId('title')).toHaveTextContent('Fretes');
+    expect(screen.getByTestId('title')).toHaveTextContent('Produtos');
   });
 });

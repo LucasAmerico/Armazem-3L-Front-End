@@ -217,7 +217,10 @@ const Fretamento = () => {
       <Container maxWidth="lg" className={clsx(classes.container, {})}>
         <Grid container xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
           <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-            <Typography variant="h4"> Fretes </Typography>
+            <Typography data-testid="title" variant="h4">
+              {' '}
+              Fretes{' '}
+            </Typography>
           </Grid>
         </Grid>
         <Grid
@@ -235,20 +238,20 @@ const Fretamento = () => {
             </div>
             <InputBase
               placeholder="Buscar…"
+              data-testid="tabs"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
               inputProps={{
                 'aria-label': 'search',
-                'data-testid': 'input-filtro',
               }}
               onChange={handleFilter}
             />
           </div>
         </Grid>
         <div className={classes.root}>
-          <AppBar position="static">
+          <AppBar position="static" data-testid="data-testid">
             <Tabs
               value={tabAtivo.value}
               onChange={handleChange}

@@ -152,7 +152,10 @@ const ProdutosLista = () => {
       >
         <Grid container xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
           <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-            <Typography variant="h4"> Produtos </Typography>
+            <Typography data-testid="title" variant="h4">
+              {' '}
+              Produtos{' '}
+            </Typography>
           </Grid>
         </Grid>
         <Grid
@@ -167,6 +170,7 @@ const ProdutosLista = () => {
           <Button
             variant="contained"
             size="small"
+            data-testid="button-add"
             className={classes.button}
             onClick={handleOpen}
           >
@@ -178,6 +182,7 @@ const ProdutosLista = () => {
             </div>
             <InputBase
               placeholder="Buscar…"
+              data-testid="input-search"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -187,7 +192,16 @@ const ProdutosLista = () => {
             />
           </div>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
+        <Grid
+          data-testid="list"
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          spacing={3}
+        >
           <Lista content={pageState.produtosList} parent="produto" />
         </Grid>
       </Container>
