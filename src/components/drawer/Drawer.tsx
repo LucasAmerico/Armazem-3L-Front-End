@@ -16,13 +16,17 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { useTheme } from '@material-ui/core/styles';
 import { useRecoilState } from 'recoil';
 import { Link } from 'react-router-dom';
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
+import usuarioEnum from '../../utils/enum/usuarioEnum';
 
 const SideBar = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
+  const [currentUser] = useRecoilState(GlobalStates.currentUser);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -53,19 +57,47 @@ const SideBar = () => {
       </div>
       <Divider />
       <List>
-        {['Cargas', 'Produtos', 'Motoristas'].map((text, index) => (
-          <ListItem
-            button
-            key={text}
-            component={Link}
-            to={`/${text.toLocaleLowerCase()}`}
-          >
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {/* {['Cargas', 'Produtos', 'Motoristas'].map((text, index) => (
+        ))} */}
+        <ListItem
+          button
+          component={Link}
+          to="/cargas"
+          className={clsx(classes.list, {
+            [classes.hide]: currentUser === usuarioEnum.MOTORISTA,
+          })}
+        >
+          <ListItemIcon>
+            <LocalShippingIcon />
+          </ListItemIcon>
+          <ListItemText primary="Cargas" />
+        </ListItem>
+        <ListItem
+          button
+          component={Link}
+          to="/produtos"
+          className={clsx(classes.list, {
+            [classes.hide]: currentUser === usuarioEnum.MOTORISTA,
+          })}
+        >
+          <ListItemIcon>
+            <LocalOfferIcon />
+          </ListItemIcon>
+          <ListItemText primary="Produtos" />
+        </ListItem>
+        <ListItem
+          button
+          component={Link}
+          to="/motoristas"
+          className={clsx(classes.list, {
+            [classes.hide]: currentUser === usuarioEnum.ADMINISTRATIVO,
+          })}
+        >
+          <ListItemIcon>
+            <LocalShippingIcon />
+          </ListItemIcon>
+          <ListItemText primary="Frete" />
+        </ListItem>
       </List>
     </Drawer>
   );

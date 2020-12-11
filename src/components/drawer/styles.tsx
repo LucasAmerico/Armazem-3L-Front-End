@@ -38,6 +38,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     }),
     marginLeft: 0,
   },
+  list: {},
+  hide: {
+    display: 'none',
+  },
 }));
 
 export default useStyles;
