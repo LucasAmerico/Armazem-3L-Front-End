@@ -45,9 +45,9 @@ const tabAtivo = atom({
   default: { value: 0 } as ITabItems,
 });
 
-const updateData = atom({
-  key: 'updateData',
-  default: { update: false },
+const currentUser = atom({
+  key: 'currentUser',
+  default: '',
 });
 
 export default {
@@ -59,4 +59,5 @@ export default {
   tabAtivo,
   openDialogAccCarga,
   openDialogRecCarga,
+  currentUser,
 };
