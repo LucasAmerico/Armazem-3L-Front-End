@@ -153,17 +153,13 @@ const CardDashboard = ({ parent }: IPropsCards) => {
           />
         </Grid>
 
-        {parent === 'motorista' ? (
-          <Grid item xs={12} spacing={0}>
-            <CardComponent
-              titulo="Cargas Rejeitadas"
-              quantidade={calculaCargasRecusadas()}
-              color="#e41321"
-            />
-          </Grid>
-        ) : (
-          <div className={classes.hide} />
-        )}
+        <Grid item xs={12} spacing={0}>
+          <CardComponent
+            titulo="Cargas Rejeitadas"
+            quantidade={calculaCargasRecusadas()}
+            color="#e41321"
+          />
+        </Grid>
 
         <Grid item xs={12} spacing={0}>
           <CardComponent
