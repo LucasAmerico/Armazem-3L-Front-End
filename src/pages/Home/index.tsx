@@ -34,26 +34,33 @@ const HomePage = () => {
           <Grid justify="center">
             <h1>Escolha o tipo de acesso</h1>
           </Grid>
-          <Grid
-            container
-            spacing={10}
-            direction="row"
-            justify="center"
-            alignItems="center"
-          >
-            <Grid item>
-              <CardUsers
-                titulo="Administrativo"
-                tipoUsuario={usuarioEnum.ADMINISTRATIVO}
-                route="/cargas"
-              />
-            </Grid>
-            <Grid item>
-              <CardUsers
-                titulo="Motorista"
-                tipoUsuario={usuarioEnum.MOTORISTA}
-                route="/motoristas"
-              />
+          <Grid container xs={12} sm={12} md={12} lg={12} xl={12}>
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={12}
+              lg={12}
+              xl={12}
+              direction="row"
+              justify="space-evenly"
+              alignItems="center"
+              className={classes.display}
+            >
+              <div className={classes.cardOne}>
+                <CardUsers
+                  titulo="Administrativo"
+                  tipoUsuario={usuarioEnum.ADMINISTRATIVO}
+                  route="/cargas"
+                />
+              </div>
+              <div className={classes.cardTwo}>
+                <CardUsers
+                  titulo="Motorista"
+                  tipoUsuario={usuarioEnum.MOTORISTA}
+                  route="/motoristas"
+                />
+              </div>
             </Grid>
           </Grid>
         </Grid>

@@ -15,10 +15,18 @@ const useStyles = makeStyles((theme: Theme) => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginLeft: drawerWidth,
   },
   container: {
     minHeight: '70vh',
+  },
+  display: {
+    display: 'flex',
+  },
+  cardOne: {
+    marginRight: '.5rem',
+  },
+  cardTwo: {
+    marginLeft: '.5rem',
   },
 }));
 
