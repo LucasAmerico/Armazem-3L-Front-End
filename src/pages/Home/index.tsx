@@ -43,7 +43,7 @@ const HomePage = () => {
           >
             <Grid item>
               <CardUsers
-                titulo="Usuário Administrativo"
+                titulo="Administrativo"
                 tipoUsuario={usuarioEnum.ADMINISTRATIVO}
                 route="/cargas"
               />
@@ -52,7 +52,7 @@ const HomePage = () => {
               <CardUsers
                 titulo="Motorista"
                 tipoUsuario={usuarioEnum.MOTORISTA}
-                route="/produtos"
+                route="/motoristas"
               />
             </Grid>
           </Grid>
