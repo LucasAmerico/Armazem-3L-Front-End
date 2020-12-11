@@ -36,7 +36,7 @@ const CargaLista = () => {
     GlobalStates.changeCarga,
   );
   const [openDetalhe, setOpenDetalhe] = useRecoilState(
-    GlobalStates.openProdutoDetalhe,
+    GlobalStates.openDetalhe,
   );
   const [openModal, setOpenModal] = useState(false);
   const [filtro, setFiltro] = useState<string>('');
@@ -79,8 +79,6 @@ const CargaLista = () => {
   }, [changeCarga]);
 
   useEffect(() => {
-    console.log(filtro);
-
     const filtrados = pageState.cargasListAux.filter((item) =>
       item.endereco.toLowerCase().includes(filtro),
     );

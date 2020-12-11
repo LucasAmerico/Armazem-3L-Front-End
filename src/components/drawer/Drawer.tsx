@@ -53,7 +53,7 @@ const SideBar = () => {
       </div>
       <Divider />
       <List>
-        {['Cargas', 'Produtos'].map((text, index) => (
+        {['Cargas', 'Produtos', 'Motoristas'].map((text, index) => (
           <ListItem
             button
             key={text}

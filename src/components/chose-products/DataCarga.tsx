@@ -24,9 +24,9 @@ const DataCarga = ({
             type="search"
             name="endereco"
             variant="filled"
+            disabled={disabled}
             value={address}
             onChange={onChangeValue}
-            disabled={disabled}
             className={clsx(classes.field__full, {
               [classes.field__margin]: true,
             })}
@@ -38,9 +38,9 @@ const DataCarga = ({
             label="Valor de Frete"
             type="search"
             name="frete"
+            disabled={disabled}
             value={freight}
             onChange={onChangeValue}
-            disabled={disabled}
             variant="filled"
             className={classes.field__full}
           />

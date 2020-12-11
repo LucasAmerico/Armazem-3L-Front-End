@@ -6,6 +6,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     backgroundColor: COLORS.white,
   },
+  centrado: {
+    textAlign: 'center',
+    color: '#262626',
+  },
 }));
 
 export default useStyles;

@@ -6,9 +6,20 @@ import { Backdrop, Button, Fade, Grid, Modal } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
-import { Carga, Produto, IPropsDetalhesCarga } from '../../utils/interfaces';
+import api from '../../services/api';
+import {
+  Carga,
+  IPropsCadastroCarga,
+  IPropsCadastroProduto,
+  IPropsDetalhesCarga,
+  IPropsDetalhesProduto,
+  Produto,
+  ProdutoList,
+} from '../../utils/interfaces';
+import ProdutoService from '../../services/ProdutoService';
 import DataCarga from '../chose-products/DataCarga';
-import DetalhesListProducts from '../detalhes-list-products/DetalhesListProducts';
+import ListProducts from '../list-products/ListProducts';
+import FormProduct from '../form-product';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -29,33 +40,8 @@ const DetalhesCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
-  const [filtro, setFiltro] = useState<string>('');
-  const [produtos, setProdutos] = useState<Produto[]>([]);
 
-  useEffect(() => {
-    if (carga?.listaProdutos !== undefined) {
-      setProdutos(carga.listaProdutos);
-    }
-  }, [carga]);
-
-  useEffect(() => {
-    if (carga?.listaProdutos !== undefined) {
-      if (carga.listaProdutos.length > 0) {
-        const filtrados = carga!.listaProdutos!.filter((item) =>
-          item.produto.nome.toLowerCase().includes(filtro),
-        );
-
-        // eslint-disable-next-line no-unused-expressions
-        filtro.length === 0
-          ? setProdutos(carga!.listaProdutos!)
-          : setProdutos(filtrados);
-      }
-    }
-  }, [filtro]);
-
-  const handleFilter = (event: ChangeEvent<HTMLInputElement>) => {
-    setFiltro(event.target.value.toLocaleLowerCase());
-  };
+  const [modalStyle] = useState(getModalStyle);
 
   return (
     <div
@@ -83,21 +69,15 @@ const DetalhesCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
                   id="transition-modal-title"
                   className={classes.modal__title}
                 >
-                  Detalhes de Carga
+                  Detalhes da Carga
                 </h2>
               </Grid>
             </Grid>
             <DataCarga
               address={carga?.endereco}
               freight={`${carga?.frete}`}
-              disabled
               onChangeValue={() => {}}
-            />
-            <DetalhesListProducts
-              produtos={produtos}
-              title="Lista de produtos"
-              filtro={filtro}
-              onChangeFilterValue={handleFilter}
+              disabled
             />
             <Grid container xs={12} xl={12} className={classes.modal__buttons}>
               <Grid

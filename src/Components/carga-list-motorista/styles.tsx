@@ -17,9 +17,16 @@ const useStyles = makeStyles((theme: Theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+  },
   containerPadding: {
     paddingLeft: '6rem',
     paddingTop: '2rem',
+  },
+  noPadding: {
+    padding: '0',
   },
   contentDisplay: {
     display: 'flex',
@@ -84,9 +91,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         width: '20ch',
       },
     },
-  },
-  table: {
-    minWidth: 650,
   },
 }));
 

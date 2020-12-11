@@ -16,28 +16,29 @@ const useStyles = makeStyles((theme: Theme) => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-  },
-  containerPadding: {
-    paddingLeft: '6rem',
-    paddingTop: '2rem',
+    marginLeft: drawerWidth,
   },
   contentDisplay: {
     display: 'flex',
     justifyContent: 'center',
+    paddingLeft: '5rem',
+    paddingRight: '5rem',
+    paddingBottom: '1rem',
+    paddingTop: '1rem',
+  },
+  contentLista: {},
+  contentCards: {
+    paddingLeft: '.5rem',
   },
   container: {
     flexGrow: 1,
     backgroundColor: COLORS.gray,
     height: '100vh',
-    paddingTop: '2rem',
-  },
-  container__iniWidth: {
-    width: '83rem',
+    paddingTop: '5vh',
   },
   actionContainer: {
     display: 'flex',
-    justifyContent: 'flex-end',
-    paddingBottom: '1rem',
+    justifyContent: 'space-between',
   },
   button: {
     backgroundColor: COLORS.green,
@@ -84,9 +85,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         width: '20ch',
       },
     },
-  },
-  table: {
-    minWidth: 650,
   },
 }));
 

@@ -1,8 +1,11 @@
-import { Carga } from '../utils/interfaces';
+import { Carga, CargaMotorista } from '../utils/interfaces';
 import api from './api';
 
 const getCargaRoute = '/carga/listagem';
 const postCargaRoute = '/carga';
+const postAceitarCargaRoute = '/carga/aceitarCarga';
+const postRecusarCargaRoute = '/carga/recusarCarga';
+const getCargasRecusadasRoute = '/carga/recusadas/';
 
 async function getCarga(id?: any, motorista?: any) {
   let url = getCargaRoute;
@@ -37,8 +40,32 @@ async function postCarga(carga: Carga) {
   return response.data;
 }
 
+async function postAceitarCarga(cm: CargaMotorista) {
+  const url = postAceitarCargaRoute;
+
+  const response = await api.post(url, cm);
+  return response.data;
+}
+
+async function postRecusarCarga(cm: CargaMotorista) {
+  const url = postRecusarCargaRoute;
+
+  const response = await api.post(url, cm);
+  return response.data;
+}
+
+async function getCargasRecusadas(motoristaId: number) {
+  const url = `${getCargasRecusadasRoute}${motoristaId}`;
+
+  const response = await api.get(url);
+  return response.data;
+}
+
 export default {
   getCarga,
   deleteCarga,
   postCarga,
+  postAceitarCarga,
+  postRecusarCarga,
+  getCargasRecusadas,
 };

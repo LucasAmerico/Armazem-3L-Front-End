@@ -7,8 +7,14 @@ interface Props {
   color: string;
   qtdPendente: any;
   qtdAceitas: any;
+  qtdRejeitada: any;
 }
-const CardGrafico = ({ color, qtdPendente, qtdAceitas }: Props) => {
+const CardGrafico = ({
+  color,
+  qtdPendente,
+  qtdAceitas,
+  qtdRejeitada,
+}: Props) => {
   const [styleProps, setStyleProps] = useState({
     color: '#DAD8D8',
   });
@@ -22,6 +28,7 @@ const CardGrafico = ({ color, qtdPendente, qtdAceitas }: Props) => {
         <Chart
           quantidadePendente={qtdPendente}
           quantidadeAceitas={qtdAceitas}
+          quantidadeRejeitada={qtdRejeitada}
         />
       </CardContent>
     </Card>

@@ -3,4 +3,6 @@ export default {
   cadastrar_Carga_Sucesso: 'Carga cadastrada com sucesso!',
   cadastrar_Produto_Sucesso: 'Produto cadastrado com sucesso!',
   deletar_Produto_Sucesso: 'Produto deletado com sucesso!',
+  rejeitar_carga_Sucesso: 'Carga rejeitada com sucesso!',
+  aceitar_carga_Sucesso: 'Carga aceitada com sucesso!',
 };

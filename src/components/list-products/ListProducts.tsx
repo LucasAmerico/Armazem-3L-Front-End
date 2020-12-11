@@ -122,13 +122,13 @@ const ListProducts = ({
                       checkedIcon={<CheckBoxIcon fontSize="large" />}
                       name={`${i.id! - 1}`}
                       color="primary"
-                      checked={prodState[i.id! - 1]}
+                      checked={prodState![i.id! - 1]}
                       onChange={onSelectItem}
                     />
                   }
                   label={i.nome}
                 />
-                {prodState[i.id! - 1] === true ? (
+                {prodState![i.id! - 1] === true ? (
                   <TextField
                     label="Qtd"
                     type="number"
