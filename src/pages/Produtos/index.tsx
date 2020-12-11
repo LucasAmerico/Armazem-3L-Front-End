@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core';
 import useWindowDimensions from '../../utils/windowsDimension';
 import useStyles from './styles';
 import GlobalStates from '../../recoil/atom';
-import ProdutosLista from '../../components/produtos-list';
+import ProdutosLista from './components/produtos-list';
 
 const ProdutosPage = () => {
   const classes = useStyles();

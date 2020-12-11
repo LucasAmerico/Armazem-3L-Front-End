@@ -1,4 +1,5 @@
 import { makeStyles, Theme } from '@material-ui/core';
+import COLORS from '../../constants/COLORS';
 
 const drawerWidth = 240;
 
@@ -28,6 +29,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   grow: {
     flexGrow: 1,
+  },
+  link: {
+    textDecoration: 'none',
+    color: COLORS.white,
   },
 }));
 

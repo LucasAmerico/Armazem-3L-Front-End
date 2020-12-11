@@ -3,9 +3,9 @@
 import { render, screen, waitForElement } from '@testing-library/react';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
-import Fretamento from '../../../components/carga-list-motorista';
+import Fretamento from '../../../pages/Motorista/components/carga-list-motorista';
 import '@testing-library/jest-dom/extend-expect';
-import ProdutosLista from '../../../components/produtos-list';
+import ProdutosLista from '../../../pages/Produtos/components/produtos-list';
 
 describe('Tests for ProdutosLista component', () => {
   it('Renders Correctly', async () => {

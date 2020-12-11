@@ -7,7 +7,7 @@ import useWindowDimensions from '../../utils/windowsDimension';
 import useStyles from './styles';
 import GlobalStates from '../../recoil/atom';
 import CardDashboard from '../../components/cards-dashboard';
-import CargaLista from '../../components/carga-list';
+import CargaLista from './components/carga-list';
 
 const CargasPage = () => {
   const classes = useStyles();

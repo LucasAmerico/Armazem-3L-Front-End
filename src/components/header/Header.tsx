@@ -5,6 +5,7 @@ import { IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import { useRecoilState } from 'recoil';
+import { Link } from 'react-router-dom';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 
@@ -20,8 +21,8 @@ const Header = (props: any) => {
     setOpen(true);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleResetUser = () => {
+    setCurrentUser('Olá, visitante!');
   };
 
   return (
@@ -46,8 +47,11 @@ const Header = (props: any) => {
           variant="h6"
           className={classes.grow}
           noWrap
+          onClick={() => handleResetUser()}
         >
-          Armazenagem 3L
+          <Link to="/" className={classes.link}>
+            Armazenagem 3L
+          </Link>
         </Typography>
         <Typography variant="h6" noWrap>
           {currentUser.charAt(0).toUpperCase() + currentUser.slice(1)}

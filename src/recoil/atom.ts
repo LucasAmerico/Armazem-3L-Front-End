@@ -47,7 +47,7 @@ const tabAtivo = atom({
 
 const currentUser = atom({
   key: 'currentUser',
-  default: '',
+  default: 'Olá, visitante!',
 });
 
 export default {

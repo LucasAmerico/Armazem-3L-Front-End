@@ -12,56 +12,51 @@ import SearchIcon from '@material-ui/icons/Search';
 import clsx from 'clsx';
 import { toast } from 'react-toastify';
 import useStyles from './styles';
-import useWindowDimensions from '../../utils/windowsDimension';
-import GlobalStates from '../../recoil/atom';
-import ProdutosService from '../../services/ProdutoService';
-import CadastroCarga from '../modal-cadastro-carga/CadastroCarga';
-import Lista from '../List/list';
-import { Carga, Produto } from '../../utils/interfaces';
-import CadastroProduto from '../modal-cadastro-produto';
-import DialogRmProduto from '../dialog-deletar-produto';
-import DetalhesProduto from '../modal-detalhe-produto';
-import MESSAGES from '../../constants/MESSAGES';
+import useWindowDimensions from '../../../../utils/windowsDimension';
+import GlobalStates from '../../../../recoil/atom';
+import CargaService from '../../../../services/CargaService';
+import CadastroCarga from '../../../../components/modal-cadastro-carga/CadastroCarga';
+import Lista from '../../../../components/List/list';
+import { Carga } from '../../../../utils/interfaces';
+import DialogConfirmAction from '../../../../components/Dialog/DialogConfirmAction';
+import DetalhesCarga from '../../../../components/modal-detalhes-carga';
+import MESSAGES from '../../../../constants/MESSAGES';
 
-const ProdutosLista = () => {
+const CargaLista = () => {
   const [pageState, setPageState] = useState({
-    produtosList: [] as Produto[],
-    produtosListAux: [] as Produto[],
+    cargasList: [] as Carga[],
+    cargasListAux: [] as Carga[],
+    selectedDeleteId: 0,
   });
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
   const [openDialog, setOpenDialog] = useRecoilState(GlobalStates.openDialog);
-  const [saveProduto, setSaveProduto] = useRecoilState(
-    GlobalStates.saveProduto,
+  const [changeCarga, setChangeCarga] = useRecoilState(
+    GlobalStates.changeCarga,
   );
   const [openDetalhe, setOpenDetalhe] = useRecoilState(
     GlobalStates.openDetalhe,
   );
   const [openModal, setOpenModal] = useState(false);
   const [filtro, setFiltro] = useState<string>('');
+  const toastConfig = {
+    position: 'top-right',
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
 
-  useEffect(() => {
-    ProdutosService.getProdutos()
+  const buscarLista = () => {
+    CargaService.getCarga()
       .then((data) => {
         setPageState({
           ...pageState,
-          produtosList: data,
-          produtosListAux: data,
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
-
-  const attData = () => {
-    ProdutosService.getProdutos()
-      .then((data) => {
-        setPageState({
-          ...pageState,
-          produtosList: data,
-          produtosListAux: data,
+          cargasList: data,
+          cargasListAux: data,
         });
       })
       .catch((e) => {
@@ -70,37 +65,33 @@ const ProdutosLista = () => {
   };
 
   useEffect(() => {
-    if (saveProduto === true) {
-      ProdutosService.getProdutos()
-        .then((data) => {
-          setPageState({
-            ...pageState,
-            produtosList: data,
-            produtosListAux: data,
-          });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-      setOpenModal(false);
-      setSaveProduto(false);
-    }
-  }, [saveProduto]);
+    buscarLista();
+  }, []);
 
   useEffect(() => {
-    const filtrados = pageState.produtosListAux.filter((item) =>
-      item.nome.toLowerCase().includes(filtro),
+    console.log(changeCarga);
+
+    if (changeCarga === true) {
+      buscarLista();
+      setOpenModal(false);
+      setChangeCarga(false);
+    }
+  }, [changeCarga]);
+
+  useEffect(() => {
+    const filtrados = pageState.cargasListAux.filter((item) =>
+      item.endereco.toLowerCase().includes(filtro),
     );
 
     // eslint-disable-next-line no-unused-expressions
     filtro.length === 0
       ? setPageState({
           ...pageState,
-          produtosList: pageState.produtosListAux,
+          cargasList: pageState.cargasListAux,
         })
       : setPageState({
           ...pageState,
-          produtosList: filtrados,
+          cargasList: filtrados,
         });
   }, [filtro]);
 
@@ -126,14 +117,14 @@ const ProdutosLista = () => {
 
   const handlePosDelete = () => {
     setOpenDialog({ ...openDialog, open: false, id: 0 });
-    attData();
+    setChangeCarga(true);
   };
 
-  const handleDeleteProduto = () => {
-    ProdutosService.deleteProduto(openDialog.id)
+  const handleDelete = () => {
+    CargaService.deleteCarga(openDialog.id)
       .then((res) => {
         handlePosDelete();
-        toast.success(MESSAGES.deletar_Produto_Sucesso);
+        toast.success(MESSAGES.deletar_Carga_Sucesso);
       })
       .catch((error) => {
         handlePosDelete();
@@ -143,19 +134,33 @@ const ProdutosLista = () => {
 
   return (
     <div>
-      <CadastroProduto modal={openModal} onClose={handleClose} />
+      <DialogConfirmAction
+        open={openDialog.open}
+        title="Deseja deletar carga?"
+        content="A carga selecionada sera deletada,
+        deseja prosseguir com esta ação?"
+        leftBtnLabel="Cancelar"
+        rigthBtnLabel="Ok"
+        closeFunction={handleCloseDialog}
+        actionFunction={handleDelete}
+      />
+      <CadastroCarga modal={openModal} onClose={handleClose} />
+      <DetalhesCarga
+        modal={openDetalhe.open}
+        onClose={handleCloseDetalhe}
+        carga={pageState.cargasList
+          .filter((item: Carga) => item.id === openDetalhe.id)
+          .pop()}
+      />
       <Container
-        maxWidth="lg"
+        maxWidth="md"
         className={clsx(classes.container, {
-          [classes.container__iniWidth]: pageState.produtosList.length === 0,
+          [classes.container__iniWidth]: pageState.cargasList.length === 0,
         })}
       >
         <Grid container xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
           <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-            <Typography data-testid="title" variant="h4">
-              {' '}
-              Produtos{' '}
-            </Typography>
+            <Typography variant="h4"> Listagem de cargas </Typography>
           </Grid>
         </Grid>
         <Grid
@@ -170,7 +175,6 @@ const ProdutosLista = () => {
           <Button
             variant="contained"
             size="small"
-            data-testid="button-add"
             className={classes.button}
             onClick={handleOpen}
           >
@@ -182,7 +186,6 @@ const ProdutosLista = () => {
             </div>
             <InputBase
               placeholder="Buscar…"
-              data-testid="input-search"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -192,39 +195,12 @@ const ProdutosLista = () => {
             />
           </div>
         </Grid>
-        <Grid
-          data-testid="list"
-          item
-          xs={12}
-          sm={12}
-          md={12}
-          lg={12}
-          xl={12}
-          spacing={3}
-        >
-          <Lista content={pageState.produtosList} parent="produto" />
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
+          <Lista content={pageState.cargasList} parent="carga" />
         </Grid>
       </Container>
-      <DialogRmProduto
-        id={openDialog.id}
-        open={openDialog.open}
-        onClose={handleCloseDialog}
-        onDelete={handleDeleteProduto}
-        nome={
-          pageState.produtosList
-            .filter((item: Produto) => item.id === openDialog.id)
-            .pop()?.nome
-        }
-      />
-      <DetalhesProduto
-        openM={openDetalhe.open}
-        onClose={handleCloseDetalhe}
-        produto={pageState.produtosList
-          .filter((item: Produto) => item.id === openDetalhe.id)
-          .pop()}
-      />
     </div>
   );
 };
 
-export default ProdutosLista;
+export default CargaLista;

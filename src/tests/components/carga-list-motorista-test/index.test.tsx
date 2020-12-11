@@ -3,7 +3,7 @@
 import { render, screen, waitForElement } from '@testing-library/react';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
-import Fretamento from '../../../components/carga-list-motorista';
+import Fretamento from '../../../pages/Motorista/components/carga-list-motorista';
 import '@testing-library/jest-dom/extend-expect';
 
 describe('Tests for Fretamento component', () => {

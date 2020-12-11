@@ -1,5 +1,5 @@
 import { makeStyles, Theme } from '@material-ui/core';
-import COLORS from '../../constants/COLORS';
+import COLORS from '../../../../constants/COLORS';
 
 const drawerWidth = 240;
 //    background: '#E5E5E5',
@@ -17,16 +17,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
   containerPadding: {
     paddingLeft: '6rem',
     paddingTop: '2rem',
-  },
-  noPadding: {
-    padding: '0',
   },
   contentDisplay: {
     display: 'flex',
@@ -91,6 +84,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         width: '20ch',
       },
     },
+  },
+  deleteButton: {
+    color: COLORS.red,
   },
 }));
 

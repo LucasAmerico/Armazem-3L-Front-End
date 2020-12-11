@@ -16,8 +16,8 @@ import useStyles from './styles';
 import GlobalStates from '../../recoil/atom';
 import CadastroCarga from '../../components/modal-cadastro-carga/CadastroCarga';
 import CardDashboard from '../../components/cards-dashboard';
-import CargaLista from '../../components/carga-list';
-import Fretamento from '../../components/carga-list-motorista';
+import CargaLista from '../Cargas/components/carga-list';
+import Fretamento from './components/carga-list-motorista';
 
 const MotoristasPage = () => {
   const classes = useStyles();

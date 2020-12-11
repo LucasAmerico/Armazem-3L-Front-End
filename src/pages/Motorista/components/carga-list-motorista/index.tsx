@@ -15,27 +15,27 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import clsx from 'clsx';
+import { toast } from 'react-toastify';
 import useStyles from './styles';
-import useWindowDimensions from '../../utils/windowsDimension';
-import GlobalStates from '../../recoil/atom';
-import ProdutosService from '../../services/ProdutoService';
-import CadastroCarga from '../modal-cadastro-carga/CadastroCarga';
-import Lista from '../List/list';
+import useWindowDimensions from '../../../../utils/windowsDimension';
+import GlobalStates from '../../../../recoil/atom';
+import ProdutosService from '../../../../services/ProdutoService';
+import CadastroCarga from '../../../../components/modal-cadastro-carga/CadastroCarga';
+import Lista from '../../../../components/List/list';
 import {
   Carga,
   CargaMotorista,
   Produto,
   TabPanelProps,
-} from '../../utils/interfaces';
-import CadastroProduto from '../modal-cadastro-produto';
-import DialogRmProduto from '../dialog-deletar-produto';
-import DetalhesProduto from '../modal-detalhe-produto';
-import CargaService from '../../services/CargaService';
-import DialogAccCarga from '../dialog-aceitar-carga';
-import DialogRecCarga from '../dialog-recusar-carga';
-import DetalhesCarga from '../modal-detalhes-carga';
-import { toast } from 'react-toastify';
-import MESSAGES from '../../constants/MESSAGES';
+} from '../../../../utils/interfaces';
+import CadastroProduto from '../../../../components/modal-cadastro-produto';
+import DialogRmProduto from '../../../../components/dialog-deletar-produto';
+import DetalhesProduto from '../../../../components/modal-detalhe-produto';
+import CargaService from '../../../../services/CargaService';
+import DialogAccCarga from '../../../../components/dialog-aceitar-carga';
+import DialogRecCarga from '../../../../components/dialog-recusar-carga';
+import DetalhesCarga from '../../../../components/modal-detalhes-carga';
+import MESSAGES from '../../../../constants/MESSAGES';
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, style, ...other } = props;
