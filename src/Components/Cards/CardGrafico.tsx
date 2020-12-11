@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@material-ui/core';
+import { Card, CardContent, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import Chart from '../Chart/Chart';
 import useStyles from './styles';
@@ -25,11 +25,13 @@ const CardGrafico = ({
   return (
     <Card className={classes.root}>
       <CardContent className={classes.cardChartMargin}>
-        <Chart
-          quantidadePendente={qtdPendente}
-          quantidadeAceitas={qtdAceitas}
-          quantidadeRejeitada={qtdRejeitada}
-        />
+        <Typography>
+          <Chart
+            quantidadePendente={qtdPendente}
+            quantidadeAceitas={qtdAceitas}
+            quantidadeRejeitada={qtdRejeitada}
+          />
+        </Typography>
       </CardContent>
     </Card>
   );

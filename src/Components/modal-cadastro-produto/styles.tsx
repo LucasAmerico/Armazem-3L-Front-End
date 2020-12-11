@@ -38,9 +38,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   modal__title: {
-    fontWeight: 800,
-    fontSize: '2.5rem',
+    fontWeight: 550,
+    fontSize: '2.0rem',
     paddingBottom: '2rem',
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   },
   modal__buttons: {
     paddingTop: '1.5rem',

@@ -32,7 +32,7 @@ const HomePage = () => {
           className={classes.container}
         >
           <Grid justify="center">
-            <h1>Escolha o tipo de acesso</h1>
+            <Typography variant="h4">Escolha o tipo de acesso</Typography>
           </Grid>
           <Grid container xs={12} sm={12} md={12} lg={12} xl={12}>
             <Grid

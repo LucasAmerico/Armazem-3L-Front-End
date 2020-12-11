@@ -30,7 +30,7 @@ const DetalhesListProducts = ({
               [classes.paper__flex2]: true,
             })}
           >
-            {title}
+            <Typography variant="h5">{title}</Typography>
           </Grid>
           <Grid
             item

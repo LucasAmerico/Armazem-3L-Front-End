@@ -3,6 +3,7 @@ import List from '@material-ui/core/List';
 import useStyles from './styles';
 import ItemLista from '../listItem/listItem';
 import ItemListaMotorista from '../list-Item-motorista';
+import { Typography } from '@material-ui/core';
 
 interface Props {
   content: any;
@@ -35,7 +36,7 @@ const Lista = ({ content, parent }: Props) => {
         ))
       ) : (
         <div className={classes.centrado}>
-          <h3> ...Sem cargas para visualizar </h3>
+          <Typography variant="h5"> ...Sem cargas para visualizar </Typography>
         </div>
       )}
     </List>

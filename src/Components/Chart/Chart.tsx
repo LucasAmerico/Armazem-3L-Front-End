@@ -30,9 +30,10 @@ const Chart = ({
           title: {
             display: true,
             text: 'Quantidade de cargas',
-            fontSize: 12,
+            fontSize: 15,
             fontColor: '#000',
             position: 'top',
+            defaultFontFamily: "'Helvetica'",
           },
           legend: {
             display: true,

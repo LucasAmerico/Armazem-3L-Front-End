@@ -21,10 +21,10 @@ const CardComponent = ({ titulo, quantidade, color }: Props) => {
   return (
     <Card className={classes.root}>
       <CardContent className={classes.cardMargin}>
-        <Typography variant="h5" component="h2">
+        <Typography variant="h5" component="h5">
           {titulo}
         </Typography>
-        <Typography variant="h4" component="h2">
+        <Typography variant="h4" component="h4">
           {quantidade}
         </Typography>
       </CardContent>

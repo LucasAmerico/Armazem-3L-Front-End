@@ -5,6 +5,7 @@ import {
   Grid,
   Paper,
   TextField,
+  Typography,
 } from '@material-ui/core';
 import clsx from 'clsx';
 import React, { ChangeEvent, useEffect, useState } from 'react';
@@ -44,7 +45,7 @@ const ListProducts = ({
               [classes.paper__flex2]: true,
             })}
           >
-            Selecionar Produtos
+            <Typography variant="h5">Selecionar Produtos</Typography>
           </Grid>
           <Grid
             item
