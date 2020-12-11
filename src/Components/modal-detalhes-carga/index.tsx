@@ -3,23 +3,12 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import clsx from 'clsx';
 import { Backdrop, Button, Fade, Grid, Modal } from '@material-ui/core';
-import { toast } from 'react-toastify';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
-import api from '../../services/api';
-import {
-  Carga,
-  IPropsCadastroCarga,
-  IPropsCadastroProduto,
-  Produto,
-  ProdutoList,
-} from '../../utils/interfaces';
-import ProdutoService from '../../services/ProdutoService';
+import { Carga, Produto, IPropsDetalhesCarga } from '../../utils/interfaces';
 import DataCarga from '../chose-products/DataCarga';
-import ListProducts from '../list-products/ListProducts';
-import FormProduct from '../form-product';
-import MESSAGES from '../../constants/MESSAGES';
+import DetalhesListProducts from '../detalhes-list-products/DetalhesListProducts';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -36,50 +25,36 @@ function getModalStyle() {
   };
 }
 
-const CadastroProduto = ({ modal, onClose }: IPropsCadastroProduto) => {
+const DetalhesCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
-  const [saveProduto, setSaveProduto] = useRecoilState(
-    GlobalStates.saveProduto,
-  );
-  const [produto, setProduto] = useState({
-    nome: '',
-    preco: '',
-    peso: '',
-    qtd: '',
-  });
-  const [modalStyle] = useState(getModalStyle);
+  const [filtro, setFiltro] = useState<string>('');
+  const [produtos, setProdutos] = useState<Produto[]>([]);
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setProduto({ ...produto, [name]: value });
-  };
+  useEffect(() => {
+    if (carga?.listaProdutos !== undefined) {
+      setProdutos(carga.listaProdutos);
+    }
+  }, [carga]);
 
-  const handlePosSave = () => {
-    setProduto({ ...produto, nome: '', preco: '', peso: '', qtd: '' });
-  };
+  useEffect(() => {
+    if (carga?.listaProdutos !== undefined) {
+      if (carga.listaProdutos.length > 0) {
+        const filtrados = carga!.listaProdutos!.filter((item) =>
+          item.produto.nome.toLowerCase().includes(filtro),
+        );
 
-  const handleSave = () => {
-    const { nome, preco, peso, qtd } = produto;
+        // eslint-disable-next-line no-unused-expressions
+        filtro.length === 0
+          ? setProdutos(carga!.listaProdutos!)
+          : setProdutos(filtrados);
+      }
+    }
+  }, [filtro]);
 
-    const newProduto: Produto = {
-      nome,
-      preco: Number(preco),
-      qtd: Number(qtd),
-      peso: Number(peso),
-    };
-
-    ProdutoService.postProduto(newProduto)
-      .then((res) => {
-        handlePosSave();
-        setSaveProduto(true);
-        toast.success(MESSAGES.cadastrar_Produto_Sucesso);
-      })
-      .catch((error) => {
-        handlePosSave();
-        toast.error(error);
-      });
+  const handleFilter = (event: ChangeEvent<HTMLInputElement>) => {
+    setFiltro(event.target.value.toLocaleLowerCase());
   };
 
   return (
@@ -108,17 +83,21 @@ const CadastroProduto = ({ modal, onClose }: IPropsCadastroProduto) => {
                   id="transition-modal-title"
                   className={classes.modal__title}
                 >
-                  Cadastro de Produto
+                  Detalhes de Carga
                 </h2>
               </Grid>
             </Grid>
-            <FormProduct
-              name={produto.nome}
-              weight={produto.peso}
-              price={produto.preco}
-              qtd={produto.qtd}
-              disabled={false}
-              onChangeValue={handleInputChange}
+            <DataCarga
+              address={carga?.endereco}
+              freight={`${carga?.frete}`}
+              disabled
+              onChangeValue={() => {}}
+            />
+            <DetalhesListProducts
+              produtos={produtos}
+              title="Lista de produtos"
+              filtro={filtro}
+              onChangeFilterValue={handleFilter}
             />
             <Grid container xs={12} xl={12} className={classes.modal__buttons}>
               <Grid
@@ -130,14 +109,6 @@ const CadastroProduto = ({ modal, onClose }: IPropsCadastroProduto) => {
                 xl={12}
                 className={classes.modal__buttonsFlex}
               >
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.modal__buttonMargin}
-                  onClick={handleSave}
-                >
-                  Salvar
-                </Button>
                 <Button variant="contained" color="default" onClick={onClose}>
                   Fechar
                 </Button>
@@ -150,4 +121,4 @@ const CadastroProduto = ({ modal, onClose }: IPropsCadastroProduto) => {
   );
 };
 
-export default CadastroProduto;
+export default DetalhesCarga;

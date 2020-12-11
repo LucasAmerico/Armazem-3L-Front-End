@@ -6,6 +6,7 @@ import Header from './components/header/Header';
 import SideBar from './components/drawer/Drawer';
 import CargasPage from './pages/Cargas';
 import ProdutosPage from './pages/Produtos';
+import MotoristasPage from './pages/Motorista';
 
 const Routes = () => (
   <BrowserRouter>
@@ -22,6 +23,7 @@ const Routes = () => (
       <Route component={CargasPage} path="/cargas" exact />
       <Route component={HomePage} path="/home" exact />
       <Route component={ProdutosPage} path="/produtos" exact />
+      <Route component={MotoristasPage} path="/motoristas" exact />
     </Switch>
   </BrowserRouter>
 );

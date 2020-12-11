@@ -3,7 +3,6 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import clsx from 'clsx';
 import { Backdrop, Button, Fade, Grid, Modal } from '@material-ui/core';
-import { toast } from 'react-toastify';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 import useWindowDimensions from '../../utils/windowsDimension';
@@ -12,6 +11,8 @@ import {
   Carga,
   IPropsCadastroCarga,
   IPropsCadastroProduto,
+  IPropsDetalhesCarga,
+  IPropsDetalhesProduto,
   Produto,
   ProdutoList,
 } from '../../utils/interfaces';
@@ -19,7 +20,6 @@ import ProdutoService from '../../services/ProdutoService';
 import DataCarga from '../chose-products/DataCarga';
 import ListProducts from '../list-products/ListProducts';
 import FormProduct from '../form-product';
-import MESSAGES from '../../constants/MESSAGES';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -36,51 +36,12 @@ function getModalStyle() {
   };
 }
 
-const CadastroProduto = ({ modal, onClose }: IPropsCadastroProduto) => {
+const DetalhesCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
-  const [saveProduto, setSaveProduto] = useRecoilState(
-    GlobalStates.saveProduto,
-  );
-  const [produto, setProduto] = useState({
-    nome: '',
-    preco: '',
-    peso: '',
-    qtd: '',
-  });
+
   const [modalStyle] = useState(getModalStyle);
-
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setProduto({ ...produto, [name]: value });
-  };
-
-  const handlePosSave = () => {
-    setProduto({ ...produto, nome: '', preco: '', peso: '', qtd: '' });
-  };
-
-  const handleSave = () => {
-    const { nome, preco, peso, qtd } = produto;
-
-    const newProduto: Produto = {
-      nome,
-      preco: Number(preco),
-      qtd: Number(qtd),
-      peso: Number(peso),
-    };
-
-    ProdutoService.postProduto(newProduto)
-      .then((res) => {
-        handlePosSave();
-        setSaveProduto(true);
-        toast.success(MESSAGES.cadastrar_Produto_Sucesso);
-      })
-      .catch((error) => {
-        handlePosSave();
-        toast.error(error);
-      });
-  };
 
   return (
     <div
@@ -108,17 +69,15 @@ const CadastroProduto = ({ modal, onClose }: IPropsCadastroProduto) => {
                   id="transition-modal-title"
                   className={classes.modal__title}
                 >
-                  Cadastro de Produto
+                  Detalhes da Carga
                 </h2>
               </Grid>
             </Grid>
-            <FormProduct
-              name={produto.nome}
-              weight={produto.peso}
-              price={produto.preco}
-              qtd={produto.qtd}
-              disabled={false}
-              onChangeValue={handleInputChange}
+            <DataCarga
+              address={carga?.endereco}
+              freight={`${carga?.frete}`}
+              onChangeValue={() => {}}
+              disabled
             />
             <Grid container xs={12} xl={12} className={classes.modal__buttons}>
               <Grid
@@ -130,14 +89,6 @@ const CadastroProduto = ({ modal, onClose }: IPropsCadastroProduto) => {
                 xl={12}
                 className={classes.modal__buttonsFlex}
               >
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.modal__buttonMargin}
-                  onClick={handleSave}
-                >
-                  Salvar
-                </Button>
                 <Button variant="contained" color="default" onClick={onClose}>
                   Fechar
                 </Button>
@@ -150,4 +101,4 @@ const CadastroProduto = ({ modal, onClose }: IPropsCadastroProduto) => {
   );
 };
 
-export default CadastroProduto;
+export default DetalhesCarga;

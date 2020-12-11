@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
+  hide: {
+    display: 'none',
+  },
 }));
 
 export default useStyles;

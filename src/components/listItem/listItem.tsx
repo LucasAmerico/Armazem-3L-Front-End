@@ -15,7 +15,7 @@ const ItemLista = ({ titulo, id }: IPropsItemLista) => {
   const classes = useStyles();
   const [openDialog, setOpenDialog] = useRecoilState(GlobalStates.openDialog);
   const [openDetalhe, setOpenDetalhe] = useRecoilState(
-    GlobalStates.openProdutoDetalhe,
+    GlobalStates.openDetalhe,
   );
 
   const handleClickDelete = (event: any) => {
@@ -29,17 +29,20 @@ const ItemLista = ({ titulo, id }: IPropsItemLista) => {
   };
 
   return (
-    <ListItem button className={classes.root}>
-      <ListItemText onClick={handleClickDetalhe}>
+    <ListItem button className={classes.root} onClick={handleClickDetalhe}>
+      <ListItemText>
         <Typography variant="h5"> {titulo} </Typography>
       </ListItemText>
       <ListItemSecondaryAction>
         <Tooltip title={<Typography variant="subtitle1"> Delete </Typography>}>
-          <IconButton edge="end" aria-label="delete">
+          <IconButton
+            edge="end"
+            aria-label="delete"
+            onClick={handleClickDelete}
+          >
             <DeleteForeverIcon
               fontSize="large"
               className={classes.deleteButton}
-              onClick={handleClickDelete}
             />
           </IconButton>
         </Tooltip>

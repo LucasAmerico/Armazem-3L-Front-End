@@ -1,4 +1,6 @@
 export interface Produto {
+  quantidade?: any;
+  produto?: any;
   id?: number;
   nome: string;
   peso: number;
@@ -8,9 +10,10 @@ export interface Produto {
 }
 
 export interface IPropsDataCarga {
-  address?: string;
-  freight?: string;
-  onChangeValue?: any;
+  address: string | undefined;
+  freight: string | undefined;
+  onChangeValue: any;
+  disabled: boolean;
 }
 
 export interface IPropsItemLista {
@@ -18,15 +21,43 @@ export interface IPropsItemLista {
   id: number;
 }
 
-export interface IRmProduct {
+export interface ITabItems {
+  value: number;
+}
+
+export interface IPropsDialog {
   open: boolean;
   id: number;
 }
 
-export interface IDtProduct {
+export interface IDetalhes {
   open: boolean;
   id: number;
 }
+
+export interface TabPanelProps {
+  children?: React.ReactNode;
+  index: any;
+  value: any;
+  style: any;
+}
+
+export interface IPropsAccCarga {
+  open: boolean;
+  onClose: any;
+  onDelete: any;
+}
+
+export interface IPropsCards {
+  parent: string;
+}
+
+export interface IPropsRecCarga {
+  open: boolean;
+  onClose: any;
+  onDelete: any;
+}
+
 export interface IPropsRmProduto {
   id: number;
   nome: string | undefined;
@@ -38,6 +69,12 @@ export interface IPropsRmProduto {
 export interface IPropsDetalhesProduto {
   produto: Produto | undefined;
   openM: boolean;
+  onClose: any;
+}
+
+export interface IPropsDetalhesCarga {
+  carga: Carga | undefined;
+  modal: boolean;
   onClose: any;
 }
 
@@ -67,7 +104,7 @@ export interface HandleBooleans {
 
 export interface IPropsListProducts {
   produtos: Produto[];
-  prodState: boolean[];
+  prodState?: boolean[];
   filtro: string;
   selectAll?: boolean;
   onSelectAllItens?: any;
@@ -76,16 +113,25 @@ export interface IPropsListProducts {
   onChangeFilterValue: any;
   onSelectItem?: any;
   onChangeQtd?: any;
+  title?: string;
 }
 
 export interface ProdutoList {
+  nome?: any;
   produtoId: any;
   qtd: any;
 }
 
 export interface Carga {
+  id?: number;
   endereco: string;
   frete: number;
   motoristaId: number;
   produtos: ProdutoList[];
+  listaProdutos?: Produto[];
+}
+
+export interface CargaMotorista {
+  cargaId: number;
+  motoristaId: number;
 }

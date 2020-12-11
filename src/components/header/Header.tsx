@@ -9,7 +9,6 @@ import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 
 const Header = (props: any) => {
-  console.log(props);
   const classes = useStyles();
   // const [sideBarStateValue, ] = useRecoilValue(sideBarState);
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
