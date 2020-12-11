@@ -67,7 +67,6 @@ const DetalhesListProducts = ({
                     xl={12}
                     className={classes.paper__listInputs}
                   >
-                    {console.log(item)}
                     <Typography variant="h6">{item.produto.nome}</Typography>
                     <TextField
                       label="Qtd"

@@ -69,8 +69,6 @@ const CargaLista = () => {
   }, []);
 
   useEffect(() => {
-    console.log(changeCarga);
-
     if (changeCarga === true) {
       buscarLista();
       setOpenModal(false);

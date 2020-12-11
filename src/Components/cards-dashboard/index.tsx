@@ -51,9 +51,6 @@ const CardDashboard = ({ parent }: IPropsCards) => {
       .then((data) => {
         CargaService.getCargasRecusadas(1)
           .then((data2: any) => {
-            console.log(data2);
-            console.log(data);
-
             setRecusadas(data2.map((item: any) => item.cargaId));
 
             const filtradosAceitos = data.filter(
@@ -89,14 +86,6 @@ const CardDashboard = ({ parent }: IPropsCards) => {
       .catch((e) => {
         console.log(e);
       });
-
-    // CargaService.getCargasRecusadas(1)
-    //   .then((data: any) => {
-    //     setRecusadas(data.map((item: any) => item.cargaId));
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
   };
   useEffect(() => {
     buscaCargas();

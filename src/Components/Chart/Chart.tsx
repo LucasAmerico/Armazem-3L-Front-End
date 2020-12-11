@@ -37,6 +37,18 @@ const Chart = ({
           legend: {
             display: true,
             position: 'right',
+            labels: {
+              boxWidth: 20,
+            },
+          },
+          tooltips: {
+            callbacks: {
+              label: (tooltipItem: any, data: any) => {
+                const dataset = data.datasets[tooltipItem.datasetIndex];
+                const value = dataset.data[tooltipItem.index];
+                return `${data.labels[tooltipItem.index]}: ${value}%`;
+              },
+            },
           },
         }}
       />

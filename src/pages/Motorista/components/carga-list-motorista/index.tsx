@@ -113,8 +113,6 @@ const Fretamento = () => {
   };
 
   useEffect(() => {
-    console.log(changeCarga);
-
     if (changeCarga === true) {
       attData();
       setChangeCarga(false);
