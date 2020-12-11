@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   grow: {
     flexGrow: 1,
+    cursor: 'pointer',
   },
   link: {
     textDecoration: 'none',
