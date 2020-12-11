@@ -28,7 +28,7 @@ const ProdutosPage = () => {
         xl={12}
         className={classes.produtosDisplay}
       >
-        <Grid item xs={8} sm={8} md={8} lg={8} xl={8}>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <ProdutosLista />
         </Grid>
       </Grid>

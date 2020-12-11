@@ -45,11 +45,6 @@ const tabAtivo = atom({
   default: { value: 0 } as ITabItems,
 });
 
-const updateData = atom({
-  key: 'updateData',
-  default: { update: false },
-});
-
 export default {
   sideBarState,
   changeCarga,
