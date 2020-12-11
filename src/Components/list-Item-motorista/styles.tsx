@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: `${theme.palette.getContrastText(deepPurple[500])} !important`,
     backgroundColor: `${deepPurple[500]} !important`,
   },
+  pointer: {
+    cursor: 'default',
+  },
 }));
 
 export default useStyles;

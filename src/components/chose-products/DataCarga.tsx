@@ -27,7 +27,6 @@ const DataCarga = ({
             disabled={disabled}
             value={address}
             onChange={onChangeValue}
-            disabled={disabled}
             className={clsx(classes.field__full, {
               [classes.field__margin]: true,
             })}
@@ -42,7 +41,6 @@ const DataCarga = ({
             disabled={disabled}
             value={freight}
             onChange={onChangeValue}
-            disabled={disabled}
             variant="filled"
             className={classes.field__full}
           />

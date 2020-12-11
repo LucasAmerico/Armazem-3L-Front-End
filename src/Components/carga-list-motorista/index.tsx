@@ -31,9 +31,11 @@ import CadastroProduto from '../modal-cadastro-produto';
 import DialogRmProduto from '../dialog-deletar-produto';
 import DetalhesProduto from '../modal-detalhe-produto';
 import CargaService from '../../services/CargaService';
-import DetalhesCarga from '../modal-detalhe-carga';
 import DialogAccCarga from '../dialog-aceitar-carga';
 import DialogRecCarga from '../dialog-recusar-carga';
+import DetalhesCarga from '../modal-detalhes-carga';
+import { toast } from 'react-toastify';
+import MESSAGES from '../../constants/MESSAGES';
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, style, ...other } = props;
@@ -84,12 +86,11 @@ const Fretamento = () => {
   const [openDialogRecCarga, setOpenDialogRecCarga] = useRecoilState(
     GlobalStates.openDialogRecCarga,
   );
+  const [changeCarga, setChangeCarga] = useRecoilState(
+    GlobalStates.changeCarga,
+  );
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setTabAtivo({ ...tabAtivo, value: newValue });
-  };
-
-  useEffect(() => {
+  const attData = () => {
     CargaService.getCarga()
       .then((data) => {
         setPageState({
@@ -109,21 +110,24 @@ const Fretamento = () => {
       .catch((e) => {
         console.log(e);
       });
-  }, []);
-
-  const attData = () => {
-    CargaService.getCarga()
-      .then((data) => {
-        setPageState({
-          ...pageState,
-          cargasList: data,
-          cargasListAux: data,
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
   };
+
+  useEffect(() => {
+    console.log(changeCarga);
+
+    if (changeCarga === true) {
+      attData();
+      setChangeCarga(false);
+    }
+  }, [changeCarga]);
+
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setTabAtivo({ ...tabAtivo, value: newValue });
+  };
+
+  useEffect(() => {
+    attData();
+  }, []);
 
   useEffect(() => {
     const filtrados = pageState.cargasListAux.filter((item) =>
@@ -160,12 +164,12 @@ const Fretamento = () => {
 
   const handlePosAccCarga = () => {
     setOpenDialogAccCarga({ ...openDialogAccCarga, open: false, id: 0 });
-    attData();
+    setChangeCarga(true);
   };
 
   const handlePosRecCarga = () => {
     setOpenDialogRecCarga({ ...openDialogRecCarga, open: false, id: 0 });
-    attData();
+    setChangeCarga(true);
   };
 
   const handleAccCarga = () => {
@@ -180,9 +184,11 @@ const Fretamento = () => {
     CargaService.postAceitarCarga(data)
       .then((res) => {
         handlePosAccCarga();
+        toast.success(MESSAGES.aceitar_carga_Sucesso);
       })
-      .then((error) => {
+      .then((error: any) => {
         handlePosAccCarga();
+        toast.error(error);
       });
   };
 
@@ -198,9 +204,11 @@ const Fretamento = () => {
     CargaService.postRecusarCarga(data)
       .then((res) => {
         handlePosRecCarga();
+        toast.success(MESSAGES.rejeitar_carga_Sucesso);
       })
-      .then((error) => {
+      .then((error: any) => {
         handlePosRecCarga();
+        toast.error(error);
       });
   };
 
@@ -254,8 +262,7 @@ const Fretamento = () => {
           <TabPanel value={tabAtivo.value} index={0} style={classes.noPadding}>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
               <Lista
-                titulo="Listagem de cargas"
-                conteudo={pageState.cargasList.filter(
+                content={pageState.cargasList.filter(
                   (item) =>
                     item.motoristaId === 0 && !recusadas.includes(item.id!),
                 )}
@@ -265,8 +272,7 @@ const Fretamento = () => {
           </TabPanel>
           <TabPanel value={tabAtivo.value} index={1} style={classes.noPadding}>
             <Lista
-              titulo="Listagem de cargas"
-              conteudo={pageState.cargasList.filter(
+              content={pageState.cargasList.filter(
                 (item) => item.motoristaId === 1,
               )}
               parent="motorista"
@@ -274,8 +280,7 @@ const Fretamento = () => {
           </TabPanel>
           <TabPanel value={tabAtivo.value} index={2} style={classes.noPadding}>
             <Lista
-              titulo="Listagem de cargas"
-              conteudo={pageState.cargasList.filter((item) =>
+              content={pageState.cargasList.filter((item) =>
                 recusadas.includes(item.id!),
               )}
               parent="motorista"
@@ -294,7 +299,7 @@ const Fretamento = () => {
         onDelete={handleRecCarga}
       />
       <DetalhesCarga
-        openM={openDetalhe.open}
+        modal={openDetalhe.open}
         onClose={handleCloseDetalhe}
         carga={pageState.cargasList
           .filter((item: Carga) => item.id === openDetalhe.id)

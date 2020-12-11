@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import clsx from 'clsx';
+import { Grid } from '@material-ui/core';
 import useWindowDimensions from '../../utils/windowsDimension';
 import useStyles from './styles';
 import GlobalStates from '../../recoil/atom';
@@ -26,7 +27,7 @@ const CargasPage = () => {
         </Grid>
       </Grid>
       <div className={classes.contentCards}>
-        <CardDashboard />
+        <CardDashboard parent="carga" />
       </div>
     </div>
   );

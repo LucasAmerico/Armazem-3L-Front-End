@@ -36,7 +36,7 @@ function getModalStyle() {
   };
 }
 
-const DetalhesCarga = ({ carga, openM, onClose }: IPropsDetalhesCarga) => {
+const DetalhesCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
@@ -53,7 +53,7 @@ const DetalhesCarga = ({ carga, openM, onClose }: IPropsDetalhesCarga) => {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
-        open={openM}
+        open={modal}
         onClose={onClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -61,7 +61,7 @@ const DetalhesCarga = ({ carga, openM, onClose }: IPropsDetalhesCarga) => {
           timeout: 500,
         }}
       >
-        <Fade in={openM}>
+        <Fade in={modal}>
           <div className={classes.paper}>
             <Grid container xs={12} xl={12}>
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

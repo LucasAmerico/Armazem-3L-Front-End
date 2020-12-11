@@ -11,6 +11,7 @@ import { useRecoilState } from 'recoil';
 import ClearIcon from '@material-ui/icons/Clear';
 import DoneIcon from '@material-ui/icons/Done';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
+import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import { Avatar, Chip } from '@material-ui/core';
 import useStyles from './styles';
 import GlobalStates from '../../recoil/atom';
@@ -93,28 +94,28 @@ const ItemListaMotorista = ({ titulo, id }: IPropsItemLista) => {
         ) : tabAtivo.value === 1 ? (
           <div>
             <Tooltip
-              title={<Typography variant="subtitle1"> Delete </Typography>}
+              title={<Typography variant="subtitle1"> Aceita </Typography>}
             >
               <IconButton edge="end" aria-label="delete">
                 <Chip
                   label="Aceitas"
                   color="primary"
                   onDelete={() => {}}
-                  deleteIcon={<DoneAllIcon />}
+                  deleteIcon={<DoneAllIcon className={classes.pointer} />}
                 />
               </IconButton>
             </Tooltip>
           </div>
         ) : (
           <Tooltip
-            title={<Typography variant="subtitle1"> Delete </Typography>}
+            title={<Typography variant="subtitle1"> Recusada </Typography>}
           >
             <IconButton edge="end" aria-label="delete">
               <Chip
                 label="Recusada"
                 color="primary"
                 onDelete={() => {}}
-                deleteIcon={<ClearIcon />}
+                deleteIcon={<NotInterestedIcon className={classes.pointer} />}
                 className={classes.RColor}
               />
             </IconButton>

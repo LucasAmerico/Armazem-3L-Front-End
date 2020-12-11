@@ -26,9 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: '1rem',
     paddingTop: '1rem',
   },
-  contentLista: {
-    paddingRight: '.5rem',
-  },
+  contentLista: {},
   contentCards: {
     paddingLeft: '.5rem',
   },

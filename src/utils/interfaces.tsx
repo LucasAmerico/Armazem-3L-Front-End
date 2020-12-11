@@ -1,6 +1,6 @@
 export interface Produto {
-  quantidade: any;
-  produto: any;
+  quantidade?: any;
+  produto?: any;
   id?: number;
   nome: string;
   peso: number;
@@ -46,6 +46,10 @@ export interface IPropsAccCarga {
   open: boolean;
   onClose: any;
   onDelete: any;
+}
+
+export interface IPropsCards {
+  parent: string;
 }
 
 export interface IPropsRecCarga {
@@ -124,6 +128,7 @@ export interface Carga {
   frete: number;
   motoristaId: number;
   produtos: ProdutoList[];
+  listaProdutos?: Produto[];
 }
 
 export interface CargaMotorista {

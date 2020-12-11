@@ -76,6 +76,7 @@ const ProdutosLista = () => {
           setPageState({
             ...pageState,
             produtosList: data,
+            produtosListAux: data,
           });
         })
         .catch((e) => {

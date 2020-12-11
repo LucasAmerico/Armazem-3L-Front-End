@@ -25,8 +25,8 @@ const Lista = ({ content, parent }: Props) => {
     </List>
   ) : (
     <List component="nav" className={classes.root} aria-label="listagem">
-      {conteudo.length !== 0 ? (
-        conteudo.map((item: { endereco: string; id: number }) => (
+      {content.length !== 0 ? (
+        content.map((item: { endereco: string; id: number }) => (
           <ItemListaMotorista
             titulo={item.endereco}
             id={item.id}

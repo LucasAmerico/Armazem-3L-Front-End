@@ -25,7 +25,7 @@ function getModalStyle() {
   };
 }
 
-const CadastroCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
+const DetalhesCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
   const classes = useStyles();
   const { height, width } = useWindowDimensions();
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
@@ -33,19 +33,23 @@ const CadastroCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
   const [produtos, setProdutos] = useState<Produto[]>([]);
 
   useEffect(() => {
-    setProdutos(carga?.listaProdutos);
+    if (carga?.listaProdutos !== undefined) {
+      setProdutos(carga.listaProdutos);
+    }
   }, [carga]);
 
   useEffect(() => {
-    if (carga?.listaProdutos?.length > 0) {
-      const filtrados = carga?.listaProdutos.filter((item) =>
-        item.produto.nome.toLowerCase().includes(filtro),
-      );
+    if (carga?.listaProdutos !== undefined) {
+      if (carga.listaProdutos.length > 0) {
+        const filtrados = carga!.listaProdutos!.filter((item) =>
+          item.produto.nome.toLowerCase().includes(filtro),
+        );
 
-      // eslint-disable-next-line no-unused-expressions
-      filtro.length === 0
-        ? setProdutos(carga?.listaProdutos)
-        : setProdutos(filtrados);
+        // eslint-disable-next-line no-unused-expressions
+        filtro.length === 0
+          ? setProdutos(carga!.listaProdutos!)
+          : setProdutos(filtrados);
+      }
     }
   }, [filtro]);
 
@@ -85,7 +89,7 @@ const CadastroCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
             </Grid>
             <DataCarga
               address={carga?.endereco}
-              freight={carga?.frete}
+              freight={`${carga?.frete}`}
               disabled
               onChangeValue={() => {}}
             />
@@ -117,4 +121,4 @@ const CadastroCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
   );
 };
 
-export default CadastroCarga;
+export default DetalhesCarga;
