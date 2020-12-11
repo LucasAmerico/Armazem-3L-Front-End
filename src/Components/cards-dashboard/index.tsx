@@ -116,27 +116,15 @@ const CardDashboard = ({ parent }: IPropsCards) => {
         alignItems="center"
         className={classes.container}
       >
-        {parent === 'motorista' ? (
-          <Grid item xs={12} spacing={0}>
-            <CardGrafico
-              key={pageState.key}
-              color="#DAD8D8"
-              qtdAceitas={pageState.aceitasPorcentagem}
-              qtdPendente={pageState.pendentePorcentagem}
-              qtdRejeitada={pageState.rejeitadasPorcentagem}
-            />
-          </Grid>
-        ) : (
-          <Grid item xs={12} spacing={0}>
-            <CardGrafico
-              key={pageState.key}
-              color="#DAD8D8"
-              qtdAceitas={pageState.aceitasPorcentagem}
-              qtdPendente={pageState.pendentePorcentagem}
-              qtdRejeitada={undefined}
-            />
-          </Grid>
-        )}
+        <Grid item xs={12} spacing={0}>
+          <CardGrafico
+            key={pageState.key}
+            color="#DAD8D8"
+            qtdAceitas={pageState.aceitasPorcentagem}
+            qtdPendente={pageState.pendentePorcentagem}
+            qtdRejeitada={pageState.rejeitadasPorcentagem}
+          />
+        </Grid>
 
         <Grid item xs={12} spacing={0}>
           <CardComponent
