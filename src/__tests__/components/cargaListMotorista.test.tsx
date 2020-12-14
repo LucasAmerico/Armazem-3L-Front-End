@@ -3,31 +3,29 @@
 import { render, screen, waitForElement } from '@testing-library/react';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
-import Fretamento from '../../../pages/Motorista/components/carga-list-motorista';
+import Fretamento from '../../pages/Motorista/components/carga-list-motorista';
 import '@testing-library/jest-dom/extend-expect';
-import ProdutosLista from '../../../pages/Produtos/components/produtos-list';
 
-describe('Tests for ProdutosLista component', () => {
+describe('Tests for Fretamento component', () => {
   it('Renders Correctly', async () => {
     // renderizar o componente
     const { queryByTestId } = render(
       <RecoilRoot>
-        <ProdutosLista />
+        <Fretamento />
       </RecoilRoot>,
     );
 
-    expect(queryByTestId('input-search')).toBeTruthy();
-    expect(queryByTestId('button-add')).toBeTruthy();
-    expect(queryByTestId('list')).toBeTruthy();
+    expect(queryByTestId('data-testid')).toBeTruthy();
+    expect(queryByTestId('tabs')).toBeTruthy();
   });
-  it('Should screem have title Produtos', async () => {
+  it('Should screem have title Fretes', async () => {
     // renderizar o componente
     const { queryByTestId } = render(
       <RecoilRoot>
-        <ProdutosLista />
+        <Fretamento />
       </RecoilRoot>,
     );
 
-    expect(screen.getByTestId('title')).toHaveTextContent('Produtos');
+    expect(screen.getByTestId('title')).toHaveTextContent('Fretes');
   });
 });

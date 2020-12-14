@@ -129,7 +129,7 @@ const Fretamento = () => {
 
   useEffect(() => {
     const filtrados = pageState.cargasListAux.filter((item) =>
-      item.endereco.toLowerCase().includes(filtro),
+      item!.endereco!.toLowerCase().includes(filtro),
     );
 
     // eslint-disable-next-line no-unused-expressions

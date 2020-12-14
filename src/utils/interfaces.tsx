@@ -124,10 +124,10 @@ export interface ProdutoList {
 
 export interface Carga {
   id?: number;
-  endereco: string;
-  frete: number;
-  motoristaId: number;
-  produtos: ProdutoList[];
+  endereco?: string;
+  frete?: number;
+  motoristaId?: number;
+  produtos?: ProdutoList[];
   listaProdutos?: Produto[];
 }
 

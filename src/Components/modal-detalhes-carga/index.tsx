@@ -74,11 +74,12 @@ const DetalhesCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
         BackdropProps={{
           timeout: 500,
         }}
+        data-testid="modal-test"
       >
         <Fade in={modal}>
           <div className={classes.paper}>
-            <Grid container xs={12} xl={12}>
-              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+            <Grid container xs={12}>
+              <Grid item xs={12}>
                 <h2
                   id="transition-modal-title"
                   className={classes.modal__title}
@@ -98,18 +99,16 @@ const DetalhesCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
               title="Lista de produtos"
               filtro={filtro}
               onChangeFilterValue={handleFilter}
+              data-testid="product-list-test"
             />
-            <Grid container xs={12} xl={12} className={classes.modal__buttons}>
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={12}
-                lg={12}
-                xl={12}
-                className={classes.modal__buttonsFlex}
-              >
-                <Button variant="contained" color="default" onClick={onClose}>
+            <Grid container xs={12} className={classes.modal__buttons}>
+              <Grid item xs={12} className={classes.modal__buttonsFlex}>
+                <Button
+                  variant="contained"
+                  color="default"
+                  onClick={onClose}
+                  data-testid="close-button-test"
+                >
                   Fechar
                 </Button>
               </Grid>
