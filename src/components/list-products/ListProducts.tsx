@@ -105,7 +105,7 @@ const ListProducts = ({
         </Grid>
         <Divider variant="middle" className={classes.paper__divider} />
         <div className={classes.paper__listProducts}>
-          {produtos.map((i) => (
+          {produtos.map((i, idx) => (
             <Grid key={i.id} container xs={12} xl={12}>
               <Grid
                 item
@@ -121,22 +121,22 @@ const ListProducts = ({
                     <Checkbox
                       icon={<CheckBoxOutlineBlankIcon fontSize="large" />}
                       checkedIcon={<CheckBoxIcon fontSize="large" />}
-                      name={`${i.id! - 1}`}
+                      name={`${idx}`}
                       color="primary"
-                      checked={prodState![i.id! - 1]}
+                      checked={prodState![idx]}
                       onChange={onSelectItem}
                     />
                   }
                   label={i.nome}
                 />
-                {prodState![i.id! - 1] === true ? (
+                {prodState![idx] === true ? (
                   <TextField
                     label="Qtd"
                     type="number"
                     id="standard-size-small"
                     InputProps={{ inputProps: { min: 1, max: 999 } }}
                     defaultValue="Small"
-                    name={`${i.id! - 1}`}
+                    name={`${idx}`}
                     onChange={onChangeQtd}
                     size="small"
                     className={classes.paper__inputNumber}
