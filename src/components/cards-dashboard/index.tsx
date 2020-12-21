@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
@@ -20,15 +20,12 @@ const CardDashboard = ({ parent }: IPropsCards) => {
   });
 
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [changeCarga, setchangeCarga] = useRecoilState(
-    GlobalStates.changeCarga,
-  );
+  const changeCarga = useRecoilValue(GlobalStates.changeCarga);
   const [recusadas, setRecusadas] = useState<number[]>([]);
 
   const calculaCargasPendentes = () => {
     const filtrados = pageState.cargasList.filter(
-      (item: any) => item.motoristaId === 0 && !recusadas.includes(item.id!),
+      (item: any) => item.motoristaId === 0 && !recusadas.includes(item.id),
     );
     return filtrados.length;
   };
@@ -42,7 +39,7 @@ const CardDashboard = ({ parent }: IPropsCards) => {
 
   const calculaCargasRecusadas = () => {
     const filtrados = pageState.cargasList.filter((item: any) =>
-      recusadas.includes(item.id!),
+      recusadas.includes(item.id),
     );
     return filtrados.length;
   };
@@ -58,7 +55,7 @@ const CardDashboard = ({ parent }: IPropsCards) => {
             );
             const filtradosPendentes = data.filter(
               (item: any) =>
-                item.motoristaId === 0 && !recusadas.includes(item.id!),
+                item.motoristaId === 0 && !recusadas.includes(item.id),
             );
 
             const aceitosPerct = Math.floor(

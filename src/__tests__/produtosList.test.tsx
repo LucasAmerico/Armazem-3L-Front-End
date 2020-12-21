@@ -1,17 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
-import { Typography } from '@material-ui/core';
-import { ListSharp } from '@material-ui/icons';
-import {
-  render,
-  screen,
-  waitForElement,
-  getByTestId,
-} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
-import Lista from '../../components/List/list';
-import ProdutosLista from '../../pages/Produtos/components/produtos-list';
+import ProdutosLista from '../pages/Produtos/components/produtos-list';
 
 const produtos = [
   {
@@ -70,5 +62,6 @@ describe('Tests for ProdutosLista component', () => {
     );
 
     const lista = screen.getByTestId('lista');
+    console.log(lista);
   });
 });

@@ -12,7 +12,6 @@ const DataCarga = ({
   disabled,
 }: IPropsDataCarga) => {
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
 
   return (
     <div>

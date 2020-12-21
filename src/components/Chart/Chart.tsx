@@ -11,7 +11,7 @@ const Chart = ({
   quantidadeAceitas,
   quantidadeRejeitada,
 }: Props) => {
-  const [chartState, setChartState] = useState({
+  const [chartState] = useState({
     labels: ['Pendentes', 'Aceitas', 'Rejeitadas'],
     datasets: [
       {
