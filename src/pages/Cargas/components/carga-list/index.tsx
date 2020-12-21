@@ -29,8 +29,6 @@ const CargaLista = () => {
     selectedDeleteId: 0,
   });
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
   const [openDialog, setOpenDialog] = useRecoilState(GlobalStates.openDialog);
   const [changeCarga, setChangeCarga] = useRecoilState(
     GlobalStates.changeCarga,
