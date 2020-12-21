@@ -21,7 +21,7 @@ interface Props {
 }
 
 const CardUsers = ({ titulo, tipoUsuario, route }: Props) => {
-  const classes = useStyles();
+  const classes = useStyles({});
   const history = useHistory();
   const [currentUser, setCurrentUser] = useRecoilState(
     GlobalStates.currentUser,
