@@ -168,17 +168,12 @@ const ProdutosLista = () => {
             />
           </div>
         </Grid>
-        <Grid
-          data-testid="list"
-          item
-          xs={12}
-          sm={12}
-          md={12}
-          lg={12}
-          xl={12}
-          spacing={3}
-        >
-          <Lista content={pageState.produtosList} parent="produto" />
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
+          <Lista
+            data-testid="lista"
+            content={pageState.produtosList}
+            parent="produto"
+          />
         </Grid>
       </Container>
       <DialogRmProduto
