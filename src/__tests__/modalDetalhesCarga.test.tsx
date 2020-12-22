@@ -44,7 +44,7 @@ describe('Tests for Modal-detalhes-carga component', () => {
     expect(modal).toBeTruthy();
   });
 
-  it('Should present a list of products', async () => {
+  it('Should show a list of products', async () => {
     const handleClose = jest.fn();
 
     render(
@@ -54,6 +54,21 @@ describe('Tests for Modal-detalhes-carga component', () => {
     );
 
     expect(screen.getAllByText(/Lista de produtos/i)).toBeTruthy();
+  });
+
+  it('Should show message when the list of products is empty', async () => {
+    const handleClose = jest.fn();
+
+    const cargaEmpty = carga;
+    cargaEmpty.listaProdutos = [];
+
+    render(
+      <RecoilRoot>
+        <DetalhesCarga modal onClose={handleClose} carga={cargaEmpty} />
+      </RecoilRoot>,
+    );
+
+    expect(screen.getAllByText(/Produtos não encontrados./i)).toBeTruthy();
   });
 
   it('Should closes modal when button close is clicked', async () => {
