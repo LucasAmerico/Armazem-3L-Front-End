@@ -1,9 +1,9 @@
 import React from 'react';
 import List from '@material-ui/core/List';
+import { Typography } from '@material-ui/core';
 import useStyles from './styles';
 import ItemLista from '../listItem/listItem';
 import ItemListaMotorista from '../list-Item-motorista';
-import { Typography } from '@material-ui/core';
 
 interface Props {
   content: any;

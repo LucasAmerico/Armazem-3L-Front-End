@@ -5,13 +5,12 @@ import { IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import { useRecoilState } from 'recoil';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 
 const Header = (props: any) => {
   const classes = useStyles();
-  // const [sideBarStateValue, ] = useRecoilValue(sideBarState);
   const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
   const [currentUser, setCurrentUser] = useRecoilState(
     GlobalStates.currentUser,

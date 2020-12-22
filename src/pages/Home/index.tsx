@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
 import clsx from 'clsx';
-import { Button, Grid, Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
-import useWindowDimensions from '../../utils/windowsDimension';
-import CardGrafico from '../../components/Cards/CardGrafico';
-import CardComponent from '../../components/Cards/CardComponent';
-import CargaService from '../../services/CargaService';
 import CardUsers from '../../components/Cards/CardUsers';
 import usuarioEnum from '../../utils/enum/usuarioEnum';
-import CargasPage from '../Cargas';
 
 const HomePage = () => {
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
+  const open = useRecoilValue(GlobalStates.sideBarState);
 
   return (
     <div

@@ -1,12 +1,11 @@
 /* eslint-disable no-param-reassign */
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import clsx from 'clsx';
 import { Backdrop, Button, Fade, Grid, Modal } from '@material-ui/core';
 import { toast } from 'react-toastify';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
-import useWindowDimensions from '../../utils/windowsDimension';
 import api from '../../services/api';
 import {
   Carga,
@@ -19,30 +18,11 @@ import DataCarga from '../chose-products/DataCarga';
 import ListProducts from '../list-products/ListProducts';
 import MESSAGES from '../../constants/MESSAGES';
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
 const CadastroCarga = ({ modal, onClose }: IPropsCadastroCarga) => {
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
-  const [changeCarga, setchangeCarga] = useRecoilState(
-    GlobalStates.changeCarga,
-  );
+  const open = useRecoilValue(GlobalStates.sideBarState);
+  const setchangeCarga = useSetRecoilState(GlobalStates.changeCarga);
   const [carga, setCarga] = useState({ endereco: '', frete: '' });
-  const [modalStyle] = useState(getModalStyle);
   const [produtos, setProdutos] = useState<Produto[]>([]);
   const [filtro, setFiltro] = useState<string>('');
   const [prodState, setProdState] = useState<boolean[]>([]);

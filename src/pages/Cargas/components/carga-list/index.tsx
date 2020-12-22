@@ -12,7 +12,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import clsx from 'clsx';
 import { toast } from 'react-toastify';
 import useStyles from './styles';
-import useWindowDimensions from '../../../../utils/windowsDimension';
 import GlobalStates from '../../../../recoil/atom';
 import CargaService from '../../../../services/CargaService';
 import CadastroCarga from '../../../../components/modal-cadastro-carga/CadastroCarga';
@@ -38,15 +37,6 @@ const CargaLista = () => {
   );
   const [openModal, setOpenModal] = useState(false);
   const [filtro, setFiltro] = useState<string>('');
-  const toastConfig = {
-    position: 'top-right',
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  };
 
   const buscarLista = () => {
     CargaService.getCarga()
@@ -76,7 +66,7 @@ const CargaLista = () => {
 
   useEffect(() => {
     const filtrados = pageState.cargasListAux.filter((item) =>
-      item!.endereco!.toLowerCase().includes(filtro),
+      item.endereco!.toLowerCase().includes(filtro),
     );
 
     // eslint-disable-next-line no-unused-expressions
@@ -133,8 +123,7 @@ const CargaLista = () => {
       <DialogConfirmAction
         open={openDialog.open}
         title="Deseja deletar carga?"
-        content="A carga selecionada sera deletada,
-        deseja prosseguir com esta ação?"
+        content="A carga selecionada sera deletada, deseja prosseguir com esta ação?"
         leftBtnLabel="Cancelar"
         rigthBtnLabel="Ok"
         closeFunction={handleCloseDialog}

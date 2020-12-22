@@ -8,10 +8,9 @@ import {
   Typography,
 } from '@material-ui/core';
 import clsx from 'clsx';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React from 'react';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import useWindowDimensions from '../../utils/windowsDimension';
 import useStyles from './styles';
 import { IPropsListProducts } from '../../utils/interfaces';
 
@@ -28,7 +27,6 @@ const ListProducts = ({
   onChangeQtd,
 }: IPropsListProducts) => {
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
 
   return (
     <div>

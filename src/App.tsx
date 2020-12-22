@@ -1,6 +1,5 @@
 import React from 'react';
 import { RecoilRoot } from 'recoil';
-import { ThemeProvider } from '@material-ui/styles';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';

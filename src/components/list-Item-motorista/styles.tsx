@@ -1,5 +1,5 @@
 import { makeStyles, Theme } from '@material-ui/core';
-import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import { deepPurple } from '@material-ui/core/colors';
 import COLORS from '../../constants/COLORS';
 
 const useStyles = makeStyles((theme: Theme) => ({

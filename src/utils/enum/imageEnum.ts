@@ -1,5 +1,3 @@
-import React from 'react';
-
 const imageEnum = (userType: string) => {
   let path = '';
   if (userType.includes('motorista')) {

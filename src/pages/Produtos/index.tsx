@@ -1,16 +1,14 @@
 import clsx from 'clsx';
 import React from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { Grid } from '@material-ui/core';
-import useWindowDimensions from '../../utils/windowsDimension';
 import useStyles from './styles';
 import GlobalStates from '../../recoil/atom';
 import ProdutosLista from './components/produtos-list';
 
 const ProdutosPage = () => {
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
+  const open = useRecoilValue(GlobalStates.sideBarState);
 
   return (
     <div

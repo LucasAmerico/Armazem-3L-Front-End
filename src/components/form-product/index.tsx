@@ -1,7 +1,6 @@
 import { Grid, TextField } from '@material-ui/core';
 import clsx from 'clsx';
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import useWindowDimensions from '../../utils/windowsDimension';
+import React from 'react';
 import useStyles from './styles';
 import { IPropsFormProduct } from '../../utils/interfaces';
 
@@ -14,7 +13,6 @@ const FormProduct = ({
   disabled,
 }: IPropsFormProduct) => {
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
 
   return (
     <div>

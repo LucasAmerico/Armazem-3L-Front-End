@@ -1,9 +1,8 @@
 /* eslint-disable linebreak-style */
-import React, { useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
-import useWindowDimensions from '../../utils/windowsDimension';
 import useStyles from './styles';
 import GlobalStates from '../../recoil/atom';
 import CardDashboard from '../../components/cards-dashboard';
@@ -11,8 +10,8 @@ import CargaLista from './components/carga-list';
 
 const CargasPage = () => {
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
+
+  const open = useRecoilValue(GlobalStates.sideBarState);
 
   return (
     <div

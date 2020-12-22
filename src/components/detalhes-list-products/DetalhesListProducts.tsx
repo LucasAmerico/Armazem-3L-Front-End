@@ -2,7 +2,6 @@ import { Divider, Grid, Paper, TextField } from '@material-ui/core';
 import clsx from 'clsx';
 import React from 'react';
 import Typography from '@material-ui/core/Typography/Typography';
-import useWindowDimensions from '../../utils/windowsDimension';
 import useStyles from './styles';
 import { IPropsListProducts } from '../../utils/interfaces';
 

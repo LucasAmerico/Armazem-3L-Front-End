@@ -12,12 +12,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import clsx from 'clsx';
 import { toast } from 'react-toastify';
 import useStyles from './styles';
-import useWindowDimensions from '../../../../utils/windowsDimension';
 import GlobalStates from '../../../../recoil/atom';
 import ProdutosService from '../../../../services/ProdutoService';
-import CadastroCarga from '../../../../components/modal-cadastro-carga/CadastroCarga';
 import Lista from '../../../../components/List/list';
-import { Carga, Produto } from '../../../../utils/interfaces';
+import { Produto } from '../../../../utils/interfaces';
 import CadastroProduto from '../../../../components/modal-cadastro-produto';
 import DialogRmProduto from '../../../../components/dialog-deletar-produto';
 import DetalhesProduto from '../../../../components/modal-detalhe-produto';
@@ -29,8 +27,6 @@ const ProdutosLista = () => {
     produtosListAux: [] as Produto[],
   });
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
   const [openDialog, setOpenDialog] = useRecoilState(GlobalStates.openDialog);
   const [saveProduto, setSaveProduto] = useRecoilState(
     GlobalStates.saveProduto,
@@ -40,20 +36,6 @@ const ProdutosLista = () => {
   );
   const [openModal, setOpenModal] = useState(false);
   const [filtro, setFiltro] = useState<string>('');
-
-  useEffect(() => {
-    ProdutosService.getProdutos()
-      .then((data) => {
-        setPageState({
-          ...pageState,
-          produtosList: data,
-          produtosListAux: data,
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
 
   const attData = () => {
     ProdutosService.getProdutos()
@@ -70,18 +52,12 @@ const ProdutosLista = () => {
   };
 
   useEffect(() => {
+    attData();
+  }, []);
+
+  useEffect(() => {
     if (saveProduto === true) {
-      ProdutosService.getProdutos()
-        .then((data) => {
-          setPageState({
-            ...pageState,
-            produtosList: data,
-            produtosListAux: data,
-          });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      attData();
       setOpenModal(false);
       setSaveProduto(false);
     }

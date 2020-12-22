@@ -6,21 +6,15 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
-import api from '../../services/api';
-import { IPropsRmProduto, Produto } from '../../utils/interfaces';
-import useStyles from './styles';
+import React from 'react';
+import { IPropsRmProduto } from '../../utils/interfaces';
 
 const DialogRmProduto = ({
   open,
   onClose,
   onDelete,
-  id,
   nome,
 }: IPropsRmProduto) => {
-  const classes = useStyles();
-  const [produto, setProduto] = useState<Produto>();
-
   return (
     <div>
       <Dialog

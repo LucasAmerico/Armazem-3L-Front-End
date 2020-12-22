@@ -1,33 +1,31 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect } from 'react';
+import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import ClearIcon from '@material-ui/icons/Clear';
 import DoneIcon from '@material-ui/icons/Done';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
-import { Avatar, Chip } from '@material-ui/core';
+import { Chip } from '@material-ui/core';
 import useStyles from './styles';
 import GlobalStates from '../../recoil/atom';
 import { IPropsItemLista } from '../../utils/interfaces';
 
 const ItemListaMotorista = ({ titulo, id }: IPropsItemLista) => {
   const classes = useStyles();
-  const [openDialog, setOpenDialog] = useRecoilState(GlobalStates.openDialog);
   const [openDetalhe, setOpenDetalhe] = useRecoilState(
     GlobalStates.openDetalhe,
   );
-  const [tabAtivo, setTabAtivo] = useRecoilState(GlobalStates.tabAtivo);
-  const [openDialogAccCarga, setOpenDialogAccCarga] = useRecoilState(
+  const tabAtivo = useRecoilValue(GlobalStates.tabAtivo);
+  const setOpenDialogAccCarga = useSetRecoilState(
     GlobalStates.openDialogAccCarga,
   );
-  const [openDialogRecCarga, setOpenDialogRecCarga] = useRecoilState(
+  const setOpenDialogRecCarga = useSetRecoilState(
     GlobalStates.openDialogRecCarga,
   );
 

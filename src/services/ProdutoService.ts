@@ -1,4 +1,4 @@
-import { Carga, Produto } from '../utils/interfaces';
+import { Produto } from '../utils/interfaces';
 import api from './api';
 
 const getProdutoRoute = '/produto/listagem';

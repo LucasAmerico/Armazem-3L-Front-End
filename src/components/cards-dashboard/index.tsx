@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import clsx from 'clsx';
+import { useRecoilValue } from 'recoil';
 import { Grid } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
-import useWindowDimensions from '../../utils/windowsDimension';
 import CargaService from '../../services/CargaService';
 import CardGrafico from '../Cards/CardGrafico';
 import useStyles from './styles';

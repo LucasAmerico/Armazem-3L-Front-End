@@ -1,34 +1,17 @@
 /* eslint-disable no-param-reassign */
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import clsx from 'clsx';
 import { Backdrop, Button, Fade, Grid, Modal } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
-import useWindowDimensions from '../../utils/windowsDimension';
-import { Carga, Produto, IPropsDetalhesCarga } from '../../utils/interfaces';
+import { Produto, IPropsDetalhesCarga } from '../../utils/interfaces';
 import DataCarga from '../chose-products/DataCarga';
 import DetalhesListProducts from '../detalhes-list-products/DetalhesListProducts';
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
 const DetalhesCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
+  const open = useRecoilValue(GlobalStates.sideBarState);
   const [filtro, setFiltro] = useState<string>('');
   const [produtos, setProdutos] = useState<Produto[]>([]);
 
@@ -41,13 +24,13 @@ const DetalhesCarga = ({ carga, modal, onClose }: IPropsDetalhesCarga) => {
   useEffect(() => {
     if (carga?.listaProdutos !== undefined) {
       if (carga.listaProdutos.length > 0) {
-        const filtrados = carga!.listaProdutos!.filter((item) =>
+        const filtrados = carga.listaProdutos.filter((item) =>
           item.produto.nome.toLowerCase().includes(filtro),
         );
 
         // eslint-disable-next-line no-unused-expressions
         filtro.length === 0
-          ? setProdutos(carga!.listaProdutos!)
+          ? setProdutos(carga.listaProdutos)
           : setProdutos(filtrados);
       }
     }

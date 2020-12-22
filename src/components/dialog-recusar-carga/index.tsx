@@ -1,19 +1,8 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
-import api from '../../services/api';
+import { Button, Dialog, DialogActions, DialogTitle } from '@material-ui/core';
+import React from 'react';
 import { IPropsRecCarga } from '../../utils/interfaces';
-import useStyles from './styles';
 
 const DialogRecCarga = ({ open, onClose, onDelete }: IPropsRecCarga) => {
-  const classes = useStyles();
-
   return (
     <div>
       <Dialog

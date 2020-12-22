@@ -1,55 +1,27 @@
 /* eslint-disable no-param-reassign */
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import React, { ChangeEvent, useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import clsx from 'clsx';
 import { Backdrop, Button, Fade, Grid, Modal } from '@material-ui/core';
 import { toast } from 'react-toastify';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
-import useWindowDimensions from '../../utils/windowsDimension';
-import api from '../../services/api';
-import {
-  Carga,
-  IPropsCadastroCarga,
-  IPropsCadastroProduto,
-  Produto,
-  ProdutoList,
-} from '../../utils/interfaces';
+import { IPropsCadastroProduto, Produto } from '../../utils/interfaces';
 import ProdutoService from '../../services/ProdutoService';
-import DataCarga from '../chose-products/DataCarga';
-import ListProducts from '../list-products/ListProducts';
 import FormProduct from '../form-product';
 import MESSAGES from '../../constants/MESSAGES';
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
 const CadastroProduto = ({ modal, onClose }: IPropsCadastroProduto) => {
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
-  const [saveProduto, setSaveProduto] = useRecoilState(
-    GlobalStates.saveProduto,
-  );
+
+  const open = useRecoilValue(GlobalStates.sideBarState);
+  const setSaveProduto = useSetRecoilState(GlobalStates.saveProduto);
   const [produto, setProduto] = useState({
     nome: '',
     preco: '',
     peso: '',
     qtd: '',
   });
-  const [modalStyle] = useState(getModalStyle);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

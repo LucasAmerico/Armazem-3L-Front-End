@@ -1,39 +1,14 @@
 /* eslint-disable no-param-reassign */
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
 import clsx from 'clsx';
 import { Backdrop, Button, Fade, Grid, Modal } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
-import useWindowDimensions from '../../utils/windowsDimension';
-import api from '../../services/api';
-import {
-  Carga,
-  IPropsCadastroCarga,
-  IPropsCadastroProduto,
-  IPropsDetalhesProduto,
-  Produto,
-  ProdutoList,
-} from '../../utils/interfaces';
-import ProdutoService from '../../services/ProdutoService';
-import DataCarga from '../chose-products/DataCarga';
-import ListProducts from '../list-products/ListProducts';
+
+import { IPropsDetalhesProduto } from '../../utils/interfaces';
+
 import FormProduct from '../form-product';
-
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 
 const DetalhesProduto = ({
   produto,
@@ -41,10 +16,8 @@ const DetalhesProduto = ({
   onClose,
 }: IPropsDetalhesProduto) => {
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
 
-  const [modalStyle] = useState(getModalStyle);
+  const open = useRecoilValue(GlobalStates.sideBarState);
 
   return (
     <div

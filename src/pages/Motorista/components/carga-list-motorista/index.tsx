@@ -1,10 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   AppBar,
   Box,
-  Button,
   Container,
   Grid,
   InputBase,
@@ -12,25 +11,17 @@ import {
   Tabs,
   Typography,
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import clsx from 'clsx';
 import { toast } from 'react-toastify';
 import useStyles from './styles';
-import useWindowDimensions from '../../../../utils/windowsDimension';
 import GlobalStates from '../../../../recoil/atom';
-import ProdutosService from '../../../../services/ProdutoService';
-import CadastroCarga from '../../../../components/modal-cadastro-carga/CadastroCarga';
 import Lista from '../../../../components/List/list';
 import {
   Carga,
   CargaMotorista,
-  Produto,
   TabPanelProps,
 } from '../../../../utils/interfaces';
-import CadastroProduto from '../../../../components/modal-cadastro-produto';
-import DialogRmProduto from '../../../../components/dialog-deletar-produto';
-import DetalhesProduto from '../../../../components/modal-detalhe-produto';
 import CargaService from '../../../../services/CargaService';
 import DialogAccCarga from '../../../../components/dialog-aceitar-carga';
 import DialogRecCarga from '../../../../components/dialog-recusar-carga';
@@ -72,9 +63,7 @@ const Fretamento = () => {
   });
   const [recusadas, setRecusadas] = useState<number[]>([]);
   const classes = useStyles();
-  const { height, width } = useWindowDimensions();
-  const [open, setOpen] = useRecoilState(GlobalStates.sideBarState);
-  const [openDialog, setOpenDialog] = useRecoilState(GlobalStates.openDialog);
+  const openDialog = useRecoilValue(GlobalStates.openDialog);
   const [openDetalhe, setOpenDetalhe] = useRecoilState(
     GlobalStates.openDetalhe,
   );
@@ -129,7 +118,7 @@ const Fretamento = () => {
 
   useEffect(() => {
     const filtrados = pageState.cargasListAux.filter((item) =>
-      item!.endereco!.toLowerCase().includes(filtro),
+      item.endereco!.toLowerCase().includes(filtro),
     );
 
     // eslint-disable-next-line no-unused-expressions
