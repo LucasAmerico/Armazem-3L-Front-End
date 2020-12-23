@@ -1,34 +1,44 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
-import { render, screen } from '@testing-library/react';
-import React from 'react';
+import {
+  fireEvent,
+  getByRole,
+  getByTestId,
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import React, { Component } from 'react';
 import { RecoilRoot } from 'recoil';
+import Lista from '../components/List/list';
 import ProdutosLista from '../pages/Produtos/components/produtos-list';
 
-const produtos = [
-  {
-    id: 1,
-    nome: 'Playstation 5',
-    peso: 1.0,
-    preco: 1.0,
-    qtd: 100,
-  },
-  {
-    id: 2,
-    nome: 'Xbox 1',
-    peso: 1.0,
-    preco: 1.0,
-    qtd: 200,
-  },
-  {
-    id: 3,
-    nome: 'Nintendo',
-    peso: 1.0,
-    preco: 1.0,
-    qtd: 300,
-  },
-];
-
+const ListaProdutos = {
+  Produtos: [
+    {
+      id: 1,
+      nome: 'Playstation 5',
+      peso: 1.0,
+      preco: 1.0,
+      qtd: 100,
+    },
+    {
+      id: 2,
+      nome: 'Xbox 1',
+      peso: 1.0,
+      preco: 1.0,
+      qtd: 200,
+    },
+    {
+      id: 3,
+      nome: 'Nintendo',
+      peso: 1.0,
+      preco: 1.0,
+      qtd: 300,
+    },
+  ],
+};
 describe('Tests for ProdutosLista component', () => {
   it('Renders Correctly', async () => {
     // renderizar o componente
@@ -40,7 +50,7 @@ describe('Tests for ProdutosLista component', () => {
 
     expect(queryByTestId('input-search')).toBeTruthy();
     expect(queryByTestId('button-add')).toBeTruthy();
-    expect(queryByTestId('list')).toBeTruthy();
+    expect(queryByTestId('lista')).toBeTruthy();
   });
   it('Should screem have title Produtos', async () => {
     // renderizar o componente
@@ -53,15 +63,37 @@ describe('Tests for ProdutosLista component', () => {
 
     expect(titulo.textContent).toBe(' Produtos ');
   });
+
   it('Should present a list of products', async () => {
     // renderizar o componente
-    const { queryByTestId } = render(
+    render(
       <RecoilRoot>
         <ProdutosLista />
       </RecoilRoot>,
     );
 
     const lista = screen.getByTestId('lista');
-    console.log(lista);
+    expect(lista.getElementsByTagName('nav').length).toBe(1);
   });
+
+  it('should open the modal when click the add button', async () => {
+    render(
+      <RecoilRoot>
+        <ProdutosLista />
+      </RecoilRoot>,
+    );
+    expect(screen.queryByText(/Cadastro de Produto/i)).toBeNull();
+    userEvent.click(screen.getByTestId('button-add'));
+    expect(screen.queryByText(/Cadastro de Produto/i)).toBeTruthy();
+  });
+  // it('Should be possible to fill in the field', async () => {
+  //   render(
+  //     <RecoilRoot>
+  //       <ProdutosLista />
+  //     </RecoilRoot>,
+  //   );
+  //   const input = screen.getByRole('textbox', { name: /search/i });
+  //   userEvent.type(input, 'Hello, World!');
+  //   expect(input).toBe('Hello, World!');
+  // });
 });

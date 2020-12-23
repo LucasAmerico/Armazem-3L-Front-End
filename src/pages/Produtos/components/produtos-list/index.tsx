@@ -119,7 +119,11 @@ const ProdutosLista = () => {
 
   return (
     <div>
-      <CadastroProduto modal={openModal} onClose={handleClose} />
+      <CadastroProduto
+        aria-label="modal"
+        modal={openModal}
+        onClose={handleClose}
+      />
       <Container
         maxWidth="lg"
         className={clsx(classes.container, {
@@ -144,9 +148,9 @@ const ProdutosLista = () => {
           xl={12}
         >
           <Button
+            data-testid="button-add"
             variant="contained"
             size="small"
-            data-testid="button-add"
             className={classes.button}
             onClick={handleOpen}
           >
@@ -168,12 +172,17 @@ const ProdutosLista = () => {
             />
           </div>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
-          <Lista
-            data-testid="lista"
-            content={pageState.produtosList}
-            parent="produto"
-          />
+        <Grid
+          data-testid="lista"
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          spacing={3}
+        >
+          <Lista content={pageState.produtosList} parent="produto" />
         </Grid>
       </Container>
       <DialogRmProduto
@@ -188,6 +197,7 @@ const ProdutosLista = () => {
         }
       />
       <DetalhesProduto
+        data-testeid="detalhes-produto"
         openM={openDetalhe.open}
         onClose={handleCloseDetalhe}
         produto={pageState.produtosList
