@@ -2,7 +2,7 @@
 import React from 'react';
 import { fireEvent, screen, render } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
-import DetalhesCarga from '../components/modal-detalhes-carga';
+import CadastroCarga from '../components/modal-cadastro-carga/CadastroCarga';
 
 const carga = {
   id: 1,
@@ -30,13 +30,21 @@ const carga = {
     },
   ],
 };
+
+// jest.mock('../services/CargaService');
+jest.mock('../services/CargaService', () => {
+  return {
+    postCarga: jest.fn(),
+  };
+});
+
 describe('Tests for Modal-detalhes-carga component', () => {
   it('Should render the component correctly', async () => {
     const handleClose = jest.fn();
 
     const { queryByTestId } = render(
       <RecoilRoot>
-        <DetalhesCarga modal onClose={handleClose} carga={{}} />
+        <CadastroCarga modal onClose={handleClose} />
       </RecoilRoot>,
     );
 
@@ -49,26 +57,11 @@ describe('Tests for Modal-detalhes-carga component', () => {
 
     render(
       <RecoilRoot>
-        <DetalhesCarga modal onClose={handleClose} carga={carga} />
+        <CadastroCarga modal onClose={handleClose} />
       </RecoilRoot>,
     );
 
-    expect(screen.getAllByText(/Lista de produtos/i)).toBeTruthy();
-  });
-
-  it('Should show message when the list of products is empty', async () => {
-    const handleClose = jest.fn();
-
-    const cargaEmpty = carga;
-    cargaEmpty.listaProdutos = [];
-
-    render(
-      <RecoilRoot>
-        <DetalhesCarga modal onClose={handleClose} carga={cargaEmpty} />
-      </RecoilRoot>,
-    );
-
-    expect(screen.getAllByText(/Produtos não encontrados./i)).toBeTruthy();
+    expect(screen.getAllByText(/Selecionar Produtos/i)).toBeTruthy();
   });
 
   it('Should closes modal when button close is clicked', async () => {
@@ -76,7 +69,7 @@ describe('Tests for Modal-detalhes-carga component', () => {
 
     render(
       <RecoilRoot>
-        <DetalhesCarga modal onClose={handleClose} carga={carga} />
+        <CadastroCarga modal onClose={handleClose} />
       </RecoilRoot>,
     );
 
