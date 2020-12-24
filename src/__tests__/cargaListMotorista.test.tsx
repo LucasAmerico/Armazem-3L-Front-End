@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 import Fretamento from '../pages/Motorista/components/carga-list-motorista';
@@ -27,5 +27,17 @@ describe('Tests for Fretamento component', () => {
     );
 
     expect(screen.getByTestId('title')).toHaveTextContent('Fretes');
+  });
+  it('Should input accept texts', async () => {
+    // renderizar o componente
+    const { getByTestId } = render(
+      <RecoilRoot>
+        <Fretamento />
+      </RecoilRoot>,
+    );
+
+    const input = getByTestId('search');
+    fireEvent.change(input, { target: { value: 'Sama' } });
+    expect(input).toHaveValue('Sama');
   });
 });

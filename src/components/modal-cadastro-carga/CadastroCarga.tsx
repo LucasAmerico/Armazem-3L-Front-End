@@ -165,6 +165,7 @@ const CadastroCarga = ({ modal, onClose }: IPropsCadastroCarga) => {
         BackdropProps={{
           timeout: 500,
         }}
+        data-testid="modal-test"
       >
         <Fade in={modal}>
           <div className={classes.paper}>
