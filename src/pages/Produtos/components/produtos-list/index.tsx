@@ -167,7 +167,7 @@ const ProdutosLista = () => {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ 'aria-label': 'search', 'data-testid': 'search' }}
               onChange={handleFilter}
             />
           </div>

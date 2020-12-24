@@ -3,7 +3,6 @@
 import {
   fireEvent,
   getByRole,
-  getByTestId,
   render,
   screen,
   waitForElementToBeRemoved,
@@ -86,14 +85,4 @@ describe('Tests for ProdutosLista component', () => {
     userEvent.click(screen.getByTestId('button-add'));
     expect(screen.queryByText(/Cadastro de Produto/i)).toBeTruthy();
   });
-  // it('Should be possible to fill in the field', async () => {
-  //   render(
-  //     <RecoilRoot>
-  //       <ProdutosLista />
-  //     </RecoilRoot>,
-  //   );
-  //   const input = screen.getByRole('textbox', { name: /search/i });
-  //   userEvent.type(input, 'Hello, World!');
-  //   expect(input).toBe('Hello, World!');
-  // });
 });

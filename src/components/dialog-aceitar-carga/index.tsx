@@ -11,7 +11,7 @@ const DialogAccCarga = ({ open, onClose, onDelete }: IPropsAccCarga) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
+        <DialogTitle id="alert-dialog-title" data-testid="title">
           Tem certeza que deseja aceitar a carga escolhida?
         </DialogTitle>
         <DialogActions>
