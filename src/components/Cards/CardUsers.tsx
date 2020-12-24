@@ -23,7 +23,11 @@ const CardUsers = ({ titulo, tipoUsuario, route }: Props) => {
     history.push(route);
   };
   return (
-    <Card className={classes.root} onClick={() => handleOnClick()}>
+    <Card
+      className={classes.root}
+      onClick={() => handleOnClick()}
+      data-testid="card"
+    >
       <CardActionArea>
         <CardMedia
           component="img"

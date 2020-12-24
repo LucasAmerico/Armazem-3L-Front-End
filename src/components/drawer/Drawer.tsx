@@ -50,7 +50,7 @@ const SideBar = () => {
         </IconButton>
       </div>
       <Divider />
-      <List>
+      <List data-testid="sidebar-list">
         {/* {['Cargas', 'Produtos', 'Motoristas'].map((text, index) => (
         ))} */}
         <ListItem

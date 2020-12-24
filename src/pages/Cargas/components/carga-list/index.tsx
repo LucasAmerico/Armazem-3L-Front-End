@@ -142,10 +142,14 @@ const CargaLista = () => {
         className={clsx(classes.container, {
           [classes.container__iniWidth]: pageState.cargasList.length === 0,
         })}
+        data-testid="data-testid"
       >
         <Grid container xs={12} sm={12} md={12} lg={12} xl={12} spacing={3}>
           <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-            <Typography variant="h4"> Listagem de cargas </Typography>
+            <Typography variant="h4" data-testid="title">
+              {' '}
+              Listagem de cargas{' '}
+            </Typography>
           </Grid>
         </Grid>
         <Grid
@@ -175,7 +179,7 @@ const CargaLista = () => {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ 'aria-label': 'search', 'data-testid': 'search' }}
               onChange={handleFilter}
             />
           </div>
