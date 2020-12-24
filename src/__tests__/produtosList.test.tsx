@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-undef */
 import {
   fireEvent,
   getByRole,
@@ -86,14 +84,20 @@ describe('Tests for ProdutosLista component', () => {
     userEvent.click(screen.getByTestId('button-add'));
     expect(screen.queryByText(/Cadastro de Produto/i)).toBeTruthy();
   });
-  // it('Should be possible to fill in the field', async () => {
-  //   render(
-  //     <RecoilRoot>
-  //       <ProdutosLista />
-  //     </RecoilRoot>,
-  //   );
-  //   const input = screen.getByRole('textbox', { name: /search/i });
-  //   userEvent.type(input, 'Hello, World!');
-  //   expect(input).toBe('Hello, World!');
-  // });
+  it('Should be possible to fill in the field', async () => {
+    render(
+      <RecoilRoot>
+        <ProdutosLista />
+      </RecoilRoot>,
+    );
+    const input = screen.getByRole('textbox', {
+      name: /search/i,
+    }) as HTMLInputElement;
+
+    expect(input.value).toBe('');
+    input.value = 'teste';
+    fireEvent.change(input);
+
+    expect(input.value).toBe('teste');
+  });
 });

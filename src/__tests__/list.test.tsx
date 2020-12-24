@@ -1,7 +1,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
 import React from 'react';
-import { getByRole, getByTestId, render, screen } from '@testing-library/react';
+import {
+  fireEvent,
+  getAllByDisplayValue,
+  getByRole,
+  getByTestId,
+  queryAllByAttribute,
+  queryByAttribute,
+  render,
+  screen,
+} from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
 import Lista from '../components/List/list';
 
@@ -32,15 +41,25 @@ const ListaProdutos = {
 };
 
 describe('Tests for list component', () => {
-  it('Should ', async () => {
+  it('Should render with a list of products', async () => {
     render(
       <RecoilRoot>
-        <Lista content={ListaProdutos.Produtos} parent="outro" />
+        <Lista content={ListaProdutos.Produtos} parent="Produto" />
       </RecoilRoot>,
     );
 
     expect(ListaProdutos.Produtos.length).toBe(3);
     const li = screen.getByLabelText('listagem');
     expect(li.getElementsByTagName('li').length).toBe(3);
+    expect(screen.queryByText(/...Sem cargas para visualizar/i)).toBeFalsy();
+    expect(render);
+  });
+  it('should show message when the list is empty', async () => {
+    render(
+      <RecoilRoot>
+        <Lista content={[]} parent="Motorista" />
+      </RecoilRoot>,
+    );
+    expect(screen.queryByText(/...Sem cargas para visualizar/i)).toBeTruthy();
   });
 });
