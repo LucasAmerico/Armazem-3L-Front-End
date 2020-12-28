@@ -23,8 +23,11 @@ const CardUsers = ({ titulo, tipoUsuario, route }: Props) => {
     history.push(route);
   };
   return (
-    // eslint-disable-next-line prettier/prettier
-    <Card className={classes.root} onClick={() => handleOnClick()} aria-label='card'>
+    <Card
+      className={classes.root}
+      onClick={() => handleOnClick()}
+      aria-label="card"
+    >
       <CardActionArea>
         <CardMedia
           component="img"
