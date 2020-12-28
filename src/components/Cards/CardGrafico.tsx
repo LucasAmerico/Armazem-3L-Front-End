@@ -23,7 +23,7 @@ const CardGrafico = ({
   }, []);
   const classes = useStyles(styleProps);
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} data-testid="card">
       <CardContent className={classes.cardChartMargin}>
         <Typography>
           <Chart

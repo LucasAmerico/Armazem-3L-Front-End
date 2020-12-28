@@ -1,54 +1,92 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
 import { RecoilRoot } from 'recoil';
-import CargaList from '../pages/Cargas/components/carga-list';
+import Fretamento from '../pages/Motorista/components/carga-list-motorista';
+import '@testing-library/jest-dom/extend-expect';
+import CargaLista from '../pages/Cargas/components/carga-list';
 
-it('Should change search input value', async () => {
-  // renderizar o componente
+describe('Tests for Cargas component', () => {
+  it('Renders Correctly', async () => {
+    // renderizar o componente
+    const { queryByTestId } = render(
+      <RecoilRoot>
+        <CargaLista />
+      </RecoilRoot>,
+    );
 
-  const { getByLabelText } = render(
-    <RecoilRoot>
-      <CargaList />
-    </RecoilRoot>,
-  );
+    expect(queryByTestId('data-testid')).toBeTruthy();
+  });
+  it('Should screem have title Cargas', async () => {
+    // renderizar o componente
+    render(
+      <RecoilRoot>
+        <CargaLista />
+      </RecoilRoot>,
+    );
 
-  const input = getByLabelText('search') as HTMLInputElement;
-  expect(input.value).toBe('');
+    expect(screen.getByTestId('title')).toHaveTextContent('Listagem de cargas');
+  });
+  it('Should input accept texts', async () => {
+    // renderizar o componente
+    const { getByTestId } = render(
+      <RecoilRoot>
+        <CargaLista />
+      </RecoilRoot>,
+    );
 
-  input.value = 'TEST VALUE';
-  fireEvent.change(input);
+    const input = getByTestId('search');
+    fireEvent.change(input, { target: { value: 'Sama' } });
+    expect(input).toHaveValue('Sama');
+  });
 
-  expect(input.value).toBe('TEST VALUE');
-});
+  it('Should change search input value', async () => {
+    // renderizar o componente
 
-it('Should open modal cadastro when button is clicked', async () => {
-  // renderizar o componente
+    const { getByLabelText } = render(
+      <RecoilRoot>
+        <CargaLista />
+      </RecoilRoot>,
+    );
 
-  render(
-    <RecoilRoot>
-      <CargaList />
-    </RecoilRoot>,
-  );
+    const input = getByLabelText('search') as HTMLInputElement;
+    expect(input.value).toBe('');
 
-  expect(() => screen.getByText('Cadastro de Carga')).toThrow(
-    'Unable to find an element',
-  );
+    input.value = 'TEST VALUE';
+    fireEvent.change(input);
 
-  fireEvent.click(screen.getByLabelText('button'));
-  expect(screen.getByText('Cadastro de Carga')).toBeTruthy();
-});
+    expect(input.value).toBe('TEST VALUE');
+  });
 
-it('Should have a list of itens', async () => {
-  // renderizar o componente
+  it('Should open modal cadastro when button is clicked', async () => {
+    // renderizar o componente
 
-  const { getByLabelText } = render(
-    <RecoilRoot>
-      <CargaList />
-    </RecoilRoot>,
-  );
+    render(
+      <RecoilRoot>
+        <CargaLista />
+      </RecoilRoot>,
+    );
 
-  const list = getByLabelText('listagem') as HTMLInputElement;
+    expect(() => screen.getByText('Cadastro de Carga')).toThrow(
+      'Unable to find an element',
+    );
 
-  expect(list).toBeTruthy();
+    fireEvent.click(screen.getByLabelText('button'));
+    expect(screen.getByText('Cadastro de Carga')).toBeTruthy();
+  });
+
+  it('Should have a list of itens', async () => {
+    // renderizar o componente
+
+    const { getByLabelText } = render(
+      <RecoilRoot>
+        <CargaLista />
+      </RecoilRoot>,
+    );
+
+    const list = getByLabelText('listagem') as HTMLInputElement;
+
+    expect(list).toBeTruthy();
+  });
 });

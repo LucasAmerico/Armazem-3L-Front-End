@@ -19,7 +19,7 @@ const CardComponent = ({ titulo, quantidade, color }: Props) => {
   }, []);
   const classes = useStyles(styleProps);
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} data-testid="card">
       <CardContent className={classes.cardMargin}>
         <Typography variant="h5" component="h5">
           {titulo}
