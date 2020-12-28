@@ -33,6 +33,7 @@ const DialogConfirmAction = ({
       onClose={() => closeFunction()}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
+      data-testid="dialog-test"
     >
       <DialogTitle id="alert-dialog-title"> {title} </DialogTitle>
       <DialogContent>

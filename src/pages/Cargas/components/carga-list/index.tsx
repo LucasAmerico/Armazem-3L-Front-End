@@ -166,6 +166,7 @@ const CargaLista = () => {
             size="small"
             className={classes.button}
             onClick={handleOpen}
+            aria-label="button"
           >
             <AddIcon fontSize="large" />
           </Button>

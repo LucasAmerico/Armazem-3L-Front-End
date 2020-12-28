@@ -30,7 +30,7 @@ const ListProducts = ({
 
   return (
     <div>
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} data-testid="component">
         <Grid container xs={12} xl={12} className={classes.paper__padding}>
           <Grid
             item
@@ -59,6 +59,9 @@ const ListProducts = ({
             <TextField
               id="standard-search"
               label="Filtro"
+              inputProps={{
+                'data-testid': 'search',
+              }}
               name="filtro"
               value={filtro}
               type="search"
