@@ -1,11 +1,13 @@
 import {
   Button,
   FilledInput,
+  FormControl,
   Grid,
   IconButton,
   InputAdornment,
   InputLabel,
   TextField,
+  Typography,
 } from '@material-ui/core';
 import clsx from 'clsx';
 import React, { useState } from 'react';
@@ -25,22 +27,27 @@ const FormCadastroMotorista = ({
 
   return (
     <div>
-      <Grid container xs={12} xl={12} className={classes.grid__padding}>
-        <Grid item xs={8} sm={8} md={8} lg={8} xl={8}>
+      <Grid container xs={6} className={classes.grid__padding}>
+        <Grid item xs={8} className={clsx(classes.buttons__flex)}>
+          <Typography variant="h4" component="h4">
+            Cadastro
+          </Typography>
+        </Grid>
+        <Grid item xs={8}>
           <TextField
             id="filled-name"
             label="Nome"
-            type="name"
+            type="text"
             name="nome"
             variant="filled"
             value={name}
             onChange={onChangeValue}
-            className={clsx(classes.field__full, {
+            className={clsx(classes.margin, classes.field__full, {
               [classes.field__margin]: true,
             })}
           />
         </Grid>
-        <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+        <Grid item xs={8}>
           <TextField
             id="filled-email"
             label="Email"
@@ -49,31 +56,42 @@ const FormCadastroMotorista = ({
             value={email}
             onChange={onChangeValue}
             variant="filled"
-            className={classes.field__full}
+            className={clsx(classes.margin, classes.field__full, {
+              [classes.field__margin]: true,
+            })}
           />
         </Grid>
-        <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-          <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
-          <FilledInput
-            id="filled-adornment-password"
-            type={showPassword ? 'text' : 'password'}
-            value={senha}
-            onChange={onChangeValue}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={() => setShowPassword(!showPassword)}
-                  edge="end"
-                >
-                  {showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
+        <Grid item xs={8}>
+          <FormControl
+            className={clsx(classes.margin, classes.field__full, {
+              [classes.field__margin]: true,
+            })}
+            variant="filled"
+          >
+            <InputLabel htmlFor="filled-adornment-password">
+              Password
+            </InputLabel>
+            <FilledInput
+              id="filled-adornment-password"
+              type={showPassword ? 'text' : 'password'}
+              value={senha}
+              onChange={onChangeValue}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
         </Grid>
-        <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-          <Button onClick={handleSave} color="default" autoFocus>
+        <Grid item xs={8} className={clsx(classes.buttons__flex)}>
+          <Button variant="contained" color="primary" onClick={handleSave}>
             Cadastrar
           </Button>
         </Grid>

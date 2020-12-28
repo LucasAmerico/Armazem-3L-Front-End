@@ -11,6 +11,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   grid__padding: {
     paddingBottom: '3rem',
   },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  buttons__flex: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
 }));
 
 export default useStyles;
