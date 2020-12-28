@@ -27,6 +27,7 @@ const CardUsers = ({ titulo, tipoUsuario, route }: Props) => {
       className={classes.root}
       onClick={() => handleOnClick()}
       data-testid="card"
+      aria-label="card"
     >
       <CardActionArea>
         <CardMedia
