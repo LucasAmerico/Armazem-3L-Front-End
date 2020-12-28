@@ -87,6 +87,14 @@ export interface IPropsFormProduct {
   onChangeValue?: any;
 }
 
+export interface IPropsFormCadastroMotorista {
+  name?: string;
+  email?: string;
+  senha?: string;
+  onChangeValue?: any;
+  handleSave?: any;
+}
+
 export interface IPropsCadastroCarga {
   modal: boolean;
   onClose: any;
