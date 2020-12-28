@@ -11,7 +11,7 @@ const DialogRecCarga = ({ open, onClose, onDelete }: IPropsRecCarga) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
+        <DialogTitle id="alert-dialog-title" data-testid="title">
           Tem certeza que deseja recusar a carga?
         </DialogTitle>
         <DialogActions>

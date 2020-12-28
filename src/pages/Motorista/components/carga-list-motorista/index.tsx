@@ -232,6 +232,7 @@ const Fretamento = () => {
               }}
               inputProps={{
                 'aria-label': 'search',
+                'data-testid': 'search',
               }}
               onChange={handleFilter}
             />

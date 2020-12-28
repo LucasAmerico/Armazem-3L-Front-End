@@ -1,7 +1,6 @@
 import {
   fireEvent,
   getByRole,
-  getByTestId,
   render,
   screen,
   waitForElementToBeRemoved,
