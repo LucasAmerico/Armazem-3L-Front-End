@@ -56,7 +56,7 @@ const onSelectItem = jest.fn();
 const onChangeFilterValue = jest.fn();
 const onChangeQtd = jest.fn();
 
-let prodState = [false, false, false, false, false, false];
+const prodState = [false, false, false, false, false, false];
 let filtro = '';
 const selectAll = false;
 

@@ -125,6 +125,19 @@ export interface IPropsListProducts {
   title?: string;
 }
 
+export interface IPropsLogin {
+  modal: boolean;
+  onClose: any;
+}
+
+export interface IPropsEntrar {
+  onHandleBackdropClose: any;
+}
+
+export interface IPropsCadastrar {
+  onHandleBackdropClose: any;
+}
+
 export interface ProdutoList {
   nome?: any;
   produtoId: any;

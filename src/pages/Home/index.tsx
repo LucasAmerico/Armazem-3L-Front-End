@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import clsx from 'clsx';
 import { Grid, Typography } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
@@ -7,10 +7,16 @@ import useStyles from './styles';
 import usuarioEnum from '../../utils/enum/usuarioEnum';
 import CardUsers from '../../components/cards/CardUsers';
 import Registro from '../../components/registrar';
+import ModalLogin from '../../components/modal-login';
 
 const HomePage = () => {
   const classes = useStyles();
   const open = useRecoilValue(GlobalStates.sideBarState);
+  const [login, setLogin] = useRecoilState(GlobalStates.login);
+
+  const handleClose = () => {
+    setLogin(false);
+  };
 
   return (
     <div
@@ -60,6 +66,7 @@ const HomePage = () => {
           </Grid>
         </Grid>
       </div>
+      <ModalLogin modal={login} onClose={handleClose} />
     </div>
   );
 };

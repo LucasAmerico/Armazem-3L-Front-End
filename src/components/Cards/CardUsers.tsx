@@ -17,10 +17,16 @@ const CardUsers = ({ titulo, tipoUsuario, route }: Props) => {
   const classes = useStyles({});
   const history = useHistory();
   const setCurrentUser = useSetRecoilState(GlobalStates.currentUser);
+  const setLogin = useSetRecoilState(GlobalStates.login);
 
   const handleOnClick = () => {
-    setCurrentUser(tipoUsuario);
-    history.push(route);
+    if (tipoUsuario === 'motorista') {
+      setLogin(true);
+    } else {
+      setCurrentUser(tipoUsuario);
+      localStorage.setItem('user', tipoUsuario);
+      history.push(route);
+    }
   };
   return (
     <Card

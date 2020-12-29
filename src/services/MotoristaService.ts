@@ -3,7 +3,7 @@ import api from './api';
 
 const postMotoristaRoute = '/motorista';
 const getMotoristaRoute = '/motorista/';
-const loginMotoristaRoute = '/motorista/login';
+const loginRoute = '/motorista/login';
 const recuperarMotoristaRoute = '/motorista/recuperar';
 
 async function getMotorista(motoristaId: number) {
@@ -20,8 +20,8 @@ async function postMotorista(motorista: Motorista) {
   return response.data;
 }
 
-async function loginMotorista(motorista: Motorista) {
-  const url = loginMotoristaRoute;
+async function login(motorista: Motorista) {
+  const url = loginRoute;
 
   const response = await api.post(url, motorista);
   return response.data;
@@ -37,6 +37,6 @@ async function recuperarMotorista(motorista: Motorista) {
 export default {
   getMotorista,
   postMotorista,
-  loginMotorista,
+  login,
   recuperarMotorista,
 };
