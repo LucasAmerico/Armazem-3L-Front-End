@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { IconButton, Typography } from '@material-ui/core';
@@ -17,14 +17,22 @@ const Header = (props: any) => {
   );
   const history = useHistory();
 
+  useEffect(() => {
+    console.log(localStorage);
+    const user = localStorage.getItem('user');
+    setCurrentUser(user!);
+  }, []);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
   const handleResetUser = () => {
     setCurrentUser('Olá, visitante!');
+    localStorage.setItem('user', 'Olá, visitante!');
     setOpen(false);
     history.push('/');
+    console.log(localStorage);
   };
 
   return (
