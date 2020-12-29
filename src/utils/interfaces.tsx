@@ -87,6 +87,15 @@ export interface IPropsFormProduct {
   onChangeValue?: any;
 }
 
+export interface IPropsFormCadastroMotorista {
+  nome?: string;
+  login?: string;
+  email?: string;
+  senha?: string;
+  onChangeValue?: any;
+  handleSave?: any;
+}
+
 export interface IPropsCadastroCarga {
   modal: boolean;
   onClose: any;
@@ -147,4 +156,11 @@ export interface Carga {
 export interface CargaMotorista {
   cargaId: number;
   motoristaId: number;
+}
+
+export interface Motorista {
+  nome?: string;
+  login?: string;
+  email?: string;
+  senha?: string;
 }

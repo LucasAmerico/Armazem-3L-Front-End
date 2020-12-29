@@ -4,8 +4,9 @@ import clsx from 'clsx';
 import { Grid, Typography } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
-import CardUsers from '../../components/Cards/CardUsers';
 import usuarioEnum from '../../utils/enum/usuarioEnum';
+import CardUsers from '../../components/cards/CardUsers';
+import Registro from '../../components/registrar';
 import ModalLogin from '../../components/modal-login';
 
 const HomePage = () => {
