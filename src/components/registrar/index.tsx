@@ -4,13 +4,13 @@ import clsx from 'clsx';
 import { toast } from 'react-toastify';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
-import FormCadastroMotorista from '../../components/form-cadastro';
 import MotoristaService from '../../services/MotoristaService';
 import MESSAGES from '../../constants/MESSAGES';
 import { Motorista } from '../../utils/interfaces';
 import encryptMD5 from '../../utils/security';
+import FormCadastroMotorista from '../form-cadastro';
 
-const HomePage = () => {
+const Registro = () => {
   const classes = useStyles();
   const open = useRecoilValue(GlobalStates.sideBarState);
   const [motorista, setMotorista] = useState({
@@ -62,4 +62,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Registro;
