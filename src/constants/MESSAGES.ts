@@ -5,4 +5,5 @@ export default {
   deletar_Produto_Sucesso: 'Produto deletado com sucesso!',
   rejeitar_carga_Sucesso: 'Carga rejeitada com sucesso!',
   aceitar_carga_Sucesso: 'Carga aceitada com sucesso!',
+  recuperar_senha_Sucesso: 'Senha alterada com sucesso!',
 };
