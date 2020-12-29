@@ -2,8 +2,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
-import Header from '../components/header/Header';
-import CardComponent from '../components/Cards/CardComponent';
+import CardComponent from '../components/cards/CardComponent';
 
 it('Should do something', async () => {
   // renderizar o componente

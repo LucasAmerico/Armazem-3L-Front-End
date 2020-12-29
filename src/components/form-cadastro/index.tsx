@@ -16,7 +16,8 @@ import useStyles from './styles';
 import { IPropsFormCadastroMotorista } from '../../utils/interfaces';
 
 const FormCadastroMotorista = ({
-  name,
+  nome,
+  login,
   email,
   senha,
   onChangeValue,
@@ -27,7 +28,12 @@ const FormCadastroMotorista = ({
 
   return (
     <div>
-      <Grid container xs={6} className={classes.grid__padding}>
+      <Grid
+        container
+        xs={6}
+        className={classes.grid__padding}
+        data-testid="form"
+      >
         <Grid item xs={8} className={clsx(classes.buttons__flex)}>
           <Typography variant="h4" component="h4">
             Cadastro
@@ -40,7 +46,21 @@ const FormCadastroMotorista = ({
             type="text"
             name="nome"
             variant="filled"
-            value={name}
+            value={nome}
+            onChange={onChangeValue}
+            className={clsx(classes.margin, classes.field__full, {
+              [classes.field__margin]: true,
+            })}
+          />
+        </Grid>
+        <Grid item xs={8}>
+          <TextField
+            id="filled-name"
+            label="Login"
+            type="text"
+            name="login"
+            variant="filled"
+            value={login}
             onChange={onChangeValue}
             className={clsx(classes.margin, classes.field__full, {
               [classes.field__margin]: true,
@@ -74,6 +94,7 @@ const FormCadastroMotorista = ({
             <FilledInput
               id="filled-adornment-password"
               type={showPassword ? 'text' : 'password'}
+              name="senha"
               value={senha}
               onChange={onChangeValue}
               endAdornment={

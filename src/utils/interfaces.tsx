@@ -88,7 +88,8 @@ export interface IPropsFormProduct {
 }
 
 export interface IPropsFormCadastroMotorista {
-  name?: string;
+  nome?: string;
+  login?: string;
   email?: string;
   senha?: string;
   onChangeValue?: any;
@@ -142,4 +143,11 @@ export interface Carga {
 export interface CargaMotorista {
   cargaId: number;
   motoristaId: number;
+}
+
+export interface Motorista {
+  nome?: string;
+  login?: string;
+  email?: string;
+  senha?: string;
 }
