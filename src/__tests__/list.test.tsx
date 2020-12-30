@@ -12,7 +12,7 @@ import {
   screen,
 } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
-import Lista from '../components/List/list';
+import Lista from '../components/list/list';
 
 const ListaProdutos = {
   Produtos: [

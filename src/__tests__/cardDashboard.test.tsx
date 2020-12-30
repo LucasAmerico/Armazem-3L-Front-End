@@ -15,7 +15,7 @@ describe('Tests for CardDashboard component', () => {
   it('Should ', async () => {
     render(
       <RecoilRoot>
-        <CardDashboard parent="" />
+        <CardDashboard />
       </RecoilRoot>,
     );
     expect(screen.getByRole('Cargas Pendentes')).toBeInTheDocument();

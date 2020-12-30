@@ -27,7 +27,7 @@ const CargasPage = () => {
         </Grid>
       </Grid>
       <div className={classes.contentCards}>
-        <CardDashboard parent="carga" />
+        <CardDashboard />
       </div>
     </div>
   );

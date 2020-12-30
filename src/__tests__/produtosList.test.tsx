@@ -8,34 +8,8 @@ import {
 import userEvent from '@testing-library/user-event';
 import React, { Component } from 'react';
 import { RecoilRoot } from 'recoil';
-import Lista from '../components/List/list';
 import ProdutosLista from '../pages/Produtos/components/produtos-list';
 
-const ListaProdutos = {
-  Produtos: [
-    {
-      id: 1,
-      nome: 'Playstation 5',
-      peso: 1.0,
-      preco: 1.0,
-      qtd: 100,
-    },
-    {
-      id: 2,
-      nome: 'Xbox 1',
-      peso: 1.0,
-      preco: 1.0,
-      qtd: 200,
-    },
-    {
-      id: 3,
-      nome: 'Nintendo',
-      peso: 1.0,
-      preco: 1.0,
-      qtd: 300,
-    },
-  ],
-};
 describe('Tests for ProdutosLista component', () => {
   it('Renders Correctly', async () => {
     // renderizar o componente
