@@ -116,7 +116,7 @@ const RecuperarSenha = () => {
   };
 
   return (
-    <div className={classes.paper}>
+    <div className={classes.paper} data-testid="recuperar-senha">
       <Grid container sm={12}>
         <Grid item sm={12}>
           <Grid>
@@ -127,7 +127,7 @@ const RecuperarSenha = () => {
           <Grid>
             {emailValido ? (
               <div>
-                <Grid>
+                <Grid data-testid="informa-senha">
                   <FormControl
                     className={clsx(
                       classes.modal__paddingFields,
@@ -159,7 +159,7 @@ const RecuperarSenha = () => {
                     />
                   </FormControl>
                 </Grid>
-                <Grid>
+                <Grid data-testid="informa-senharepetida">
                   <FormControl
                     className={classes.modal__fieldFull}
                     variant="filled"
@@ -202,7 +202,7 @@ const RecuperarSenha = () => {
                 </div>
               </div>
             ) : (
-              <div>
+              <div data-testid="informa-email">
                 <FormControl
                   className={classes.modal__fieldFull}
                   variant="filled"
@@ -211,6 +211,7 @@ const RecuperarSenha = () => {
                     Email
                   </InputLabel>
                   <FilledInput
+                    data-testid="input-email"
                     id="filled-adornment-weight"
                     type="email"
                     value={recuperarSenha.email}
