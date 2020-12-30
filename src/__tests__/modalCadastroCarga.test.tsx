@@ -63,7 +63,6 @@ describe('Tests for Modal-detalhes-carga component', () => {
 
     expect(screen.getAllByText(/Selecionar Produtos/i)).toBeTruthy();
   });
-
   it('Should closes modal when button close is clicked', async () => {
     const handleClose = jest.fn();
 
@@ -76,4 +75,41 @@ describe('Tests for Modal-detalhes-carga component', () => {
     fireEvent.click(screen.getByText(/Fechar/i));
     expect(handleClose).toHaveBeenCalled();
   });
+  it('Should adds new carga when button confirm is clicked', async () => {
+    const handleClose = jest.fn();
+    const handleSave = jest.fn();
+
+    render(
+      <RecoilRoot>
+        <CadastroCarga modal onClose={handleClose} />
+      </RecoilRoot>,
+    );
+
+    fireEvent.click(screen.getByText(/Fechar/i));
+    expect(handleClose).toHaveBeenCalled();
+  });
+  // it('Should render data component correctly', async () => {
+  //   const handleClose = jest.fn();
+
+  //   const { queryByTestId } = render(
+  //     <RecoilRoot>
+  //       <CadastroCarga modal onClose={handleClose} />
+  //     </RecoilRoot>,
+  //   );
+
+  //   const component = queryByTestId('dados');
+  //   expect(component).toBeTruthy();
+  // });
+  // it('Should render the data list component correctly', async () => {
+  //   const handleClose = jest.fn();
+
+  //   const { queryByTestId } = render(
+  //     <RecoilRoot>
+  //       <CadastroCarga modal onClose={handleClose} />
+  //     </RecoilRoot>,
+  //   );
+
+  //   const component = queryByTestId('lista-dados');
+  //   expect(component).toBeTruthy();
+  // });
 });

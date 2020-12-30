@@ -2,7 +2,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
-import CardUsers from '../components/Cards/CardUsers';
+import CardUsers from '../components/cards/CardUsers';
 import usuarioEnum from '../utils/enum/usuarioEnum';
 import imageEnum from '../utils/enum/imageEnum';
 

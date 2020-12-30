@@ -2,7 +2,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
-import DialogConfirmAction from '../components/Dialog/DialogConfirmAction';
+import DialogConfirmAction from '../components/dialog/DialogConfirmAction';
 
 it('Should show dialog at screen', async () => {
   // renderizar o componente

@@ -50,6 +50,16 @@ const currentUser = atom({
   default: 'Olá, visitante!',
 });
 
+const login = atom({
+  key: 'login',
+  default: false,
+});
+
+const bloco = atom({
+  key: 'bloco',
+  default: 0,
+});
+
 export default {
   sideBarState,
   changeCarga,
@@ -60,4 +70,6 @@ export default {
   openDialogAccCarga,
   openDialogRecCarga,
   currentUser,
+  login,
+  bloco,
 };

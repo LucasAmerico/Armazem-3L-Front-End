@@ -184,6 +184,7 @@ const CadastroCarga = ({ modal, onClose }: IPropsCadastroCarga) => {
               freight={carga.frete}
               onChangeValue={handleInputChange}
               disabled={false}
+              data-testid="dados"
             />
             <ListProducts
               produtos={produtos}
@@ -196,6 +197,7 @@ const CadastroCarga = ({ modal, onClose }: IPropsCadastroCarga) => {
               filtro={filtro}
               onChangeFilterValue={handleFilter}
               onChangeQtd={handleChangeQtd}
+              data-testid="lista-dados"
             />
             <Grid container xs={12} xl={12} className={classes.modal__buttons}>
               <Grid

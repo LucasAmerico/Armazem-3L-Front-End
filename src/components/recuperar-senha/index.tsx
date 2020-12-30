@@ -17,6 +17,7 @@ import useStyles from './styles';
 import MESSAGES from '../../constants/MESSAGES';
 import MotoristaService from '../../services/MotoristaService';
 import clsx from 'clsx';
+import { RecuperarSenha } from '../../utils/interfaces';
 
 const RecuperarSenha = () => {
   const classes = useStyles();
@@ -50,7 +51,11 @@ const RecuperarSenha = () => {
 
   const handleVerificarEmail = () => {
     if (recuperarSenha.email !== '') {
-      MotoristaService.postVerificarMotorista(recuperarSenha)
+      const obj = {
+        email: recuperarSenha.email,
+      };
+
+      MotoristaService.postVerificarMotorista(obj)
         .then((res) => {
           if (res) {
             setEmailValido(true);
@@ -73,7 +78,12 @@ const RecuperarSenha = () => {
       recuperarSenha.senhaRepetida === recuperarSenha.senha &&
       recuperarSenha.senha !== ''
     ) {
-      MotoristaService.putRecuperarSenhaMotorista(recuperarSenha)
+      const obj = {
+        senha: recuperarSenha.senha,
+        email: recuperarSenha.email,
+      };
+
+      MotoristaService.putRecuperarSenhaMotorista(obj)
         .then((res) => {
           toast.success(MESSAGES.recuperar_senha_Sucesso);
           handleClose();
