@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import useStyles from './styles';
 import GlobalStates from '../../../../recoil/atom';
 import ProdutosService from '../../../../services/ProdutoService';
-import Lista from '../../../../components/List/list';
+import Lista from '../../../../components/list/list';
 import { Produto } from '../../../../utils/interfaces';
 import CadastroProduto from '../../../../components/modal-cadastro-produto';
 import DialogRmProduto from '../../../../components/dialog-deletar-produto';

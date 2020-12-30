@@ -15,9 +15,9 @@ import useStyles from './styles';
 import GlobalStates from '../../../../recoil/atom';
 import CargaService from '../../../../services/CargaService';
 import CadastroCarga from '../../../../components/modal-cadastro-carga/CadastroCarga';
-import Lista from '../../../../components/List/list';
+import Lista from '../../../../components/list/list';
 import { Carga } from '../../../../utils/interfaces';
-import DialogConfirmAction from '../../../../components/Dialog/DialogConfirmAction';
+import DialogConfirmAction from '../../../../components/dialog/DialogConfirmAction';
 import DetalhesCarga from '../../../../components/modal-detalhes-carga';
 import MESSAGES from '../../../../constants/MESSAGES';
 
