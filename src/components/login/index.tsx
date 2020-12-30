@@ -68,7 +68,7 @@ const Login = () => {
   };
 
   return (
-    <div className={classes.modal__right}>
+    <div className={classes.modal__right} data-testid="data-testid">
       <div>
         <Typography variant="h4" className={classes.modal__subTitle}>
           Login

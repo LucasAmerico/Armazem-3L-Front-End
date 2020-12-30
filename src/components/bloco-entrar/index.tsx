@@ -13,7 +13,7 @@ const Entrar = () => {
   };
 
   return (
-    <div className={classes.modal__left}>
+    <div className={classes.modal__left} data-testid="data-testid">
       <Typography variant="h4" className={classes.modal__subTitle}>
         Bem vindo(a)!
       </Typography>
@@ -26,6 +26,7 @@ const Entrar = () => {
           color="default"
           onClick={handleClick}
           className={classes.modal__buttonColor}
+          data-testid="button"
         >
           Entrar
         </Button>
