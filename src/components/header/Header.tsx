@@ -43,7 +43,6 @@ const Header = (props: any) => {
       className={clsx(classes.appBar, {
         [classes.appBarShift]: open,
       })}
-      data-testid="app-label"
     >
       <Toolbar>
         {currentUser !== 'Olá, visitante!' ? (
