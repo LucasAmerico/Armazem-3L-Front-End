@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
 import CardUsers from '../components/cards/CardUsers';
 import usuarioEnum from '../utils/enum/usuarioEnum';
@@ -43,4 +43,18 @@ it('Should render correct props', async () => {
 
   const title = screen.getByText(/Administrativo/i);
   expect(title).toBeTruthy();
+});
+
+it('Should handle click on card', async () => {
+  render(
+    <RecoilRoot>
+      <CardUsers
+        titulo="Motorista"
+        tipoUsuario={usuarioEnum.MOTORISTA}
+        route="/cargas"
+      />
+    </RecoilRoot>,
+  );
+  fireEvent.click(screen.getByTestId('card'));
+  expect(screen.getByTestId('card')).toBeTruthy();
 });
