@@ -3,9 +3,9 @@ import { useRecoilValue } from 'recoil';
 import { Grid } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
 import CargaService from '../../services/CargaService';
-import CardGrafico from '../Cards/CardGrafico';
+import CardGrafico from '../cards/CardGrafico';
 import useStyles from './styles';
-import CardComponent from '../Cards/CardComponent';
+import CardComponent from '../cards/CardComponent';
 import { IPropsCards } from '../../utils/interfaces';
 
 const CardDashboard = ({ parent }: IPropsCards) => {

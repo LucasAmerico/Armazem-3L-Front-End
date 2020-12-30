@@ -4,8 +4,9 @@ import clsx from 'clsx';
 import { Grid, Typography } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
-import CardUsers from '../../components/Cards/CardUsers';
+import CardUsers from '../../components/cards/CardUsers';
 import usuarioEnum from '../../utils/enum/usuarioEnum';
+import RecuperarSenha from '../../components/recuperar-senha';
 
 const HomePage = () => {
   const classes = useStyles();
@@ -59,6 +60,7 @@ const HomePage = () => {
           </Grid>
         </Grid>
       </div>
+      <RecuperarSenha />
     </div>
   );
 };
