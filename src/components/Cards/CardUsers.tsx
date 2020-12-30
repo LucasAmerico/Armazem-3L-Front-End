@@ -3,9 +3,9 @@ import Card from '@material-ui/core/Card';
 import { useHistory } from 'react-router-dom';
 import { CardActionArea, CardMedia, Typography } from '@material-ui/core';
 import { useSetRecoilState } from 'recoil';
-import useStyles from './styles';
 import imageEnum from '../../utils/enum/imageEnum';
 import GlobalStates from '../../recoil/atom';
+import useStyles from './styles';
 
 interface Props {
   titulo: string;

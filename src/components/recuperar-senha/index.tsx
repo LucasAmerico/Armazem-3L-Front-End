@@ -13,12 +13,12 @@ import { Email, Visibility, VisibilityOff } from '@material-ui/icons';
 import SaveIcon from '@material-ui/icons/Save';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+import clsx from 'clsx';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 import MESSAGES from '../../constants/MESSAGES';
 import MotoristaService from '../../services/MotoristaService';
-import clsx from 'clsx';
-import { useSetRecoilState } from 'recoil';
 import encryptMD5 from '../../utils/security';
 
 const RecuperarSenha = () => {
@@ -79,6 +79,12 @@ const RecuperarSenha = () => {
     }
   };
   const handleClose = () => {
+    setRecuperarSenha({
+      ...recuperarSenha,
+      senha: '',
+      senhaRepetida: '',
+      email: '',
+    });
     setEmailValido(false);
     setBloco(0);
   };

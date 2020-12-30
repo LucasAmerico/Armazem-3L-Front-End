@@ -3,7 +3,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
 import CardComponent from '../components/cards/CardComponent';
-../components/cards/CardComponent
+
 it('Should do something', async () => {
   // renderizar o componente
 
