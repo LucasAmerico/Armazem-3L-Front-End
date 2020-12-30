@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import clsx from 'clsx';
 import { toast } from 'react-toastify';
 import GlobalStates from '../../recoil/atom';
@@ -19,6 +19,7 @@ const Registro = () => {
     email: '',
     senha: '',
   });
+  const setBloco = useSetRecoilState(GlobalStates.bloco);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -36,7 +37,12 @@ const Registro = () => {
 
     MotoristaService.postMotorista(newMotorista)
       .then((res) => {
-        toast.success(MESSAGES.cadastrar_Produto_Sucesso);
+        toast.success(MESSAGES.cadastrar_Produto_Sucesso, {
+          autoClose: 800,
+          onClose: () => {
+            setBloco(0);
+          },
+        });
       })
       .catch((error) => {
         toast.error(error);

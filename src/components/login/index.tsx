@@ -1,4 +1,14 @@
-import { Button, TextField, Typography } from '@material-ui/core';
+import {
+  Button,
+  FilledInput,
+  InputAdornment,
+  TextField,
+  IconButton,
+  Typography,
+  InputLabel,
+  FormControl,
+} from '@material-ui/core';
+import clsx from 'clsx';
 import React, { ChangeEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -7,6 +17,8 @@ import GlobalStates from '../../recoil/atom';
 import MotoristaService from '../../services/MotoristaService';
 import usuarioEnum from '../../utils/enum/usuarioEnum';
 import useStyles from './styles';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
+import encryptMD5 from '../../utils/security';
 
 const Login = () => {
   const classes = useStyles();
@@ -15,6 +27,7 @@ const Login = () => {
   const setLogin = useSetRecoilState(GlobalStates.login);
   const setCurrentUser = useSetRecoilState(GlobalStates.currentUser);
   const setBloco = useSetRecoilState(GlobalStates.bloco);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleClick = () => {
     setBloco(2);
@@ -30,7 +43,7 @@ const Login = () => {
 
     const obj = {
       login,
-      senha,
+      senha: encryptMD5(senha),
     };
 
     MotoristaService.login(obj)
@@ -72,17 +85,34 @@ const Login = () => {
             className={classes.modal__input}
           />
           <div className={classes.modal__input}>
-            <TextField
-              label="Senha"
-              name="senha"
-              id="filled-size-small"
+            <FormControl
+              className={clsx(classes.modal__inputWidth)}
               variant="filled"
-              value={input.senha}
-              type="password"
-              size="small"
-              onChange={handleChange}
-              className={classes.modal__inputWidth}
-            />
+            >
+              <InputLabel htmlFor="filled-adornment-password">Senha</InputLabel>
+              <FilledInput
+                id="filled-adornment-password"
+                type={showPassword ? 'text' : 'password'}
+                name="senha"
+                value={input.senha}
+                onChange={handleChange}
+                className={clsx(
+                  classes.modal__inputWidth,
+                  classes.modal__passwordField,
+                )}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
             <Button
               onClick={handleClick}
               className={classes.modal__buttonAnchor}

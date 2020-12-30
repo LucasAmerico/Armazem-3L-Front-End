@@ -10,6 +10,7 @@ import { IPropsLogin } from '../../utils/interfaces';
 import Entrar from '../bloco-entrar';
 import Cadastrar from '../bloco-cadastrar';
 import Login from '../login';
+import Registro from '../registrar';
 
 const ModalLogin = ({ modal }: IPropsLogin) => {
   const classes = useStyles();
@@ -52,6 +53,7 @@ const ModalLogin = ({ modal }: IPropsLogin) => {
               ) : bloco === 1 ? (
                 <>
                   <Entrar />
+                  <Registro />
                 </>
               ) : bloco === 2 ? (
                 <></>

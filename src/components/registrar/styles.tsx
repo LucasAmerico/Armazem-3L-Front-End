@@ -1,6 +1,5 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-//    background: '#E5E5E5',
 const useStyles = makeStyles((theme: Theme) => ({
   content: {
     flexGrow: 1,
@@ -8,6 +7,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    backgroundColor: '#fff',
   },
   contentShift: {
     transition: theme.transitions.create('margin', {

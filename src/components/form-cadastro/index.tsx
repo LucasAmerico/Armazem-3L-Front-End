@@ -30,20 +30,21 @@ const FormCadastroMotorista = ({
     <div>
       <Grid
         container
-        xs={6}
+        xs={12}
         className={classes.grid__padding}
         data-testid="form"
       >
-        <Grid item xs={8} className={clsx(classes.buttons__flex)}>
+        <Grid item xs={12} className={classes.title}>
           <Typography variant="h4" component="h4">
             Cadastro
           </Typography>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12}>
           <TextField
             id="filled-name"
             label="Nome"
             type="text"
+            size="small"
             name="nome"
             variant="filled"
             value={nome}
@@ -53,11 +54,12 @@ const FormCadastroMotorista = ({
             })}
           />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12}>
           <TextField
             id="filled-name"
             label="Login"
             type="text"
+            size="small"
             name="login"
             variant="filled"
             value={login}
@@ -67,11 +69,12 @@ const FormCadastroMotorista = ({
             })}
           />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12}>
           <TextField
             id="filled-email"
             label="Email"
             type="email"
+            size="small"
             name="email"
             value={email}
             onChange={onChangeValue}
@@ -81,7 +84,7 @@ const FormCadastroMotorista = ({
             })}
           />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12}>
           <FormControl
             className={clsx(classes.margin, classes.field__full, {
               [classes.field__margin]: true,
@@ -97,6 +100,7 @@ const FormCadastroMotorista = ({
               name="senha"
               value={senha}
               onChange={onChangeValue}
+              className={classes.passwordField}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -111,8 +115,13 @@ const FormCadastroMotorista = ({
             />
           </FormControl>
         </Grid>
-        <Grid item xs={8} className={clsx(classes.buttons__flex)}>
-          <Button variant="contained" color="primary" onClick={handleSave}>
+        <Grid item xs={12} className={clsx(classes.buttons__flex)}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSave}
+            className={classes.buttonColor}
+          >
             Cadastrar
           </Button>
         </Grid>

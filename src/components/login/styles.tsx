@@ -116,6 +116,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   modal__login: {
     display: 'flex',
   },
+  modal__passwordField: {
+    height: '3.7rem',
+  },
 }));
 
 export default useStyles;

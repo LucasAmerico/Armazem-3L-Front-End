@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: '2rem',
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'center',
   },
   modal__right: {
     backgroundColor: '#FFFFFF',

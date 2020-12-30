@@ -5,18 +5,34 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     paddingBottom: '1rem',
   },
+  title: {
+    color: '#777',
+    display: 'flex',
+    justifyContent: 'center',
+    paddingBottom: '1.9rem',
+  },
   field__margin: {
-    paddingRight: '2.2rem',
+    paddingBottom: '2rem',
   },
   grid__padding: {
-    paddingBottom: '3rem',
+    padding: '2rem 2rem',
   },
   margin: {
-    margin: theme.spacing(1),
+    // margin: theme.spacing(1),
   },
   buttons__flex: {
     display: 'flex',
     justifyContent: 'center',
+  },
+  buttonColor: {
+    color: 'white',
+    backgroundColor: '#0061F3',
+    '&:hover': {
+      backgroundColor: '#2677f0',
+    },
+  },
+  passwordField: {
+    height: '3.7rem',
   },
 }));
 
