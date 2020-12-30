@@ -2,7 +2,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
-    position: 'absolute',
+    width: '100%',
     backgroundColor: '#FFF',
     padding: '2rem',
     outline: 0,

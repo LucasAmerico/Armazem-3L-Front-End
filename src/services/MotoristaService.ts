@@ -1,4 +1,4 @@
-import { Motorista, RecuperarSenha } from '../utils/interfaces';
+import { Motorista, RecuperarSenhaDados } from '../utils/interfaces';
 import api from './api';
 
 const postMotoristaRoute = '/motorista';
@@ -21,7 +21,7 @@ async function postMotorista(motorista: Motorista) {
   return response.data;
 }
 
-async function postVerificarMotorista(content: RecuperarSenha) {
+async function postVerificarMotorista(content: RecuperarSenhaDados) {
   const url = postVerificarMotoristaRoute;
 
   const response = await api.post(url, content);
@@ -35,10 +35,10 @@ async function login(motorista: Motorista) {
   return response.data;
 }
 
-async function putRecuperarSenhaMotorista(content: RecuperarSenha) {
+async function putRecuperarSenhaMotorista(content: RecuperarSenhaDados) {
   const url = putRecuperarSenhaMotoristaRoute;
 
-  const response = await api.post(url, content);
+  const response = await api.put(url, content);
   return response.data;
 }
 

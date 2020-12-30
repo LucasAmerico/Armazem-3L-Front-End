@@ -13,11 +13,13 @@ import { Email, Visibility, VisibilityOff } from '@material-ui/icons';
 import SaveIcon from '@material-ui/icons/Save';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import { toast } from 'react-toastify';
+import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 import MESSAGES from '../../constants/MESSAGES';
 import MotoristaService from '../../services/MotoristaService';
 import clsx from 'clsx';
-import { RecuperarSenha } from '../../utils/interfaces';
+import { useSetRecoilState } from 'recoil';
+import encryptMD5 from '../../utils/security';
 
 const RecuperarSenha = () => {
   const classes = useStyles();
@@ -26,9 +28,10 @@ const RecuperarSenha = () => {
     senha: '',
     senhaRepetida: '',
   });
-  const [emailValido, setEmailValido] = useState(true);
+  const [emailValido, setEmailValido] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showRPassword, setShowRPassword] = useState(false);
+  const setBloco = useSetRecoilState(GlobalStates.bloco);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -58,7 +61,12 @@ const RecuperarSenha = () => {
       MotoristaService.postVerificarMotorista(obj)
         .then((res) => {
           if (res) {
-            setEmailValido(true);
+            toast.success('E-mail verificado com sucesso!', {
+              autoClose: 800,
+              onClose: () => {
+                setEmailValido(true);
+              },
+            });
           } else {
             toast.error('E-mail não cadastrado');
           }
@@ -72,6 +80,7 @@ const RecuperarSenha = () => {
   };
   const handleClose = () => {
     setEmailValido(false);
+    setBloco(0);
   };
   const validarSenha = () => {
     if (
@@ -79,14 +88,18 @@ const RecuperarSenha = () => {
       recuperarSenha.senha !== ''
     ) {
       const obj = {
-        senha: recuperarSenha.senha,
+        senha: encryptMD5(recuperarSenha.senha),
         email: recuperarSenha.email,
       };
 
       MotoristaService.putRecuperarSenhaMotorista(obj)
         .then((res) => {
-          toast.success(MESSAGES.recuperar_senha_Sucesso);
-          handleClose();
+          toast.success(MESSAGES.recuperar_senha_Sucesso, {
+            autoClose: 800,
+            onClose: () => {
+              handleClose();
+            },
+          });
         })
         .catch((error) => {
           toast.error(error);
@@ -185,7 +198,7 @@ const RecuperarSenha = () => {
             ) : (
               <div>
                 <FormControl
-                  // className={clsx(classes.margin, classes.textField)}
+                  className={classes.modal__fieldFull}
                   variant="filled"
                 >
                   <InputLabel htmlFor="filled-adornment-password">

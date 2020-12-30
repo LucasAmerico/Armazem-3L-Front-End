@@ -162,7 +162,7 @@ export interface CargaMotorista {
   motoristaId: number;
 }
 
-export interface RecuperarSenha {
+export interface RecuperarSenhaDados {
   nome?: string;
   email?: string;
 }

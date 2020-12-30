@@ -11,6 +11,7 @@ import Entrar from '../bloco-entrar';
 import Cadastrar from '../bloco-cadastrar';
 import Login from '../login';
 import Registro from '../registrar';
+import RecuperarSenha from '../recuperar-senha';
 
 const ModalLogin = ({ modal }: IPropsLogin) => {
   const classes = useStyles();
@@ -56,7 +57,10 @@ const ModalLogin = ({ modal }: IPropsLogin) => {
                   <Registro />
                 </>
               ) : bloco === 2 ? (
-                <></>
+                <>
+                  <Entrar />
+                  <RecuperarSenha />
+                </>
               ) : null}
             </div>
           </div>
