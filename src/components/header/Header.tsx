@@ -18,7 +18,9 @@ const Header = (props: any) => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(localStorage);
+    if (!localStorage.getItem('user')) {
+      localStorage.setItem('user', 'Olá, visitante!');
+    }
     const user = localStorage.getItem('user');
     setCurrentUser(user!);
   }, []);

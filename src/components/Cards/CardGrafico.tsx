@@ -1,6 +1,6 @@
 import { Card, CardContent, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import Chart from '../chart/Chart';
+import Chart from '../Chart/Chart';
 import useStyles from './styles';
 
 interface Props {
