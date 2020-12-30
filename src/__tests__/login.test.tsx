@@ -19,20 +19,31 @@ describe('Tests for Cargas component', () => {
 
     expect(queryByTestId('data-testid')).toBeTruthy();
   });
-  // it('Should open modal cadastro when button is clicked', async () => {
-  //   // renderizar o componente
+  it('Should input accept texts', async () => {
+    // renderizar o componente
+    const { getByTestId } = render(
+      <RecoilRoot>
+        <Login />
+      </RecoilRoot>,
+    );
 
-  //   render(
-  //     <RecoilRoot>
-  //       <CargaLista />
-  //     </RecoilRoot>,
-  //   );
+    const login = getByTestId('login');
+    fireEvent.change(login, { target: { value: 'Sama' } });
+    expect(login).toHaveValue('Sama');
 
-  //   expect(() => screen.getByText('Cadastro de Carga')).toThrow(
-  //     'Unable to find an element',
-  //   );
+    const senha = getByTestId('senha');
+    fireEvent.change(senha, { target: { value: 'Sama' } });
+    expect(senha).toHaveValue('Sama');
+  });
+  it('Should open toast when button is clicked', async () => {
+    // renderizar o componente
 
-  //   fireEvent.click(screen.getByLabelText('button'));
-  //   expect(screen.getByText('Cadastro de Carga')).toBeTruthy();
-  // });
+    render(
+      <RecoilRoot>
+        <Login />
+      </RecoilRoot>,
+    );
+
+    fireEvent.click(screen.getByLabelText('button'));
+  });
 });

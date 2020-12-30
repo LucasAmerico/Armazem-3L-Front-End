@@ -80,6 +80,7 @@ const Login = () => {
             id="filled-size-small"
             value={input.login}
             variant="filled"
+            inputProps={{ 'aria-label': 'login', 'data-testid': 'login' }}
             size="small"
             onChange={handleChange}
             className={classes.modal__input}
@@ -95,6 +96,7 @@ const Login = () => {
                 type={showPassword ? 'text' : 'password'}
                 name="senha"
                 value={input.senha}
+                inputProps={{ 'aria-label': 'senha', 'data-testid': 'senha' }}
                 onChange={handleChange}
                 className={clsx(
                   classes.modal__inputWidth,
@@ -126,6 +128,7 @@ const Login = () => {
               color="default"
               onClick={handleLogin}
               className={classes.modal__buttonColor}
+              aria-label="button"
             >
               Entrar
             </Button>
