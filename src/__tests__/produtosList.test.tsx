@@ -1,14 +1,10 @@
-import {
-  fireEvent,
-  render,
-  screen,
-} from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 import ProdutosLista from '../pages/Produtos/components/produtos-list';
 
-describe('Tests for ProdutosLista component', () => {
+describe('Tests for../components/list/listt', () => {
   it('Renders Correctly', async () => {
     // renderizar o componente
     const { queryByTestId } = render(
