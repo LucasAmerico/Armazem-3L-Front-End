@@ -6,7 +6,6 @@ import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 import usuarioEnum from '../../utils/enum/usuarioEnum';
 import CardUsers from '../../components/cards/CardUsers';
-import Registro from '../../components/registrar';
 import ModalLogin from '../../components/modal-login';
 
 const HomePage = () => {

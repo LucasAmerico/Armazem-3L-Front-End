@@ -105,6 +105,10 @@ export interface IPropsCadastroProduto {
   modal: boolean;
   onClose: any;
 }
+export interface IPropsRecuperarSenha {
+  modal: boolean;
+  onClose: any;
+}
 
 export interface HandleBooleans {
   prodState: boolean[];
@@ -156,6 +160,11 @@ export interface Carga {
 export interface CargaMotorista {
   cargaId: number;
   motoristaId: number;
+}
+
+export interface RecuperarSenha {
+  nome?: string;
+  email?: string;
 }
 
 export interface Motorista {

@@ -1,10 +1,11 @@
-import { Motorista } from '../utils/interfaces';
+import { Motorista, RecuperarSenha } from '../utils/interfaces';
 import api from './api';
 
 const postMotoristaRoute = '/motorista';
 const getMotoristaRoute = '/motorista/';
 const loginRoute = '/motorista/login';
-const recuperarMotoristaRoute = '/motorista/recuperar';
+const postVerificarMotoristaRoute = '/motorista/verificar';
+const putRecuperarSenhaMotoristaRoute = '/motorista/recuperar';
 
 async function getMotorista(motoristaId: number) {
   const url = `${getMotoristaRoute}${motoristaId}`;
@@ -20,6 +21,13 @@ async function postMotorista(motorista: Motorista) {
   return response.data;
 }
 
+async function postVerificarMotorista(content: RecuperarSenha) {
+  const url = postVerificarMotoristaRoute;
+
+  const response = await api.post(url, content);
+  return response.data;
+}
+
 async function login(motorista: Motorista) {
   const url = loginRoute;
 
@@ -27,10 +35,10 @@ async function login(motorista: Motorista) {
   return response.data;
 }
 
-async function recuperarMotorista(motorista: Motorista) {
-  const url = recuperarMotoristaRoute;
+async function putRecuperarSenhaMotorista(content: RecuperarSenha) {
+  const url = putRecuperarSenhaMotoristaRoute;
 
-  const response = await api.post(url, motorista);
+  const response = await api.post(url, content);
   return response.data;
 }
 
@@ -38,5 +46,6 @@ export default {
   getMotorista,
   postMotorista,
   login,
-  recuperarMotorista,
+  postVerificarMotorista,
+  putRecuperarSenhaMotorista,
 };
