@@ -60,7 +60,6 @@ const HomePage = () => {
           </Grid>
         </Grid>
       </div>
-      <RecuperarSenha />
     </div>
   );
 };
