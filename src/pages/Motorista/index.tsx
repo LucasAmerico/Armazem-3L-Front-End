@@ -25,7 +25,7 @@ const MotoristasPage = () => {
         </Grid>
       </Grid>
       <div className={classes.contentCards}>
-        <CardDashboard parent="motorista" />
+        <CardDashboard />
       </div>
     </div>
   );
