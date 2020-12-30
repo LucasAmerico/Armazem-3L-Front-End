@@ -3,7 +3,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
-import Fretamento from '../pages/Motorista/components/carga-list-motorista';
 import '@testing-library/jest-dom/extend-expect';
 import CargaLista from '../pages/Cargas/components/carga-list';
 

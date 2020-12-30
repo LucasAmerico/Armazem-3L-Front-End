@@ -15,5 +15,5 @@ it('Should do something', async () => {
 
   const input = queryByTestId('app-label');
 
-  expect(queryByTestId('app-label')).toBeTruthy();
+  expect(input).toBeTruthy();
 });
