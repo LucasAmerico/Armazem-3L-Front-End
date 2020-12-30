@@ -2,12 +2,6 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import {
-  fireEvent,
-  getAllByDisplayVa../components/list/list
-  getByRole,
-  getByTestId,
-  queryAllByAttribute,
-  queryByAttribute,
   render,
   screen,
 } from '@testing-library/react';
