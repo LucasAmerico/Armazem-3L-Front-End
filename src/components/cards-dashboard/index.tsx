@@ -6,9 +6,8 @@ import CargaService from '../../services/CargaService';
 import CardGrafico from '../cards/CardGrafico';
 import useStyles from './styles';
 import CardComponent from '../cards/CardComponent';
-import { IPropsCards } from '../../utils/interfaces';
 
-const CardDashboard = ({ parent }: IPropsCards) => {
+const CardDashboard = () => {
   const [pageState, setPageState] = useState({
     cargasList: [],
     pendentePorcentagem: 0,
@@ -99,6 +98,7 @@ const CardDashboard = ({ parent }: IPropsCards) => {
         direction="column"
         alignItems="center"
         className={classes.container}
+        data-testid="dashboard"
       >
         <Grid item xs={12} spacing={0}>
           <CardGrafico

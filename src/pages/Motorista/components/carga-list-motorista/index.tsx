@@ -16,7 +16,7 @@ import clsx from 'clsx';
 import { toast } from 'react-toastify';
 import useStyles from './styles';
 import GlobalStates from '../../../../recoil/atom';
-import Lista from '../../../../components/List/list';
+import Lista from '../../../../components/list/list';
 import {
   Carga,
   CargaMotorista,

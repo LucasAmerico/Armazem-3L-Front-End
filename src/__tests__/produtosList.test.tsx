@@ -8,7 +8,7 @@ import {
 import userEvent from '@testing-library/user-event';
 import React, { Component } from 'react';
 import { RecoilRoot } from 'recoil';
-import Lista from '../components/List/list';
+import Lista from '../components/list/list';
 import ProdutosLista from '../pages/Produtos/components/produtos-list';
 
 const ListaProdutos = {
