@@ -36,8 +36,8 @@ const Registro = () => {
     newMotorista.senha = senhaCrypto;
 
     MotoristaService.postMotorista(newMotorista)
-      .then((res) => {
-        toast.success(MESSAGES.cadastrar_Produto_Sucesso, {
+      .then(() => {
+        toast.success(MESSAGES.cadastrar_Motorista_Sucesso, {
           autoClose: 800,
           onClose: () => {
             setBloco(0);
@@ -55,7 +55,7 @@ const Registro = () => {
         [classes.contentShift]: open,
       })}
     >
-      <div>
+      <div data-testid="form-cadastro">
         <FormCadastroMotorista
           email={motorista.email}
           nome={motorista.nome}
