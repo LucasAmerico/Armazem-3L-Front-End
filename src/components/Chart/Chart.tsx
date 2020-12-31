@@ -23,7 +23,7 @@ const Chart = ({
     ],
   });
   return (
-    <div>
+    <div data-testid="chart">
       <Pie
         data={chartState}
         options={{
