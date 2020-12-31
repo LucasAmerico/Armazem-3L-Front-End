@@ -63,10 +63,8 @@ const RecuperarSenha = () => {
           if (res) {
             toast.success('E-mail verificado com sucesso!', {
               autoClose: 800,
-              onClose: () => {
-                setEmailValido(true);
-              },
             });
+            setEmailValido(true);
           } else {
             toast.error('E-mail não cadastrado');
           }

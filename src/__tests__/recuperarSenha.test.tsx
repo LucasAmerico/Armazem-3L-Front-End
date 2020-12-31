@@ -1,7 +1,15 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  waitForElement,
+} from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import RecuperarSenha from '../components/recuperar-senha';
+import MotoristaService from '../services/MotoristaService';
 
 const motorista = [
   {
@@ -19,6 +27,11 @@ const motorista = [
     email: 'pedro_cilada@gmail.com',
   },
 ];
+jest.mock('../services/MotoristaService', () => {
+  return {
+    postVerificarMotorista: jest.fn(() => Promise.resolve(true)),
+  };
+});
 
 describe('Test RecuperarSenha component', () => {
   it('Should render component', () => {
@@ -36,9 +49,11 @@ describe('Test RecuperarSenha component', () => {
       </RecoilRoot>,
     );
     expect(screen.getByTestId('recuperar-senha')).toBeTruthy();
+    expect(screen.queryByText(/Insira uma nova senha/i)).toBeNull();
+    expect(screen.queryByText(/Repita sua senha/i)).toBeNull();
     expect(screen.getByTestId('informa-email')).toBeTruthy();
-    expect(screen.getByTestId('informa-senharepetida')).toBeFalsy();
   });
+
   it('Should be possible to fill in the field ', () => {
     render(
       <RecoilRoot>
@@ -56,5 +71,31 @@ describe('Test RecuperarSenha component', () => {
     fireEvent.change(input);
 
     expect(input.value).toBe('teste.email@email.com');
+  });
+
+  it('Should  ', async () => {
+    render(
+      <RecoilRoot>
+        <RecuperarSenha />
+      </RecoilRoot>,
+    );
+
+    const input = screen.getByRole('textbox', {
+      name: /weight/i,
+    }) as HTMLInputElement;
+    const button = screen.getByRole('button', {
+      name: /button/i,
+    });
+
+    expect(input.value).toBe('');
+
+    fireEvent.change(input, { target: { value: 'bino_cilada@gmail.com' } });
+
+    fireEvent.click(button);
+
+    await waitForElement(() => screen.queryByText(/Insira uma nova senha/i));
+
+    expect(screen.queryByText(/Insira uma nova senha/i)).toBeTruthy();
+    expect(screen.queryByText(/Repita sua senha/i)).toBeTruthy();
   });
 });
