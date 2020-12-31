@@ -124,8 +124,8 @@ const RecuperarSenha = () => {
           </Grid>
           <Grid>
             {emailValido ? (
-              <div>
-                <Grid data-testid="informa-senha">
+              <div data-testid="form-senha">
+                <Grid>
                   <FormControl
                     className={clsx(
                       classes.modal__paddingFields,
@@ -154,10 +154,13 @@ const RecuperarSenha = () => {
                           </IconButton>
                         </InputAdornment>
                       }
+                      inputProps={{
+                        'data-testid': 'informa-senha',
+                      }}
                     />
                   </FormControl>
                 </Grid>
-                <Grid data-testid="informa-senharepetida">
+                <Grid>
                   <FormControl
                     className={classes.modal__fieldFull}
                     variant="filled"
@@ -183,6 +186,9 @@ const RecuperarSenha = () => {
                           </IconButton>
                         </InputAdornment>
                       }
+                      inputProps={{
+                        'data-testid': 'informa-senharepetida',
+                      }}
                     />
                   </FormControl>
                 </Grid>
@@ -200,7 +206,7 @@ const RecuperarSenha = () => {
                 </div>
               </div>
             ) : (
-              <div data-testid="informa-email">
+              <div data-testid="form-email">
                 <FormControl
                   className={classes.modal__fieldFull}
                   variant="filled"
