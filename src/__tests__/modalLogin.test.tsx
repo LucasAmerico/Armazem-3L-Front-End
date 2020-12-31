@@ -17,26 +17,26 @@ it('Should render modal correctly', async () => {
   expect(queryByTestId('modal-test')).toBeTruthy();
 });
 
-  it('Should change modal content based on button clicks', async () => {
-    const handleClose = jest.fn();
+it('Should change modal content based on button clicks', async () => {
+  const handleClose = jest.fn();
 
-    render(
-      <RecoilRoot>
-        <ModalLogin modal onClose={handleClose} />
-      </RecoilRoot>,
-    );
-    
-    expect(screen.getByLabelText(/Login/i)).toBeTruthy();
-    expect(screen.getByText(/Cadastrar/i)).toBeTruthy();
-    
-    fireEvent.click(screen.getByText(/Cadastrar/i));
-    expect(screen.getByTestId("form")).toBeTruthy();
-    expect(screen.getByText(/Entrar/i)).toBeTruthy();
-    
-    fireEvent.click(screen.getByText(/Entrar/i));
-    expect(screen.getByLabelText(/Login/i)).toBeTruthy();
-    expect(screen.getByText(/Esqueci a Senha/i)).toBeTruthy();
-    
-    fireEvent.click(screen.getByText(/Esqueci a Senha/i));
-    expect(screen.getByLabelText(/Recuperar senha/i)).toBeTruthy();    
-  });
+  render(
+    <RecoilRoot>
+      <ModalLogin modal onClose={handleClose} />
+    </RecoilRoot>,
+  );
+  
+  expect(screen.getByLabelText(/Login/i)).toBeTruthy();
+  expect(screen.getByText(/Cadastrar/i)).toBeTruthy();
+  
+  fireEvent.click(screen.getByText(/Cadastrar/i));
+  expect(screen.getByTestId("form")).toBeTruthy();
+  expect(screen.getByText(/Entrar/i)).toBeTruthy();
+  
+  fireEvent.click(screen.getByText(/Entrar/i));
+  expect(screen.getByLabelText(/Login/i)).toBeTruthy();
+  expect(screen.getByText(/Esqueci a Senha/i)).toBeTruthy();
+  
+  fireEvent.click(screen.getByText(/Esqueci a Senha/i));
+  expect(screen.getByLabelText(/Recuperar senha/i)).toBeTruthy();    
+});
