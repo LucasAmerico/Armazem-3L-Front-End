@@ -1,32 +1,10 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  waitForElement,
-} from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import RecuperarSenha from '../components/recuperar-senha';
-import MotoristaService from '../services/MotoristaService';
+import putRecuperarSenhaMotorista from '../services/MotoristaService';
 
-const motorista = [
-  {
-    id: 1,
-    nome: 'Bino',
-    login: 'bino',
-    senha: 'cargapesada',
-    email: 'bino_cilada@gmail.com',
-  },
-  {
-    id: 2,
-    nome: 'Pedro',
-    login: 'bino',
-    senha: 'cargapesada',
-    email: 'pedro_cilada@gmail.com',
-  },
-];
 jest.mock('../services/MotoristaService', () => {
   return {
     postVerificarMotorista: jest.fn(() => Promise.resolve(true)),
@@ -127,13 +105,18 @@ describe('Test RecuperarSenha component', () => {
     });
 
     userEvent.type(inputSenha, 'senhaIgual');
+    userEvent.type(inputSenhaRepetida, 'senhaDiferente');
+    fireEvent.click(buttonSalvar);
+    expect(
+      putRecuperarSenhaMotorista.putRecuperarSenhaMotorista,
+    ).not.toHaveBeenCalled();
+
+    userEvent.type(inputSenha, 'senhaIgual');
     userEvent.type(inputSenhaRepetida, 'senhaIgual');
     fireEvent.click(buttonSalvar);
 
-    // expect(
-    //   await screen.findByText(/Senha alterada com sucesso!/i),
-    // ).toBeTruthy();
-
-    screen.debug();
+    expect(
+      putRecuperarSenhaMotorista.putRecuperarSenhaMotorista,
+    ).toHaveBeenCalled();
   });
 });
