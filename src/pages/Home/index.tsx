@@ -5,8 +5,8 @@ import { Grid, Typography } from '@material-ui/core';
 import GlobalStates from '../../recoil/atom';
 import useStyles from './styles';
 import usuarioEnum from '../../utils/enum/usuarioEnum';
-import CardUsers from '../../components/cards/CardUsers';
 import ModalLogin from '../../components/modal-login';
+import CardUsers from '../../components/cards/CardUsers';
 
 const HomePage = () => {
   const classes = useStyles();
